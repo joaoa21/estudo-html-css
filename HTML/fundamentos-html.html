@@ -1,7 +1,8 @@
 - Como fazer um comentário
 <!-- comentário -->
 
-Anatomia das tags
+
+▪ ANATOMIA DAS TAGS
 - abertura de tah
 - conteúdo
 - fechamento de tag
@@ -10,17 +11,163 @@ Anatomia das tags
 ex:
 <h1 id="title">Título</h1>
 
-Elementos de tag vazios
+
+▪ ELEMENTOS DE TAG VAZIOS
 - não possuem conteúdo
 - poderão conter atributos
 ex:
 <img src="" alt="">
 <br/>
 
-Espaços e quebras de linha:
+
+▪ ESPAÇOS E QUEBRA DE LINHA
 <br /> - quebra de linha
 &nbsp; - espaços
 
-Fluxo HTML
-- block 
-- inline 
+
+
+▪ FLUXO HTML
+- block (quebra a linha)
+ex: <p>texto 1</p> <p>texto 2</p>
+
+- inline (sempre considera em linha, mesmo quebrando no código)
+<a href="">link</a>
+<a href="">outro link</a>
+
+
+
+▪ ALINHAMENTO DE TAGS
+tag dentro da outra
+ex:
+<p>texto <em>texto itálico</em> e <strong>texto em negrito</strong></p>
+
+
+
+▪ CARACTERES RESERVADOS
+&lt; - <
+&gt; - >
+&amp; - &
+usar esses elementos sozinhos não tem problema
+
+
+
+▪ TRANSFORMAR EM CÓDIGO
+<code></code> (mas o ideal é usar Highlight.js)
+
+
+
+▪ ATRIBUTOS HTML
+<img src="" alt="">
+tag é img, src e alt são atributos
+usar sempre o atributo entre ""
+
+
+
+▪ ATRIBUTOS HTML BOOLEANOS
+- não precisam de conteúdo
+ex:
+<h1 hidden>Título</h1>
+
+
+
+▪ ATRIBUTOS GLOBAIS
+podem ser usados em todos os elementos, embora não tenham efeito em alguns elementos
+id:
+- não repete, é único
+- não coloca números ou caracteres especiais no começo
+<div id="nome-1">João</div>
+<div id="nome-2">Maria</div>
+
+class:
+- usado para classificar elementos
+- permite espaço mas entende como mais de uma classificação
+<div class="produto">tenis</div>
+<div class="produto">camiseta</div>
+<div class="produto grandes">camisas</div>
+
+data:
+- data-* pode colocar o que quiser dps do traço. Para utilizar o conteúdo depois no CSS, etc
+- serve para armazenar informações personalizadas dentro de elementos
+- é útil quando você precisa guardar alguma informação no elemento para usar depois
+<div data-id="1234">teste</div>
+
+style:
+- para colocar valores CSS para aplicar estilos já no HTML
+<div style="color: aquamarine;">texto</div>
+
+
+
+▪ ELEMENTOS SEMÂNTICOS
+- títutlos e parágrafos
+<h1>Título</h1> - usar apenas 1 h1 por página
+<h2>Subtítulo</h2>
+<h3></h3>
+<h4></h4>
+<p>parágrafo</p>
+
+- formatação de texto
+<strong>negrito</strong> - indica que o texto tem importância
+<b>negrito</b> - puramente visual
+<em>itálico</em> - indica ênfase de verdade no texto
+<i>itálico</i> - puramente visual
+<mark>destacado/marcado</mark>
+<s>riscado</s>
+
+- listas
+não ordenada:
+<ul>
+  <li>elemento 1</li>
+  <li>elemento 2</li>
+</ul>
+
+ordenada:
+<ol>
+  <li>elemento 1</li>
+  <li>elemento 2</li>
+</ol>
+
+- hiperlink
+href - colocar link externo, ou referencia interna
+usar target _blank para uma nova aba
+<a href="https://google.com.br" target="_blank">link</a>
+
+<a href="#trabalhos">trabalhos</a>
+<p id="trabalhos">texto</p>
+
+- imagem
+src é o endereço da image
+alt é a descrição
+pode colocar width ou heigh para largura ou altura fixa
+<img src="" alt="">
+
+
+
+▪ ELEMENTOS ESTRUTURAIS
+- anatomia do documento html
+<html>
+  <head>
+    <meta>
+    <title></title>
+  </head>
+  <body>
+  </body>
+</html>
+
+- elementos de uma página
+<header></header> - cabeçalho
+<main></main> - conteúdo principal
+<aside></aside> - conteúdo secundário
+<footer></footer> - rodapé
+
+<nav></nav> - menu/navegação/links (pode estar ou não dentro do header)
+<section></section> - marca seção do site (colocar id para nomear)
+<article></article> - escrita de artigo
+
+- tags genéricas
+não tem um significado especial, serve apenas para estruturar
+<div></div> - é basicamente uma caixa, pega bloco inteiro (block)
+<span></span> - comportamento em linha (inline)
+
+
+
+▪ CAMINHOS ABSOLUTOS E RELATIVOS
