@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Flex vs Grid - Estudo Visual</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+    :root {
+      --flex-color: #f97316;
+      --grid-color: #6366f1;
+      --bg: #0f0f0f;
+      --card-bg: #181818;
+      --border: #2a2a2a;
+      --text: #e5e5e5;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 48px 32px;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    header h1 span.flex-label { color: var(--flex-color); }
+    header h1 span.grid-label { color: var(--grid-color); }
+
+    header p {
+      color: var(--muted);
+      margin-top: 12px;
+      font-size: 15px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── SEÇÕES ── */
+    .secao {
+      max-width: 1100px;
+      margin: 0 auto 72px auto;
+    }
+
+    .secao-titulo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .secao-titulo h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .badge-flex { background: var(--flex-color); color: #000; }
+    .badge-grid { background: var(--grid-color); color: #fff; }
+
+    .secao-desc {
+      color: var(--muted);
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 28px;
+      padding-left: 2px;
+    }
+
+    /* ── DEMO WRAPPER ── */
+    .demo-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .demo-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .demo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .demo-card-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .demo-card-header span { font-weight: 700; }
+    .demo-card-header span.c-flex { color: var(--flex-color); }
+    .demo-card-header span.c-grid { color: var(--grid-color); }
+
+    .demo-area {
+      padding: 20px;
+      min-height: 160px;
+    }
+
+    /* ── ITENS BASE ── */
+    .item {
+      background: #2a2a2a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #888;
+      border: 1px solid #333;
+    }
+
+    .item-flex { border-color: rgba(249,115,22,0.3); color: var(--flex-color); }
+    .item-grid { border-color: rgba(99,102,241,0.3); color: var(--grid-color); }
+
+    /* ── DEMO 1: Comportamento padrão ── */
+    .flex-row {
+      display: flex;
+      gap: 10px;
+    }
+    .flex-row .item { padding: 16px 20px; }
+
+    .grid-auto {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .grid-auto .item { padding: 16px; }
+
+    /* ── DEMO 2: Direção ── */
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .flex-col .item { padding: 14px; }
+
+    .grid-col {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 10px;
+    }
+    .grid-col .item { padding: 14px; }
+
+    /* ── DEMO 3: Wrap ── */
+    .flex-wrap-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .flex-wrap-demo .item { padding: 14px 18px; }
+
+    .grid-template {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 10px;
+    }
+    .grid-template .item { padding: 14px; }
+    .grid-template .item:nth-child(1) {
+      grid-column: span 2;
+    }
+    .grid-template .item:nth-child(5) {
+      grid-column: span 4;
+    }
+
+    /* ── DEMO 4: Alinhamento ── */
+    .flex-align {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 120px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .flex-align .item:nth-child(1) { padding: 30px 16px; }
+    .flex-align .item:nth-child(2) { padding: 14px 16px; }
+    .flex-align .item:nth-child(3) { padding: 22px 16px; }
+
+    .grid-center {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      place-items: center;
+      gap: 10px;
+      min-height: 120px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .grid-center .item { padding: 14px 18px; width: 100%; }
+
+    /* ── EXPLICAÇÃO ── */
+    .explicacao-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .explicacao-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .explicacao {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.8;
+      color: #999;
+    }
+
+    .explicacao strong { display: block; margin-bottom: 6px; font-size: 14px; }
+    .explicacao strong.c-flex { color: var(--flex-color); }
+    .explicacao strong.c-grid { color: var(--grid-color); }
+
+    /* ── QUANDO USAR ── */
+    .quando-usar {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .quando-usar { grid-template-columns: 1fr; }
+    }
+
+    .quando-card {
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .quando-card.flex-card {
+      background: rgba(249,115,22,0.06);
+      border: 1px solid rgba(249,115,22,0.2);
+    }
+
+    .quando-card.grid-card {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.2);
+    }
+
+    .quando-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .quando-card.flex-card h3 { color: var(--flex-color); }
+    .quando-card.grid-card h3 { color: var(--grid-color); }
+
+    .quando-card ul {
+      list-style: none;
+      font-size: 14px;
+      line-height: 2;
+      color: #bbb;
+    }
+
+    .quando-card ul li::before {
+      content: '→ ';
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .quando-card.flex-card ul li::before { color: var(--flex-color); }
+    .quando-card.grid-card ul li::before { color: var(--grid-color); }
+
+    /* ── DIVISOR ── */
+    .divisor {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESUMO FINAL ── */
+    .resumo {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      font-size: 14px;
+      line-height: 2;
+      color: #bbb;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .resumo strong { color: white; }
+    .resumo .c-flex { color: var(--flex-color); }
+    .resumo .c-grid { color: var(--grid-color); }
+
+    .secao-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <span class="flex-label">Flexbox</span>
+      <span style="color:#333"> vs </span>
+      <span class="grid-label">Grid</span>
+    </h1>
+    <p>// display: flex  ←→  display: grid</p>
+  </header>
+
+  <!-- ── DEMO 1 ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2>01. Comportamento padrão</h2>
+    </div>
+    <p class="secao-desc">// O que acontece quando você só escreve display: flex ou display: grid</p>
+
+    <div class="demo-wrapper">
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-flex">display: flex</span> — os filhos ficam em linha</div>
+        <div class="demo-area">
+          <div class="flex-row">
+            <div class="item item-flex">A</div>
+            <div class="item item-flex">B</div>
+            <div class="item item-flex">C</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-grid">display: grid</span> + <span class="c-grid">grid-template-columns: repeat(3, 1fr)</span></div>
+        <div class="demo-area">
+          <div class="grid-auto">
+            <div class="item item-grid">A</div>
+            <div class="item item-grid">B</div>
+            <div class="item item-grid">C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao-wrapper">
+      <div class="explicacao">
+        <strong class="c-flex">→ Flex</strong>
+        Pensa em 1 dimensão: uma linha OU uma coluna de cada vez. Por padrão, coloca tudo em linha (row). Os itens ocupam só o espaço que precisam.
+      </div>
+      <div class="explicacao">
+        <strong class="c-grid">→ Grid</strong>
+        Pensa em 2 dimensões: linhas E colunas ao mesmo tempo. Você define quantas colunas quer e o grid divide o espaço igualmente entre elas.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DEMO 2 ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2>02. Direção e proporção</h2>
+    </div>
+    <p class="secao-desc">// Flex muda a direção. Grid controla as proporções das colunas.</p>
+
+    <div class="demo-wrapper">
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-flex">flex-direction: column</span> — agora empilha na vertical</div>
+        <div class="demo-area">
+          <div class="flex-col">
+            <div class="item item-flex">Item 1</div>
+            <div class="item item-flex">Item 2</div>
+            <div class="item item-flex">Item 3</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-grid">grid-template-columns: 1fr 2fr</span> — segunda coluna é o dobro</div>
+        <div class="demo-area">
+          <div class="grid-col">
+            <div class="item item-grid">1fr</div>
+            <div class="item item-grid">2fr (dobro)</div>
+            <div class="item item-grid">1fr</div>
+            <div class="item item-grid">2fr (dobro)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao-wrapper">
+      <div class="explicacao">
+        <strong class="c-flex">→ Flex</strong>
+        Com flex-direction você escolhe a direção: row (linha, padrão) ou column (coluna). Simples assim.
+      </div>
+      <div class="explicacao">
+        <strong class="c-grid">→ Grid</strong>
+        O "fr" é uma unidade de fração. 1fr 2fr significa: divide o espaço em 3 partes, dá 1 pra primeira coluna e 2 pra segunda.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DEMO 3 ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2>03. Quebra de linha e áreas</h2>
+    </div>
+    <p class="secao-desc">// Flex quebra linha automaticamente. Grid pode mesclar células.</p>
+
+    <div class="demo-wrapper">
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-flex">flex-wrap: wrap</span> — quebra linha quando não cabe</div>
+        <div class="demo-area">
+          <div class="flex-wrap-demo">
+            <div class="item item-flex" style="padding:14px 28px">A</div>
+            <div class="item item-flex" style="padding:14px 28px">B</div>
+            <div class="item item-flex" style="padding:14px 28px">C</div>
+            <div class="item item-flex" style="padding:14px 28px">D</div>
+            <div class="item item-flex" style="padding:14px 28px">E</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-grid">grid-column: span 2</span> — item ocupando 2 colunas</div>
+        <div class="demo-area">
+          <div class="grid-template">
+            <div class="item item-grid">A (span 2)</div>
+            <div class="item item-grid">B</div>
+            <div class="item item-grid">C</div>
+            <div class="item item-grid">D</div>
+            <div class="item item-grid">E (span 4)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao-wrapper">
+      <div class="explicacao">
+        <strong class="c-flex">→ Flex</strong>
+        Com flex-wrap: wrap, quando os itens não cabem na linha, eles descem automaticamente para a próxima. O flex decide onde quebrar.
+      </div>
+      <div class="explicacao">
+        <strong class="c-grid">→ Grid</strong>
+        Com grid-column: span 2, você manda um item ocupar 2 colunas de uma vez, como mesclar células no Excel. Você tem controle total.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DEMO 4 ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2>04. Alinhamento</h2>
+    </div>
+    <p class="secao-desc">// Os dois são ótimos para alinhar, mas de formas diferentes.</p>
+
+    <div class="demo-wrapper">
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-flex">align-items: center</span> + <span class="c-flex">justify-content: space-between</span></div>
+        <div class="demo-area">
+          <div class="flex-align">
+            <div class="item item-flex">Alto</div>
+            <div class="item item-flex">Médio</div>
+            <div class="item item-flex">Alto</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header"><span class="c-grid">place-items: center</span> — centraliza em linha e coluna</div>
+        <div class="demo-area">
+          <div class="grid-center">
+            <div class="item item-grid">A</div>
+            <div class="item item-grid">B</div>
+            <div class="item item-grid">C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao-wrapper">
+      <div class="explicacao">
+        <strong class="c-flex">→ Flex</strong>
+        align-items controla o eixo cruzado (vertical se for row) e justify-content controla o eixo principal (horizontal). Com isso você empurra e centraliza os itens como quiser.
+      </div>
+      <div class="explicacao">
+        <strong class="c-grid">→ Grid</strong>
+        place-items é o shorthand que centraliza nos dois eixos de uma vez (vertical e horizontal). É um atalho pra align-items + justify-items juntos.
+      </div>
+    </div>
+  </div>
+
+  <hr class="divisor">
+
+  <!-- QUANDO USAR -->
+  <div class="secao-label">quando usar cada um</div>
+  <div class="quando-usar">
+    <div class="quando-card flex-card">
+      <h3>⚡ Use Flexbox quando...</h3>
+      <ul>
+        <li>Alinhar itens em uma linha (navbar, botões)</li>
+        <li>Centralizar algo na tela</li>
+        <li>Distribuir espaço entre itens</li>
+        <li>Criar um componente simples (card, header)</li>
+        <li>O layout for em uma só direção</li>
+      </ul>
+    </div>
+    <div class="quando-card grid-card">
+      <h3>🎯 Use Grid quando...</h3>
+      <ul>
+        <li>Criar o layout geral da página</li>
+        <li>Precisar de linhas E colunas ao mesmo tempo</li>
+        <li>Quiser que um item ocupe múltiplas colunas/linhas</li>
+        <li>Montar galerias de imagem</li>
+        <li>O layout for complexo e bidimensional</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resumo">
+    💡 <strong>Resumo de uma linha:</strong><br><br>
+    <span class="c-flex">Flexbox</span> = <strong>1 dimensão</strong> → você pensa em linha OU coluna. Ótimo pra alinhar componentes.<br>
+    <span class="c-grid">Grid</span> = <strong>2 dimensões</strong> → você pensa em linha E coluna ao mesmo tempo. Ótimo pra montar o esqueleto da página.<br><br>
+    <strong>Na prática você vai usar os dois juntos</strong>: Grid pra estrutura geral da página, Flex pra organizar os elementos dentro de cada seção. ✅
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+/* ===== RESET ===== */
+* {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0.2px;
+}
+
+.container {
+  display: flex;
+}
+
+.coluna { 
+  flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+hr {
+  margin-block: 60px;
+}
+
+.box {
+  background-color: black;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.position {
+  background-color: red;
+}
