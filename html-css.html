@@ -1,0 +1,4864 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guia de Estudos — HTML & CSS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════
+       CINEMATIC BACKGROUND SYSTEM
+    ═══════════════════════════════════════════════ */
+      :root {
+        /* Accent: Electric Blue */
+        --accent: rgb(59, 130, 246);
+        --accent-dim: rgba(59, 130, 246, 0.18);
+        --accent-glow: rgba(59, 130, 246, 0.45);
+
+        /* Module colors */
+        --m01: #f97316;
+        --m02: #6366f1;
+        --m03: #f59e0b;
+        --m04: #f472b6;
+        --m05: #a78bfa;
+        --m06: #fbbf24;
+
+        /* UI */
+        --dark: #0a0a0a;
+        --sidebar-bg: rgba(10, 10, 14, 0.92);
+        --sidebar-w: 252px;
+        --white: #f0f0f0;
+        --muted: rgba(240, 240, 240, 0.45);
+        --border: rgba(255, 255, 255, 0.06);
+
+        /* Content */
+        --card-bg: rgba(24, 24, 28, 0.95);
+        --border-c: #2a2a2a;
+        --text: #e5e5e5;
+        --text-muted: #555;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Syne", sans-serif;
+        background: var(--dark);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      /* ─── Layer 0: Fixed Animated Background ─── */
+      .bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        background: radial-gradient(
+          ellipse at 60% 0%,
+          rgba(59, 130, 246, 0.06) 0%,
+          #0a0a0a 65%
+        );
+      }
+
+      .bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(59, 130, 246, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+        animation: gridDrift 24s linear infinite;
+      }
+
+      @keyframes gridDrift {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 48px 48px;
+        }
+      }
+
+      .shape {
+        position: absolute;
+        border-radius: 12px;
+        filter: blur(3px);
+      }
+
+      .shape-1 {
+        width: 80px;
+        height: 80px;
+        top: 15%;
+        right: 20%;
+        background: rgba(59, 130, 246, 0.18);
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.45);
+        animation: float1 9s ease-in-out infinite;
+      }
+      .shape-2 {
+        width: 50px;
+        height: 50px;
+        top: 45%;
+        left: 15%;
+        background: rgba(99, 102, 241, 0.15);
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        animation: float2 7s ease-in-out infinite;
+      }
+      .shape-3 {
+        width: 120px;
+        height: 120px;
+        bottom: 20%;
+        right: 10%;
+        background: rgba(59, 130, 246, 0.1);
+        box-shadow: 0 0 60px rgba(59, 130, 246, 0.3);
+        border-radius: 50%;
+        animation: float3 12s ease-in-out infinite;
+      }
+      .shape-4 {
+        width: 60px;
+        height: 60px;
+        top: 70%;
+        left: 40%;
+        background: rgba(139, 92, 246, 0.12);
+        box-shadow: 0 0 35px rgba(139, 92, 246, 0.35);
+        animation: float1 10s ease-in-out infinite reverse;
+      }
+
+      @keyframes float1 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(18px, -20px) rotate(6deg);
+        }
+        50% {
+          transform: translate(-12px, 14px) rotate(-9deg);
+        }
+        75% {
+          transform: translate(22px, 8px) rotate(4deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+      @keyframes float2 {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(-15px, 18px) rotate(-7deg);
+        }
+        66% {
+          transform: translate(20px, -10px) rotate(5deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+      @keyframes float3 {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        40% {
+          transform: translate(-25px, -15px) scale(1.05);
+        }
+        70% {
+          transform: translate(15px, 20px) scale(0.97);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+
+      .line {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        border-radius: 2px;
+        opacity: 0;
+        transform: rotate(-38deg);
+      }
+      .line-1 {
+        width: 160px;
+        top: 8%;
+        right: 5%;
+        animation: lineFlash 8s ease-in-out 0s infinite;
+      }
+      .line-2 {
+        width: 100px;
+        top: 18%;
+        right: 12%;
+        animation: lineFlash 8s ease-in-out 1.2s infinite;
+      }
+      .line-3 {
+        width: 200px;
+        bottom: 15%;
+        left: 3%;
+        animation: lineFlash 9s ease-in-out 2s infinite;
+      }
+      .line-4 {
+        width: 130px;
+        bottom: 25%;
+        left: 10%;
+        animation: lineFlash 9s ease-in-out 3.5s infinite;
+      }
+
+      @keyframes lineFlash {
+        0% {
+          opacity: 0;
+          transform: rotate(-38deg) translateX(-20px);
+        }
+        15% {
+          opacity: 0.6;
+        }
+        40% {
+          opacity: 0.35;
+        }
+        70% {
+          opacity: 0.7;
+        }
+        85% {
+          opacity: 0.2;
+        }
+        100% {
+          opacity: 0;
+          transform: rotate(-38deg) translateX(10px);
+        }
+      }
+
+      /* ═══════════════════════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════════════════════ */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: var(--sidebar-w);
+        background: var(--sidebar-bg);
+        backdrop-filter: blur(20px);
+        border-right: 1px solid var(--border);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .sidebar-brand {
+        padding: 24px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .sidebar-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+
+      .sidebar-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.8),
+          rgba(99, 102, 241, 0.8)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        box-shadow: 0 0 16px rgba(59, 130, 246, 0.4);
+      }
+
+      .sidebar-title {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--white);
+        letter-spacing: 0.02em;
+      }
+
+      .sidebar-sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        margin-top: 2px;
+      }
+
+      /* Progress */
+      .sidebar-progress {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .progress-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 62.5%;
+        background: linear-gradient(
+          90deg,
+          rgb(59, 130, 246),
+          rgb(99, 102, 241)
+        );
+        border-radius: 2px;
+        animation: progressGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes progressGlow {
+        0%,
+        100% {
+          box-shadow: none;
+        }
+        50% {
+          box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+        }
+      }
+
+      /* Nav */
+      .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 0 20px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+      }
+
+      .sidebar-nav::-webkit-scrollbar {
+        width: 3px;
+      }
+      .sidebar-nav::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .sidebar-nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+      }
+
+      .nav-module {
+        margin-bottom: 4px;
+      }
+
+      .nav-module-header {
+        padding: 8px 20px 4px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .nav-module-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .nav-item {
+        display: block;
+        padding: 7px 20px 7px 34px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(240, 240, 240, 0.4);
+        text-decoration: none;
+        transition:
+          color 0.2s,
+          background 0.2s,
+          padding-left 0.2s;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-item::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.3;
+        transition:
+          opacity 0.2s,
+          width 0.2s,
+          height 0.2s;
+      }
+
+      .nav-item:hover {
+        color: rgba(240, 240, 240, 0.8);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      /* Active states per module */
+      .nav-item.active {
+        font-weight: 700;
+      }
+
+      .nav-item.active.m01 {
+        color: var(--m01);
+      }
+      .nav-item.active.m02 {
+        color: var(--m02);
+      }
+      .nav-item.active.m03 {
+        color: var(--m03);
+      }
+      .nav-item.active.m04 {
+        color: var(--m04);
+      }
+      .nav-item.active.m05 {
+        color: var(--m05);
+      }
+      .nav-item.active.m06 {
+        color: var(--m06);
+      }
+
+      .nav-item.active::before {
+        opacity: 1;
+        width: 5px;
+        height: 5px;
+      }
+
+      /* Soon badge */
+      .nav-soon {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 20px 7px 34px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(240, 240, 240, 0.18);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .sidebar-divider {
+        margin: 8px 16px;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ═══════════════════════════════════════════════
+       MAIN LAYOUT
+    ═══════════════════════════════════════════════ */
+      .main {
+        position: relative;
+        z-index: 1;
+        margin-left: var(--sidebar-w);
+        min-height: 100vh;
+      }
+
+      /* ─── HERO ─── */
+      .hero {
+        text-align: center;
+        padding: 80px 40px 64px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(59, 130, 246, 0.06) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 24px;
+      }
+
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: blink 1.5s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 800;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+
+      .hero p {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+
+      .hero-tags {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .hero-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      /* ─── SECTION (CAPÍTULO) ─── */
+      .section {
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 60px 40px;
+      }
+
+      .section-inner {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 36px;
+      }
+
+      .section-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(240, 240, 240, 0.2);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding-top: 5px;
+      }
+
+      .section-title h2 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .section-title p {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* ─── MODULE ANCHOR ─── */
+      .module-anchor {
+        display: block;
+        position: relative;
+      }
+
+      /* Scrollable sections offset */
+      .section[id] {
+        scroll-margin-top: 20px;
+      }
+
+      /* ═══════════════════════════════════════════════
+       SHARED UI COMPONENTS (merged from all files)
+    ═══════════════════════════════════════════════ */
+
+      /* Grade */
+      .grade {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .grade.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grade.cols-1 {
+        grid-template-columns: 1fr;
+      }
+      .full {
+        grid-column: 1 / -1;
+      }
+
+      @media (max-width: 800px) {
+        .grade,
+        .grade.cols-3 {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          display: none;
+        }
+        .main {
+          margin-left: 0;
+        }
+      }
+
+      /* Card */
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .card-header {
+        padding: 11px 16px;
+        border-bottom: 1px solid var(--border-c);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .card-body {
+        padding: 18px;
+      }
+
+      /* Demo grid (positions / selectors style) */
+      .demo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 680px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Demo card (positions / selectors style) */
+      .demo-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .demo-card.full {
+        grid-column: 1 / -1;
+      }
+      .demo-card-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-c);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .demo-card-header span {
+        font-weight: 700;
+      }
+      .demo-area {
+        padding: 20px;
+        min-height: 140px;
+        position: relative;
+      }
+
+      /* Nota / Explicação */
+      .nota {
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.9;
+        color: #999;
+        margin-bottom: 20px;
+      }
+      .nota strong {
+        color: white;
+      }
+
+      .explicacao {
+        margin-top: 16px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+        line-height: 1.9;
+        color: #999;
+      }
+      .explicacao strong {
+        color: white;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      /* Badge */
+      .badge {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      /* Code */
+      .code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        line-height: 2;
+        color: #888;
+      }
+      .code .tag {
+        color: var(--m01);
+      }
+      .code .attr {
+        color: var(--m06);
+      }
+      .code .val {
+        color: #34d399;
+      }
+      .code .sel {
+        color: var(--m02);
+      }
+      .code .prop {
+        color: #94a3b8;
+      }
+      .code .com {
+        color: #444;
+        font-style: italic;
+      }
+      .code .hl {
+        color: white;
+        font-weight: 700;
+      }
+      .code .highlight {
+        color: var(--m02);
+        font-weight: 700;
+      }
+
+      /* Tabela */
+      .tabela {
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .tabela table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+      }
+      .tabela th {
+        background: #141414;
+        padding: 11px 16px;
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border-c);
+      }
+      .tabela td {
+        padding: 11px 16px;
+        border-bottom: 1px solid #1a1a1a;
+        color: #bbb;
+        vertical-align: top;
+        line-height: 1.6;
+      }
+      .tabela tr:last-child td {
+        border-bottom: none;
+      }
+      .tabela td:first-child {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      /* Label section */
+      .label-secao {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      /* Dica */
+      .dica {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 20px 24px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.9;
+        color: #999;
+      }
+      .dica strong {
+        color: white;
+      }
+
+      /* ══════════════════════════════════════════════
+       HTML FUNDAMENTOS (m01) SPECIFIC STYLES
+    ══════════════════════════════════════════════ */
+      .demo-block p {
+        background: rgba(249, 115, 22, 0.1);
+        border: 1px solid rgba(249, 115, 22, 0.3);
+        color: var(--m01);
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .d-item {
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        color: var(--m02);
+        padding: 8px 14px;
+        border-radius: 4px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .espec-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+      }
+      .espec-label {
+        width: 80px;
+        color: var(--text-muted);
+      }
+      .espec-track {
+        flex: 1;
+        background: #1a1a1a;
+        border-radius: 4px;
+        height: 28px;
+        overflow: hidden;
+      }
+      .espec-fill {
+        height: 100%;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        font-weight: 700;
+        font-size: 11px;
+      }
+
+      .bm-margin {
+        background: rgba(251, 191, 36, 0.05);
+        border: 2px dashed rgba(251, 191, 36, 0.3);
+        border-radius: 8px;
+        padding: 16px;
+        width: 100%;
+      }
+      .bm-border {
+        background: rgba(244, 114, 182, 0.05);
+        border: 4px solid rgba(244, 114, 182, 0.5);
+        border-radius: 4px;
+        padding: 14px;
+      }
+      .bm-padding {
+        background: rgba(52, 211, 153, 0.05);
+        border: 2px dashed rgba(52, 211, 153, 0.3);
+        border-radius: 2px;
+        padding: 12px;
+      }
+      .bm-content {
+        background: rgba(99, 102, 241, 0.15);
+        border: 1px solid rgba(99, 102, 241, 0.4);
+        border-radius: 2px;
+        padding: 10px 16px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--m02);
+        font-weight: 700;
+        text-align: center;
+      }
+      .bm-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: #888;
+        padding: 4px 0;
+      }
+      .bm-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .sel-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #1a1a1a;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+      }
+      .sel-item:last-child {
+        border-bottom: none;
+      }
+      .sel-code {
+        color: var(--m02);
+        font-weight: 700;
+        min-width: 160px;
+      }
+      .sel-desc {
+        color: #888;
+        line-height: 1.6;
+      }
+
+      .comb-demo {
+        background: #111;
+        border-radius: 8px;
+        padding: 14px;
+      }
+
+      .sh-titulo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .sh-syntax {
+        background: #111;
+        border-radius: 6px;
+        padding: 12px 16px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #ccc;
+        line-height: 1.8;
+        margin-bottom: 12px;
+      }
+      .sh-syntax .parte {
+        color: var(--m02);
+      }
+
+      .dica-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid #1a1a1a;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+      }
+      .dica-item:last-child {
+        border-bottom: none;
+      }
+      .dica-key {
+        background: #222;
+        border: 1px solid #333;
+        border-bottom: 2px solid #444;
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+        color: var(--m06);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .dica-desc {
+        color: #888;
+        line-height: 1.6;
+        padding-top: 2px;
+      }
+
+      /* ══════════════════════════════════════════════
+       POSITIONS (m03) SPECIFIC STYLES
+    ══════════════════════════════════════════════ */
+      --static-color: #94a3b8;
+      --relative-color: #f59e0b;
+      --absolute-color: #f43f5e;
+      --fixed-color: #22d3ee;
+      --sticky-color: #a78bfa;
+      --inset-color: #34d399;
+      --z-color: #f472b6;
+
+      .static-color {
+        background: rgba(148, 163, 184, 0.1);
+        border-color: rgba(148, 163, 184, 0.3);
+        color: #94a3b8;
+      }
+      .relative-color {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: rgba(245, 158, 11, 0.3);
+        color: #f59e0b;
+      }
+      .absolute-color {
+        background: rgba(244, 63, 94, 0.1);
+        border-color: rgba(244, 63, 94, 0.3);
+        color: #f43f5e;
+      }
+      .fixed-color {
+        background: rgba(34, 211, 238, 0.1);
+        border-color: rgba(34, 211, 238, 0.3);
+        color: #22d3ee;
+      }
+      .sticky-color {
+        background: rgba(167, 139, 250, 0.1);
+        border-color: rgba(167, 139, 250, 0.3);
+        color: #a78bfa;
+      }
+
+      .box {
+        border-radius: 6px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        border: 1px solid;
+      }
+
+      .static-flow,
+      .relative-flow {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .box-relative {
+        position: relative;
+        top: 16px;
+        left: 24px;
+      }
+
+      .absolute-container {
+        position: relative;
+        background: #1a1a1a;
+        border: 1px dashed #333;
+        border-radius: 8px;
+        height: 130px;
+      }
+      .box-absolute {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      .box-absolute-2 {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+      }
+
+      .fixed-illustration {
+        background: #111;
+        border-radius: 8px;
+        height: 130px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #222;
+      }
+      .fake-scroll {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .fake-line {
+        height: 10px;
+        border-radius: 4px;
+        background: #2a2a2a;
+      }
+      .fake-fixed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(34, 211, 238, 0.15);
+        border-bottom: 1px solid rgba(34, 211, 238, 0.4);
+        color: #22d3ee;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 8px 12px;
+      }
+
+      .sticky-illustration {
+        background: #111;
+        border-radius: 8px;
+        height: 130px;
+        overflow-y: auto;
+        border: 1px solid #222;
+      }
+      .sticky-inner {
+        padding: 0 10px 20px;
+      }
+      .fake-sticky {
+        position: sticky;
+        top: 0;
+        background: rgba(167, 139, 250, 0.15);
+        border-bottom: 1px solid rgba(167, 139, 250, 0.4);
+        color: #a78bfa;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 8px 12px;
+        margin: 0 -10px;
+      }
+      .sticky-content-line {
+        height: 10px;
+        border-radius: 4px;
+        background: #2a2a2a;
+        margin-top: 10px;
+      }
+
+      /* INSET */
+      .inset-pai {
+        position: relative;
+        background: #1a1a1a;
+        border: 1px dashed #333;
+        border-radius: 8px;
+        height: 180px;
+      }
+      .inset-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: #333;
+        padding: 6px 10px;
+      }
+      .box-verbose {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(52, 211, 153, 0.1);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        border-radius: 6px;
+        color: #34d399;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 1.6;
+      }
+      .box-inset {
+        position: absolute;
+        inset: 20px;
+        background: rgba(52, 211, 153, 0.1);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        border-radius: 6px;
+        color: #34d399;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .box-inset-zero {
+        position: absolute;
+        inset: 0;
+        background: rgba(52, 211, 153, 0.08);
+        border: 2px solid rgba(52, 211, 153, 0.5);
+        border-radius: 8px;
+        color: #34d399;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .box-inset-diff {
+        position: absolute;
+        inset: 10px 30px 40px 10px;
+        background: rgba(52, 211, 153, 0.1);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        border-radius: 6px;
+        color: #34d399;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .tabela-inset {
+        margin-top: 16px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .tabela-inset table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+      }
+      .tabela-inset th {
+        background: #1a1a1a;
+        padding: 12px 16px;
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border-c);
+      }
+      .tabela-inset td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #1e1e1e;
+        color: #bbb;
+      }
+      .tabela-inset tr:last-child td {
+        border-bottom: none;
+      }
+      .tabela-inset td:first-child {
+        color: #34d399;
+        font-weight: 700;
+      }
+
+      /* Z-INDEX */
+      .z-stack {
+        position: relative;
+        height: 180px;
+      }
+      .z-box {
+        position: absolute;
+        width: 120px;
+        height: 80px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        border: 2px solid;
+      }
+      .z1-a {
+        background: rgba(244, 114, 182, 0.15);
+        border-color: rgba(244, 114, 182, 0.4);
+        color: #f472b6;
+        top: 20px;
+        left: 20px;
+      }
+      .z1-b {
+        background: rgba(99, 102, 241, 0.15);
+        border-color: rgba(99, 102, 241, 0.4);
+        color: #818cf8;
+        top: 50px;
+        left: 70px;
+      }
+      .z1-c {
+        background: rgba(251, 191, 36, 0.15);
+        border-color: rgba(251, 191, 36, 0.4);
+        color: #fbbf24;
+        top: 80px;
+        left: 120px;
+      }
+      .z2-a {
+        background: rgba(244, 114, 182, 0.15);
+        border-color: rgba(244, 114, 182, 0.4);
+        color: #f472b6;
+        top: 20px;
+        left: 20px;
+        z-index: 3;
+      }
+      .z2-b {
+        background: rgba(99, 102, 241, 0.15);
+        border-color: rgba(99, 102, 241, 0.4);
+        color: #818cf8;
+        top: 50px;
+        left: 70px;
+        z-index: 1;
+      }
+      .z2-c {
+        background: rgba(251, 191, 36, 0.15);
+        border-color: rgba(251, 191, 36, 0.4);
+        color: #fbbf24;
+        top: 80px;
+        left: 120px;
+        z-index: 2;
+      }
+      .z-numero {
+        position: absolute;
+        bottom: 4px;
+        right: 6px;
+        font-size: 10px;
+        opacity: 0.6;
+      }
+      .z-modal-demo {
+        position: relative;
+        height: 180px;
+        background: #111;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .z-page-content {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .z-linha {
+        height: 10px;
+        background: #2a2a2a;
+        border-radius: 4px;
+      }
+      .z-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .z-modal {
+        background: #222;
+        border: 1px solid rgba(244, 114, 182, 0.3);
+        border-radius: 10px;
+        padding: 16px 24px;
+        z-index: 20;
+        color: #f472b6;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 1.6;
+      }
+      .z-tags {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .z-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        border: 1px solid;
+      }
+
+      /* ══════════════════════════════════════════════
+       SELETORES AVANÇADOS (m04) SPECIFIC STYLES
+    ══════════════════════════════════════════════ */
+      .var-box {
+        background: rgba(52, 211, 153, 0.08);
+        border: 2px solid #34d399;
+        border-radius: 8px;
+        padding: 14px 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #34d399;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .var-box:last-child {
+        margin-bottom: 0;
+      }
+      .var-box.diferente {
+        background: rgba(249, 115, 22, 0.08);
+        border-color: var(--m01);
+        color: var(--m01);
+      }
+
+      .scope-block {
+        border: 1px dashed #2a2a2a;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .scope-label {
+        position: absolute;
+        top: -10px;
+        left: 12px;
+        background: #181818;
+        padding: 0 6px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+      }
+      .scope-item {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      .pc-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        background: rgba(244, 114, 182, 0.1);
+        border: 1px solid rgba(244, 114, 182, 0.3);
+        color: #f472b6;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .pc-btn:hover {
+        background: rgba(244, 114, 182, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .pc-lista {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .pc-item {
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        background: rgba(244, 114, 182, 0.1);
+        border: 1px solid rgba(244, 114, 182, 0.2);
+        color: #f472b6;
+      }
+      .pc-item:not(.destaque) {
+        opacity: 0.3;
+      }
+
+      .pc-has-card {
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 14px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: #666;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .pc-has-card:has(input:checked) {
+        border-color: rgba(244, 114, 182, 0.5);
+        color: #f472b6;
+        background: rgba(244, 114, 182, 0.05);
+      }
+      .pc-has-card label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .pc-nth {
+        display: flex;
+        gap: 8px;
+      }
+      .pc-nth-item {
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+        border: 1px solid #2a2a2a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: #444;
+      }
+      .pc-nth-item:nth-child(even) {
+        background: rgba(244, 114, 182, 0.1);
+        border-color: rgba(244, 114, 182, 0.3);
+        color: #f472b6;
+      }
+
+      .root-demo {
+        background: rgba(244, 114, 182, 0.05);
+        border: 1px dashed rgba(244, 114, 182, 0.2);
+        border-radius: 8px;
+        padding: 14px 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #888;
+        line-height: 1.8;
+      }
+
+      .pe-first-letter p::first-letter {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #a78bfa;
+        float: left;
+        line-height: 1;
+        margin-right: 6px;
+      }
+      .pe-first-letter p {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #bbb;
+      }
+
+      .pe-before-after {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .pe-item {
+        position: relative;
+        padding: 12px 16px;
+        border-radius: 6px;
+        background: rgba(167, 139, 250, 0.05);
+        border: 1px solid rgba(167, 139, 250, 0.15);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #bbb;
+      }
+      .pe-item::before {
+        content: "→ ";
+        color: #a78bfa;
+        font-weight: 700;
+      }
+      .pe-item.com-after::after {
+        content: " ✓";
+        color: #34d399;
+        font-weight: 700;
+      }
+
+      .pe-decorativo {
+        position: relative;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #bbb;
+        line-height: 1.8;
+      }
+      .pe-decorativo::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 4px;
+        height: calc(100% - 8px);
+        background: #a78bfa;
+        border-radius: 2px;
+      }
+
+      /* Divisor */
+      hr.divisor {
+        border: none;
+        border-top: 1px solid var(--border-c);
+        margin: 0 0 40px 0;
+      }
+
+      /* ══════════════════════════════════════════════
+       FLEXBOX vs GRID (m05) SPECIFIC STYLES
+    ══════════════════════════════════════════════ */
+      .demo-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      @media (max-width: 700px) {
+        .demo-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .item {
+        background: #2a2a2a;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: #888;
+        border: 1px solid #333;
+      }
+      .item-flex {
+        border-color: rgba(249, 115, 22, 0.3);
+        color: var(--m01);
+      }
+      .item-grid {
+        border-color: rgba(99, 102, 241, 0.3);
+        color: var(--m02);
+      }
+
+      .flex-row {
+        display: flex;
+        gap: 10px;
+      }
+      .flex-row .item {
+        padding: 16px 20px;
+      }
+      .grid-auto {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .grid-auto .item {
+        padding: 16px;
+      }
+      .flex-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .flex-col .item {
+        padding: 14px;
+      }
+      .grid-col {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+      }
+      .grid-col .item {
+        padding: 14px;
+      }
+      .flex-wrap-demo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .flex-wrap-demo .item {
+        padding: 14px 18px;
+      }
+      .grid-template {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto auto;
+        gap: 10px;
+      }
+      .grid-template .item {
+        padding: 14px;
+      }
+      .grid-template .item:nth-child(1) {
+        grid-column: span 2;
+      }
+      .grid-template .item:nth-child(5) {
+        grid-column: span 4;
+      }
+      .flex-align {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-height: 120px;
+        background: #1a1a1a;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .flex-align .item:nth-child(1) {
+        padding: 30px 16px;
+      }
+      .flex-align .item:nth-child(2) {
+        padding: 14px 16px;
+      }
+      .flex-align .item:nth-child(3) {
+        padding: 22px 16px;
+      }
+      .grid-center {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        gap: 10px;
+        min-height: 120px;
+        background: #1a1a1a;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .grid-center .item {
+        padding: 14px 18px;
+        width: 100%;
+      }
+
+      .explicacao-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+      @media (max-width: 700px) {
+        .explicacao-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+      .explicacao strong.c-flex {
+        color: var(--m01);
+      }
+      .explicacao strong.c-grid {
+        color: var(--m02);
+      }
+
+      .quando-usar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 700px) {
+        .quando-usar {
+          grid-template-columns: 1fr;
+        }
+      }
+      .quando-card {
+        border-radius: 12px;
+        padding: 28px;
+      }
+      .quando-card.flex-card {
+        background: rgba(249, 115, 22, 0.06);
+        border: 1px solid rgba(249, 115, 22, 0.2);
+      }
+      .quando-card.grid-card {
+        background: rgba(99, 102, 241, 0.06);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+      }
+      .quando-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+      }
+      .quando-card.flex-card h3 {
+        color: var(--m01);
+      }
+      .quando-card.grid-card h3 {
+        color: var(--m02);
+      }
+      .quando-card ul {
+        list-style: none;
+        font-size: 14px;
+        line-height: 2;
+        color: #bbb;
+      }
+      .quando-card ul li::before {
+        content: "→ ";
+        font-family: "JetBrains Mono", monospace;
+      }
+      .quando-card.flex-card ul li::before {
+        color: var(--m01);
+      }
+      .quando-card.grid-card ul li::before {
+        color: var(--m02);
+      }
+
+      .resumo {
+        background: var(--card-bg);
+        border: 1px solid var(--border-c);
+        border-radius: 12px;
+        padding: 28px 32px;
+        font-size: 14px;
+        line-height: 2;
+        color: #bbb;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .resumo strong {
+        color: white;
+      }
+      .resumo .c-flex {
+        color: var(--m01);
+      }
+      .resumo .c-grid {
+        color: var(--m02);
+      }
+
+      /* ─── Footer ─── */
+      .footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 32px 40px;
+        text-align: center;
+      }
+      .footer p {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      /* ─── Secao heading (positions style) ─── */
+      .secao-titulo {
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .secao-titulo h2 {
+        font-size: 1.4rem;
+        font-weight: 800;
+      }
+      .secao-desc {
+        color: var(--text-muted);
+        font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════════════════════
+     ANIMATED BACKGROUND
+══════════════════════════════════ -->
+    <div class="bg">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="line line-1"></div>
+      <div class="line line-2"></div>
+      <div class="line line-3"></div>
+      <div class="line line-4"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+     SIDEBAR
+══════════════════════════════════ -->
+    <nav class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">
+          <div class="sidebar-icon">📚</div>
+          <span class="sidebar-title">Dev Study</span>
+        </div>
+        <div class="sidebar-sub">// Rocketseat Fullstack</div>
+      </div>
+
+      <div class="sidebar-progress">
+        <div class="progress-label">
+          <span>Progresso</span>
+          <span>5 / 8 módulos</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <!-- M01 HTML -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m01)"></div>
+            <span class="nav-module-label">M01 · HTML</span>
+          </div>
+          <a class="nav-item m01" href="#html-tags">Tags & Anatomia</a>
+          <a class="nav-item m01" href="#html-atributos">Atributos Globais</a>
+          <a class="nav-item m01" href="#html-semantico"
+            >Elementos Semânticos</a
+          >
+          <a class="nav-item m01" href="#html-estrutura"
+            >Estrutura & Caminhos</a
+          >
+        </div>
+
+        <!-- M02 CSS Base -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m02)"></div>
+            <span class="nav-module-label">M02 · CSS Fundamentos</span>
+          </div>
+          <a class="nav-item m02" href="#css-anatomia">Anatomia & Cascata</a>
+          <a class="nav-item m02" href="#css-seletores"
+            >Seletores & Combinators</a
+          >
+          <a class="nav-item m02" href="#css-display">Display</a>
+          <a class="nav-item m02" href="#css-boxmodel">Box Model</a>
+          <a class="nav-item m02" href="#css-boxsizing">Box Sizing</a>
+          <a class="nav-item m02" href="#css-background">Background</a>
+          <a class="nav-item m02" href="#css-shorthands">Shorthands</a>
+        </div>
+
+        <!-- M03 Positions -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m03)"></div>
+            <span class="nav-module-label">M03 · Positions</span>
+          </div>
+          <a class="nav-item m03" href="#pos-static">Static</a>
+          <a class="nav-item m03" href="#pos-relative">Relative</a>
+          <a class="nav-item m03" href="#pos-absolute">Absolute</a>
+          <a class="nav-item m03" href="#pos-fixed">Fixed</a>
+          <a class="nav-item m03" href="#pos-sticky">Sticky</a>
+          <a class="nav-item m03" href="#pos-inset">Inset</a>
+          <a class="nav-item m03" href="#pos-zindex">Z-Index</a>
+        </div>
+
+        <!-- M04 Seletores Avançados -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m04)"></div>
+            <span class="nav-module-label">M04 · Seletores Avançados</span>
+          </div>
+          <a class="nav-item m04" href="#sel-variaveis">Variáveis CSS</a>
+          <a class="nav-item m04" href="#sel-pseudoclasses">Pseudo-classes</a>
+          <a class="nav-item m04" href="#sel-pseudoelements">Pseudo-elements</a>
+        </div>
+
+        <!-- M05 Layout -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m05)"></div>
+            <span class="nav-module-label">M05 · Layout</span>
+          </div>
+          <a class="nav-item m05" href="#layout-flex-grid">Flexbox vs Grid</a>
+        </div>
+
+        <!-- M06 VS Code -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: var(--m06)"></div>
+            <span class="nav-module-label">Extra · Ferramentas</span>
+          </div>
+          <a class="nav-item m06" href="#vscode">Dicas VS Code</a>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Em breve -->
+        <div class="nav-module">
+          <div class="nav-module-header">
+            <div class="nav-dot" style="background: #333"></div>
+            <span class="nav-module-label">Em breve</span>
+          </div>
+          <span class="nav-soon">Transitions</span>
+          <span class="nav-soon">Animations</span>
+          <span class="nav-soon">Responsive</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════ -->
+    <div class="main">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Guia de Estudos · Rocketseat Fullstack
+        </div>
+        <h1>
+          <span style="color: var(--m01)">HTML</span>
+          <span style="color: #1a1a1a"> & </span>
+          <span style="color: var(--m02)">CSS</span><br />
+          <span style="color: rgba(240, 240, 240, 0.15)">Fundamentos</span>
+        </h1>
+        <p>// 5 módulos concluídos · em constante atualização</p>
+        <div class="hero-tags">
+          <span
+            class="hero-tag"
+            style="
+              background: rgba(249, 115, 22, 0.1);
+              color: var(--m01);
+              border: 1px solid rgba(249, 115, 22, 0.2);
+            "
+            >HTML</span
+          >
+          <span
+            class="hero-tag"
+            style="
+              background: rgba(99, 102, 241, 0.1);
+              color: var(--m02);
+              border: 1px solid rgba(99, 102, 241, 0.2);
+            "
+            >CSS</span
+          >
+          <span
+            class="hero-tag"
+            style="
+              background: rgba(245, 158, 11, 0.1);
+              color: var(--m03);
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            "
+            >Positions</span
+          >
+          <span
+            class="hero-tag"
+            style="
+              background: rgba(244, 114, 182, 0.1);
+              color: var(--m04);
+              border: 1px solid rgba(244, 114, 182, 0.2);
+            "
+            >Seletores</span
+          >
+          <span
+            class="hero-tag"
+            style="
+              background: rgba(167, 139, 250, 0.1);
+              color: var(--m05);
+              border: 1px solid rgba(167, 139, 250, 0.2);
+            "
+            >Layout</span
+          >
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       M01 — HTML FUNDAMENTOS
+  ═══════════════════════════════ -->
+
+      <!-- 01 TAGS -->
+      <div class="section" id="html-tags">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M01 · 01</div>
+            <div class="section-title">
+              <h2 style="color: var(--m01)">Tags & Anatomia</h2>
+              <p>// como o HTML é estruturado</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">Anatomia de um elemento HTML</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;h1</span>
+                  <span class="attr">id</span>=<span class="val">"titulo"</span
+                  ><span class="tag">&gt;</span>Olá Mundo<span class="tag"
+                    >&lt;/h1&gt;</span
+                  ><br /><br />
+                  <span class="com">// tag de abertura → &lt;h1&gt;</span><br />
+                  <span class="com">// atributo → id="titulo"</span><br />
+                  <span class="com">// conteúdo → Olá Mundo</span><br />
+                  <span class="com">// tag de fechamento → &lt;/h1&gt;</span
+                  ><br />
+                  <span class="com">// elemento = tudo isso junto</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                Tags vazias, comentários e caracteres reservados
+              </div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="com">&lt;!-- comentário --&gt;</span><br /><br />
+                  <span class="tag">&lt;img</span>
+                  <span class="attr">src</span>=<span class="val">""</span>
+                  <span class="attr">alt</span>=<span class="val">""</span
+                  ><span class="tag">&gt;</span>
+                  <span class="com">← sem conteúdo</span><br />
+                  <span class="tag">&lt;br/&gt;</span><br /><br />
+                  <span class="hl">&amp;lt;</span> → &lt; &nbsp;
+                  <span class="hl">&amp;gt;</span> → &gt; &nbsp;
+                  <span class="hl">&amp;amp;</span> → &amp;<br />
+                  <span class="hl">&amp;nbsp;</span> → espaço &nbsp;
+                  <span class="tag">&lt;br/&gt;</span> → quebra linha
+                </div>
+              </div>
+            </div>
+            <div class="card full">
+              <div class="card-header">Fluxo HTML — block vs inline</div>
+              <div
+                class="card-body"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--m01);
+                      margin-bottom: 10px;
+                    "
+                  >
+                    BLOCK — ocupa todo o bloco
+                  </div>
+                  <div class="demo-block">
+                    <p>&lt;p&gt; texto 1 &lt;/p&gt;</p>
+                    <p>&lt;p&gt; texto 2 &lt;/p&gt;</p>
+                  </div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      margin-top: 10px;
+                    "
+                  >
+                    div, p, h1–h6, header, section, main...
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--m02);
+                      margin-bottom: 10px;
+                    "
+                  >
+                    INLINE — fica na mesma linha
+                  </div>
+                  <div>
+                    <span
+                      class="d-item"
+                      style="border-radius: 0; margin-right: 2px"
+                      >link 1</span
+                    >
+                    <span
+                      class="d-item"
+                      style="border-radius: 0; margin-right: 2px"
+                      >link 2</span
+                    >
+                    <span class="d-item" style="border-radius: 0">link 3</span>
+                  </div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      margin-top: 10px;
+                    "
+                  >
+                    a, span, em, strong, img...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 ATRIBUTOS -->
+      <div class="section" id="html-atributos">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M01 · 02</div>
+            <div class="section-title">
+              <h2 style="color: var(--m01)">Atributos Globais</h2>
+              <p>// funcionam em qualquer elemento HTML</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m01)">id</b> — identificador único
+              </div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">id</span>=<span class="val">"nome-1"</span
+                  ><span class="tag">&gt;</span>João<span class="tag"
+                    >&lt;/div&gt;</span
+                  ><br />
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">id</span>=<span class="val">"nome-2"</span
+                  ><span class="tag">&gt;</span>Maria<span class="tag"
+                    >&lt;/div&gt;</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-top: 12px;
+                    line-height: 1.9;
+                  "
+                >
+                  → não se repete na página<br />
+                  → não começa com número ou caractere especial<br />
+                  → usado para âncoras e seleção CSS específica
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m01)">class</b> — classifica elementos
+              </div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">class</span>=<span class="val"
+                    >"produto"</span
+                  ><span class="tag">&gt;</span>tênis<span class="tag"
+                    >&lt;/div&gt;</span
+                  ><br />
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">class</span>=<span class="val"
+                    >"produto grandes"</span
+                  ><span class="tag">&gt;</span>camisa<span class="tag"
+                    >&lt;/div&gt;</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-top: 12px;
+                    line-height: 1.9;
+                  "
+                >
+                  → pode se repetir<br />
+                  → espaço = mais de uma classe<br />
+                  → principal forma de estilizar no CSS
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m01)">data-*</b> — dados personalizados
+              </div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">data-id</span>=<span class="val"
+                    >"1234"</span
+                  ><span class="tag">&gt;</span>produto<span class="tag"
+                    >&lt;/div&gt;</span
+                  ><br />
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">data-categoria</span>=<span class="val"
+                    >"roupa"</span
+                  ><span class="tag">&gt;</span>item<span class="tag"
+                    >&lt;/div&gt;</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-top: 12px;
+                    line-height: 1.9;
+                  "
+                >
+                  → coloca o que quiser após o traço<br />
+                  → guarda informações para usar no JS/CSS<br />
+                  → não aparece visualmente
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m01)">style</b> e booleanos
+              </div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="com">/* style: CSS inline */</span><br />
+                  <span class="tag">&lt;div</span>
+                  <span class="attr">style</span>=<span class="val"
+                    >"color: aquamarine"</span
+                  ><span class="tag">&gt;</span>texto<span class="tag"
+                    >&lt;/div&gt;</span
+                  ><br /><br />
+                  <span class="com">/* booleano: só presença já ativa */</span
+                  ><br />
+                  <span class="tag">&lt;h1</span>
+                  <span class="attr">hidden</span
+                  ><span class="tag">&gt;</span>escondido<span class="tag"
+                    >&lt;/h1&gt;</span
+                  ><br />
+                  <span class="tag">&lt;input</span>
+                  <span class="attr">disabled</span
+                  ><span class="tag">&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 SEMÂNTICOS -->
+      <div class="section" id="html-semantico">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M01 · 03</div>
+            <div class="section-title">
+              <h2 style="color: var(--m01)">Elementos Semânticos</h2>
+              <p>
+                // tags com significado real para o navegador e acessibilidade
+              </p>
+            </div>
+          </div>
+          <div class="grade cols-3">
+            <div class="card">
+              <div class="card-header">Títulos & Parágrafos</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;h1&gt;</span>Título<span class="tag"
+                    >&lt;/h1&gt;</span
+                  >
+                  <span class="com">← só 1 por página</span><br />
+                  <span class="tag">&lt;h2&gt;</span>Subtítulo<span class="tag"
+                    >&lt;/h2&gt;</span
+                  ><br />
+                  <span class="tag">&lt;h3&gt;</span>...<span class="tag"
+                    >&lt;/h3&gt;</span
+                  >
+                  <span class="com">até h6</span><br />
+                  <span class="tag">&lt;p&gt;</span>parágrafo<span class="tag"
+                    >&lt;/p&gt;</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Formatação de Texto</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;strong&gt;</span>negrito<span
+                    class="tag"
+                    >&lt;/strong&gt;</span
+                  >
+                  <span class="com">← importância</span><br />
+                  <span class="tag">&lt;b&gt;</span>negrito<span class="tag"
+                    >&lt;/b&gt;</span
+                  >
+                  <span class="com">← visual</span><br />
+                  <span class="tag">&lt;em&gt;</span>itálico<span class="tag"
+                    >&lt;/em&gt;</span
+                  >
+                  <span class="com">← ênfase</span><br />
+                  <span class="tag">&lt;mark&gt;</span>destacado<span
+                    class="tag"
+                    >&lt;/mark&gt;</span
+                  ><br />
+                  <span class="tag">&lt;s&gt;</span>riscado<span class="tag"
+                    >&lt;/s&gt;</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Listas</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="com">/* não ordenada */</span><br />
+                  <span class="tag">&lt;ul&gt;</span><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>item<span
+                    class="tag"
+                    >&lt;/li&gt;</span
+                  ><br />
+                  <span class="tag">&lt;/ul&gt;</span><br /><br />
+                  <span class="com">/* ordenada */</span><br />
+                  <span class="tag">&lt;ol&gt;</span><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;li&gt;</span>item<span
+                    class="tag"
+                    >&lt;/li&gt;</span
+                  ><br />
+                  <span class="tag">&lt;/ol&gt;</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Hiperlinks</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="com">/* link externo */</span><br />
+                  <span class="tag">&lt;a</span>
+                  <span class="attr">href</span>=<span class="val"
+                    >"https://google.com"</span
+                  >
+                  <span class="attr">target</span>=<span class="val"
+                    >"_blank"</span
+                  ><span class="tag">&gt;</span>link<span class="tag"
+                    >&lt;/a&gt;</span
+                  ><br /><br />
+                  <span class="com">/* âncora interna */</span><br />
+                  <span class="tag">&lt;a</span>
+                  <span class="attr">href</span>=<span class="val"
+                    >"#trabalhos"</span
+                  ><span class="tag">&gt;</span>ver<span class="tag"
+                    >&lt;/a&gt;</span
+                  ><br />
+                  <span class="tag">&lt;p</span>
+                  <span class="attr">id</span>=<span class="val"
+                    >"trabalhos"</span
+                  ><span class="tag">&gt;</span>...<span class="tag"
+                    >&lt;/p&gt;</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Imagens</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;img</span><br />
+                  &nbsp;&nbsp;<span class="attr">src</span>=<span class="val"
+                    >"caminho/foto.jpg"</span
+                  ><br />
+                  &nbsp;&nbsp;<span class="attr">alt</span>=<span class="val"
+                    >"descrição"</span
+                  ><br />
+                  &nbsp;&nbsp;<span class="attr">width</span>=<span class="val"
+                    >"300"</span
+                  ><br />
+                  <span class="tag">&gt;</span><br /><br />
+                  <span class="com">// alt = acessibilidade + SEO</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Código</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;code&gt;</span>trecho<span class="tag"
+                    >&lt;/code&gt;</span
+                  ><br /><br />
+                  <span class="com">// para blocos maiores</span><br />
+                  <span class="com">// o ideal é usar Highlight.js</span><br />
+                  <span class="com">// que adiciona syntax highlight</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 ESTRUTURA -->
+      <div class="section" id="html-estrutura">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M01 · 04</div>
+            <div class="section-title">
+              <h2 style="color: var(--m01)">Estrutura & Caminhos</h2>
+              <p>// anatomia do documento e navegação entre arquivos</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">Anatomia do documento</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;html&gt;</span><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;head&gt;</span><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;meta</span>
+                  <span class="attr">charset</span>=<span class="val"
+                    >"UTF-8"</span
+                  ><span class="tag">&gt;</span><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;title&gt;</span
+                  >Página<span class="tag">&lt;/title&gt;</span><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;link</span>
+                  <span class="attr">rel</span>=<span class="val"
+                    >"stylesheet"</span
+                  >
+                  <span class="attr">href</span>=<span class="val"
+                    >"style.css"</span
+                  ><span class="tag">&gt;</span><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;/head&gt;</span><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;body&gt;</span><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="com"
+                    >/* conteúdo visível */</span
+                  ><br />
+                  &nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span><br />
+                  <span class="tag">&lt;/html&gt;</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Elementos estruturais</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="tag">&lt;header&gt;</span>
+                  <span class="com">→ cabeçalho</span><br />
+                  <span class="tag">&lt;nav&gt;</span>
+                  <span class="com">→ navegação / menu</span><br />
+                  <span class="tag">&lt;main&gt;</span>
+                  <span class="com">→ conteúdo principal</span><br />
+                  <span class="tag">&lt;section&gt;</span>
+                  <span class="com">→ seção (use id)</span><br />
+                  <span class="tag">&lt;article&gt;</span>
+                  <span class="com">→ artigo / post</span><br />
+                  <span class="tag">&lt;aside&gt;</span>
+                  <span class="com">→ conteúdo secundário</span><br />
+                  <span class="tag">&lt;footer&gt;</span>
+                  <span class="com">→ rodapé</span><br /><br />
+                  <span class="tag">&lt;div&gt;</span>
+                  <span class="com">→ genérico block</span><br />
+                  <span class="tag">&lt;span&gt;</span>
+                  <span class="com">→ genérico inline</span>
+                </div>
+              </div>
+            </div>
+            <div class="card full">
+              <div class="card-header">Caminhos — absolutos vs relativos</div>
+              <div
+                class="card-body"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px"
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--m01);
+                      margin-bottom: 10px;
+                    "
+                  >
+                    ABSOLUTOS
+                  </div>
+                  <div class="code">
+                    <span class="val">https://google.com</span>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--m02);
+                      margin-bottom: 10px;
+                    "
+                  >
+                    RELATIVOS
+                  </div>
+                  <div class="code">
+                    <span class="val">./arquivo</span>
+                    <span class="com">← mesma pasta</span><br />
+                    <span class="val">./subpasta/arquivo</span>
+                    <span class="com">← entrar</span><br />
+                    <span class="val">../pasta/arquivo</span>
+                    <span class="com">← voltar</span><br />
+                    <span class="val">/</span>
+                    <span class="com">← raiz do servidor</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       M02 — CSS FUNDAMENTOS
+  ═══════════════════════════════ -->
+
+      <!-- 05 ANATOMIA CSS -->
+      <div class="section" id="css-anatomia">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 01</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">
+                Anatomia CSS, Cascata & Especificidade
+              </h2>
+              <p>// como o CSS decide qual regra aplicar</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">Anatomia de uma regra CSS</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="sel">h1</span> {<br />
+                  &nbsp;&nbsp;<span class="prop">color</span>: blue;<br />
+                  &nbsp;&nbsp;<span class="prop">font-size</span>: 60px;<br />
+                  &nbsp;&nbsp;<span class="prop">letter-spacing</span>: 2px;<br />
+                  &nbsp;&nbsp;<span class="prop">text-transform</span>:
+                  uppercase;<br />
+                  }<br /><br />
+                  <span class="com">// seletor → h1</span><br />
+                  <span class="com">// propriedade → color</span><br />
+                  <span class="com">// valor → blue</span><br />
+                  <span class="com">// declaração → color: blue;</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Cascata — o último sempre vence</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="sel">h1</span> {<br />
+                  &nbsp;&nbsp;<span class="prop">color</span>: blue;<br />
+                  }<br /><br />
+                  <span class="sel">h1</span> {
+                  <span class="com">← esta vence</span><br />
+                  &nbsp;&nbsp;<span class="prop">color</span>:
+                  <span class="hl">red</span>;<br />
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="card full">
+              <div class="card-header">
+                Especificidade — cada seletor tem um peso
+              </div>
+              <div
+                class="card-body"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px"
+              >
+                <div>
+                  <div class="espec-bar">
+                    <span class="espec-label">#id</span>
+                    <div class="espec-track">
+                      <div
+                        class="espec-fill"
+                        style="
+                          width: 100%;
+                          background: rgba(244, 114, 182, 0.2);
+                          color: #f472b6;
+                        "
+                      >
+                        100 pts
+                      </div>
+                    </div>
+                  </div>
+                  <div class="espec-bar">
+                    <span class="espec-label">.class</span>
+                    <div class="espec-track">
+                      <div
+                        class="espec-fill"
+                        style="
+                          width: 60%;
+                          background: rgba(99, 102, 241, 0.2);
+                          color: var(--m02);
+                        "
+                      >
+                        10 pts
+                      </div>
+                    </div>
+                  </div>
+                  <div class="espec-bar">
+                    <span class="espec-label">elemento</span>
+                    <div class="espec-track">
+                      <div
+                        class="espec-fill"
+                        style="
+                          width: 20%;
+                          background: rgba(52, 211, 153, 0.2);
+                          color: #34d399;
+                        "
+                      >
+                        1 pt
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="code">
+                  <span class="com">/* 1 ponto */</span><br />
+                  <span class="tag">p</span> { color: green; }<br /><br />
+                  <span class="com">/* 10 pontos */</span><br />
+                  <span class="sel">.texto</span> { color:
+                  <span class="hl">blue</span>; }<br /><br />
+                  <span class="com">/* 100 pontos */</span><br />
+                  <span class="attr">#titulo</span> { color:
+                  <span class="hl">red</span>; }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 SELETORES -->
+      <div class="section" id="css-seletores">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 02</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Seletores & Combinators</h2>
+              <p>// como apontar para os elementos certos</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">Tipos de seletores</div>
+              <div class="card-body">
+                <div class="sel-item">
+                  <span class="sel-code">p { }</span
+                  ><span class="sel-desc"
+                    >tipo — seleciona todos os &lt;p&gt;</span
+                  >
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">#texto { }</span
+                  ><span class="sel-desc">id — seleciona id="texto"</span>
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">.texto { }</span
+                  ><span class="sel-desc">class — seleciona class="texto"</span>
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">[title="t"] { }</span
+                  ><span class="sel-desc">atributo — seleciona pelo valor</span>
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">* { }</span
+                  ><span class="sel-desc">universal — seleciona todos</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Combinators</div>
+              <div class="card-body">
+                <div class="sel-item">
+                  <span class="sel-code">article p</span
+                  ><span class="sel-desc"
+                    >descendente — &lt;p&gt; dentro de &lt;article&gt; (qualquer
+                    nível)</span
+                  >
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">span, mark</span
+                  ><span class="sel-desc"
+                    >lista — aplica nos dois ao mesmo tempo</span
+                  >
+                </div>
+                <div class="sel-item">
+                  <span class="sel-code">h2 + p</span
+                  ><span class="sel-desc"
+                    >adjacente — &lt;p&gt; logo após &lt;h2&gt; (mesmo
+                    nível)</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card full">
+              <div class="card-header">Exemplo visual dos combinators</div>
+              <div
+                class="card-body"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 16px;
+                "
+              >
+                <div class="comb-demo">
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    article p → descendente
+                  </div>
+                  <div class="code">
+                    <span class="tag">article</span><br />
+                    &nbsp;&nbsp;<span class="tag">div</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight"
+                      >p ← selecionado</span
+                    >
+                  </div>
+                </div>
+                <div class="comb-demo">
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    span, mark → lista
+                  </div>
+                  <div class="code">
+                    <span class="highlight">span ← selecionado</span><br />
+                    <span class="tag">p</span><br />
+                    <span class="highlight">mark ← selecionado</span>
+                  </div>
+                </div>
+                <div class="comb-demo">
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    h2 + p → adjacente
+                  </div>
+                  <div class="code">
+                    <span class="tag">h2</span><br />
+                    <span class="highlight">p ← selecionado</span><br />
+                    <span class="tag">p</span> <span class="com">← não</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 DISPLAY -->
+      <div class="section" id="css-display">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 03</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Display</h2>
+              <p>// como o elemento se comporta no fluxo</p>
+            </div>
+          </div>
+          <div class="grade cols-3">
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m01)">block</b>
+              </div>
+              <div class="card-body">
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 6px;
+                    margin-bottom: 14px;
+                  "
+                >
+                  <div class="d-item" style="display: block">bloco 1</div>
+                  <div class="d-item" style="display: block">bloco 2</div>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    line-height: 1.9;
+                  "
+                >
+                  ✅ ocupa todo o bloco<br />
+                  ✅ width e height funcionam<br />
+                  ✅ margin, padding e border completos
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <b style="color: var(--m02)">inline</b>
+              </div>
+              <div class="card-body">
+                <div style="margin-bottom: 14px">
+                  <span
+                    class="d-item"
+                    style="display: inline; border-radius: 0; margin-right: 4px"
+                    >inline 1</span
+                  >
+                  <span class="d-item" style="display: inline; border-radius: 0"
+                    >inline 2</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    line-height: 1.9;
+                  "
+                >
+                  ✅ fica na mesma linha<br />
+                  ❌ width e height não funcionam<br />
+                  ⚠️ padding/margin só nas horizontais
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <b style="color: #34d399">inline-block</b> — meio-termo
+              </div>
+              <div class="card-body">
+                <div style="margin-bottom: 14px">
+                  <span
+                    class="d-item"
+                    style="
+                      display: inline-block;
+                      background: rgba(52, 211, 153, 0.1);
+                      border-color: rgba(52, 211, 153, 0.3);
+                      color: #34d399;
+                      margin-right: 6px;
+                      padding: 12px 18px;
+                    "
+                    >IB 1</span
+                  >
+                  <span
+                    class="d-item"
+                    style="
+                      display: inline-block;
+                      background: rgba(52, 211, 153, 0.1);
+                      border-color: rgba(52, 211, 153, 0.3);
+                      color: #34d399;
+                      padding: 12px 18px;
+                    "
+                    >IB 2</span
+                  >
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    line-height: 1.9;
+                  "
+                >
+                  ✅ fica na mesma linha<br />
+                  ✅ width e height funcionam<br />
+                  ✅ margin, padding e border completos
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nota">
+            💡 O <strong>inline-block</strong> resolve o problema dos elementos
+            inline que não respeitam margin/padding vertical. Muito usado em
+            links estilizados como botões.
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 BOX MODEL -->
+      <div class="section" id="css-boxmodel">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 04</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Box Model</h2>
+              <p>// todo elemento é uma caixa com 4 camadas</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">As 4 camadas</div>
+              <div class="card-body">
+                <div class="bm-margin">
+                  <div class="bm-border">
+                    <div class="bm-padding">
+                      <div class="bm-content">content</div>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top: 16px">
+                  <div class="bm-label">
+                    <span
+                      class="bm-dot"
+                      style="background: rgba(251, 191, 36, 0.5)"
+                    ></span
+                    >margin — espaço fora da borda
+                  </div>
+                  <div class="bm-label">
+                    <span
+                      class="bm-dot"
+                      style="background: rgba(244, 114, 182, 0.7)"
+                    ></span
+                    >border — a borda
+                  </div>
+                  <div class="bm-label">
+                    <span
+                      class="bm-dot"
+                      style="background: rgba(52, 211, 153, 0.4)"
+                    ></span
+                    >padding — espaço entre borda e conteúdo
+                  </div>
+                  <div class="bm-label">
+                    <span
+                      class="bm-dot"
+                      style="background: rgba(99, 102, 241, 0.6)"
+                    ></span
+                    >content — o conteúdo em si
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">Código e comportamento</div>
+              <div class="card-body">
+                <div class="code">
+                  <span class="sel">.container</span> {<br />
+                  &nbsp;&nbsp;<span class="prop">background-color</span>:
+                  lightgray;<br />
+                  &nbsp;&nbsp;<span class="prop">padding</span>: 1px;
+                  <span class="com">← segura margin collapse</span><br />
+                  }<br /><br />
+                  <span class="sel">.boxmodel</span> {<br />
+                  &nbsp;&nbsp;<span class="prop">border</span>: 3px solid
+                  red;<br />
+                  &nbsp;&nbsp;<span class="prop">padding</span>: 20px;<br />
+                  &nbsp;&nbsp;<span class="prop">margin</span>: 20px;<br />
+                  }
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-top: 12px;
+                    line-height: 1.8;
+                  "
+                >
+                  ⚠️
+                  <strong style="color: white">margin collapse:</strong> margin
+                  top/bottom de elementos inline "escapa" do pai se não houver
+                  padding ou border nele
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 BOX SIZING -->
+      <div class="section" id="css-boxsizing">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 05</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Box Sizing</h2>
+              <p>// como o CSS calcula o tamanho da caixa</p>
+            </div>
+          </div>
+          <div class="grade">
+            <div class="card">
+              <div class="card-header">🔴 content-box — padrão do CSS</div>
+              <div class="card-body">
+                <div
+                  style="
+                    background: rgba(249, 115, 22, 0.1);
+                    border: 10px solid rgba(249, 115, 22, 0.5);
+                    padding: 16px;
+                    border-radius: 4px;
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    font-weight: 700;
+                    text-align: center;
+                    color: var(--m01);
+                  "
+                >
+                  width: 300px · padding: 20px · border: 10px
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                    margin-top: 14px;
+                    line-height: 1.9;
+                  "
+                >
+                  <span style="color: white">width: 300px</span> (só
+                  conteúdo)<br />
+                  + padding: 20 + 20px<br />
+                  + border: 10 + 10px<br />
+                  <span style="color: var(--m01)">= Real: 360px 😱</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">🟢 border-box — recomendado</div>
+              <div class="card-body">
+                <div
+                  style="
+                    background: rgba(52, 211, 153, 0.1);
+                    border: 10px solid rgba(52, 211, 153, 0.5);
+                    padding: 16px;
+                    border-radius: 4px;
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    font-weight: 700;
+                    text-align: center;
+                    color: #34d399;
+                  "
+                >
+                  width: 300px · padding: 20px · border: 10px
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                    margin-top: 14px;
+                    line-height: 1.9;
+                  "
+                >
+                  <span style="color: white">width: 300px</span> (tudo
+                  incluso)<br />
+                  padding já está dentro<br />
+                  border já está dentro<br />
+                  <span style="color: #34d399">= Real: 300px ✅</span>
+                </div>
+              </div>
+            </div>
+            <div class="card full">
+              <div class="card-header">
+                ⭐ Reset padrão — todo projeto começa assim
+              </div>
+              <div class="card-body">
+                <div class="code" style="font-size: 14px">
+                  <span class="sel">*</span> {<br />
+                  &nbsp;&nbsp;<span class="prop">box-sizing</span>:
+                  <span class="hl">border-box</span>;<br />
+                  &nbsp;&nbsp;<span class="prop">margin</span>: 0;<br />
+                  &nbsp;&nbsp;<span class="prop">padding</span>: 0;<br />
+                  }
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                    margin-top: 12px;
+                  "
+                >
+                  → o que você escreve é o que aparece na tela. Sem surpresas.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 BACKGROUND -->
+      <div class="section" id="css-background">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 06</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Background</h2>
+              <p>// controlando imagens e fundos</p>
+            </div>
+          </div>
+          <div class="tabela">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propriedade</th>
+                  <th>Valor</th>
+                  <th>O que faz</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color: var(--m02)">background-size</td>
+                  <td><span style="color: #f472b6">cover</span></td>
+                  <td>
+                    Preenche tudo. Pode cortar a imagem. Sem espaço vazio. ⭐
+                    mais usado
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: var(--m02)">background-size</td>
+                  <td><span style="color: #34d399">contain</span></td>
+                  <td>
+                    Mostra a imagem inteira. Pode sobrar espaço vazio nas
+                    bordas.
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: var(--m02)">background-size</td>
+                  <td><span style="color: var(--text-muted)">auto</span></td>
+                  <td>
+                    Tamanho original. Pode ser cortada se maior que a caixa.
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: var(--m02)">background-repeat</td>
+                  <td><span style="color: #f472b6">no-repeat</span></td>
+                  <td>A imagem aparece uma única vez.</td>
+                </tr>
+                <tr>
+                  <td style="color: var(--m02)">background-repeat</td>
+                  <td><span style="color: var(--text-muted)">repeat</span></td>
+                  <td>
+                    A imagem se repete como ladrilho. Comportamento padrão do
+                    CSS.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="nota">
+            💡 <strong>Combo mais usado:</strong>
+            <code
+              style="
+                color: #34d399;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+              "
+              >cover + no-repeat</code
+            >
+            → preenche tudo sem repetição. Padrão de banners e hero sections.
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 SHORTHANDS -->
+      <div class="section" id="css-shorthands">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M02 · 07</div>
+            <div class="section-title">
+              <h2 style="color: var(--m02)">Shorthands</h2>
+              <p>// escrever menos, fazer mais</p>
+            </div>
+          </div>
+          <div class="grade cols-1">
+            <div class="card">
+              <div class="card-header">border</div>
+              <div class="card-body">
+                <div class="sh-titulo">sintaxe</div>
+                <div class="sh-syntax">
+                  border: <span class="parte">[largura]</span> ·
+                  <span class="parte">[estilo]</span> ·
+                  <span class="parte">[cor]</span>;
+                </div>
+                <div class="code">
+                  <span class="prop">border</span>: 2px solid red;<br />
+                  <span class="prop">border</span>: 1px dashed #ccc;<br />
+                  <span class="com"
+                    >// estilo é obrigatório (solid, dashed, dotted...)</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">font</div>
+              <div class="card-body">
+                <div class="sh-titulo">sintaxe</div>
+                <div class="sh-syntax">
+                  font: <span class="parte">[style]</span>
+                  <span class="parte">[weight]</span>
+                  <span class="parte">[size]</span>/<span class="parte"
+                    >[line-height]</span
+                  >
+                  <span class="parte">[family]</span>;
+                </div>
+                <div class="code">
+                  <span class="com">/* mínimo obrigatório */</span><br />
+                  <span class="prop">font</span>: 16px Arial;<br /><br />
+                  <span class="com">/* completo */</span><br />
+                  <span class="prop">font</span>: italic bold 16px/1.5 Arial,
+                  sans-serif;<br />
+                  <span class="com"
+                    >// size sempre antes de family · line-height colado no size
+                    com /</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">background</div>
+              <div class="card-body">
+                <div class="sh-titulo">sintaxe</div>
+                <div class="sh-syntax">
+                  background: <span class="parte">[color]</span>
+                  <span class="parte">[image]</span>
+                  <span class="parte">[position]</span>/<span class="parte"
+                    >[size]</span
+                  >
+                  <span class="parte">[repeat]</span>;
+                </div>
+                <div class="code">
+                  <span class="prop">background</span>: #fff;<br />
+                  <span class="prop">background</span>: url('foto.jpg');<br />
+                  <span class="prop">background</span>: #fff url('foto.jpg')
+                  center/cover no-repeat;<br />
+                  <span class="com"
+                    >// size vem DEPOIS da position, separado por /</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       M03 — CSS POSITIONS
+  ═══════════════════════════════ -->
+
+      <!-- STATIC -->
+      <div class="section" id="pos-static">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 01</div>
+            <div class="section-title">
+              <h2 style="color: #94a3b8">Position: Static</h2>
+              <p>// o padrão — fluxo normal da página</p>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header">
+              Os elementos seguem o
+              <span style="color: #94a3b8">fluxo normal</span> — um embaixo do
+              outro
+            </div>
+            <div class="demo-area">
+              <div class="static-flow">
+                <div class="box static-color">Elemento 1</div>
+                <div class="box static-color">Elemento 2</div>
+                <div class="box static-color">Elemento 3</div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            <strong style="color: #94a3b8">→ static</strong>
+            É o padrão. Você não precisa escrever, já vem assim. O elemento
+            segue o fluxo normal da página, um depois do outro. As propriedades
+            top, bottom, left, right <strong>não funcionam</strong> aqui.
+          </div>
+        </div>
+      </div>
+
+      <!-- RELATIVE -->
+      <div class="section" id="pos-relative">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 02</div>
+            <div class="section-title">
+              <h2 style="color: #f59e0b">Position: Relative</h2>
+              <p>// desloca a si mesmo, mantém espaço no fluxo</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Sem <span style="color: #f59e0b">position: relative</span>
+              </div>
+              <div class="demo-area">
+                <div class="relative-flow">
+                  <div class="box static-color">Elemento 1</div>
+                  <div class="box static-color">Elemento 2</div>
+                  <div class="box static-color">Elemento 3</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Com
+                <span style="color: #f59e0b"
+                  >relative + top: 16px left: 24px</span
+                >
+              </div>
+              <div class="demo-area">
+                <div class="relative-flow">
+                  <div class="box static-color">Elemento 1</div>
+                  <div class="box relative-color box-relative">
+                    Elemento 2 ← deslocado
+                  </div>
+                  <div class="box static-color">Elemento 3</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            <strong style="color: #f59e0b">→ relative</strong>
+            O elemento se desloca da sua posição original. O espaço que ele
+            ocupava <strong>continua lá</strong> — o Elemento 3 não subiu. Muito
+            usado como "âncora" para o absolute.
+          </div>
+        </div>
+      </div>
+
+      <!-- ABSOLUTE -->
+      <div class="section" id="pos-absolute">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 03</div>
+            <div class="section-title">
+              <h2 style="color: #f43f5e">Position: Absolute</h2>
+              <p>// sai do fluxo, se posiciona em relação ao pai relative</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Pai com <span style="color: #f59e0b">relative</span> — filho se
+                posiciona dentro
+              </div>
+              <div class="demo-area">
+                <div class="absolute-container">
+                  <span
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: #333;
+                      padding: 8px;
+                      display: block;
+                    "
+                    >pai (relative)</span
+                  >
+                  <div class="box absolute-color box-absolute">
+                    top: 12px right: 12px
+                  </div>
+                  <div class="box absolute-color box-absolute-2">
+                    bottom: 12px left: 12px
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                O absolute <span style="color: #f43f5e">sai do fluxo</span> —
+                outros ignoram ele
+              </div>
+              <div class="demo-area" style="position: relative">
+                <div class="static-flow">
+                  <div class="box static-color">Elemento 1</div>
+                  <div class="box static-color">Elemento 2</div>
+                </div>
+                <div
+                  class="box absolute-color"
+                  style="
+                    position: absolute;
+                    top: 50%;
+                    right: 20px;
+                    transform: translateY(-50%);
+                  "
+                >
+                  Absolute<br />(flutuando)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            <strong style="color: #f43f5e">→ absolute</strong>
+            Ele sai completamente do fluxo. Se posiciona em relação ao
+            <strong>pai com position: relative</strong> mais próximo. Se não
+            tiver nenhum pai relative, usa o body como referência.
+          </div>
+        </div>
+      </div>
+
+      <!-- FIXED -->
+      <div class="section" id="pos-fixed">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 04</div>
+            <div class="section-title">
+              <h2 style="color: #22d3ee">Position: Fixed</h2>
+              <p>// fixo na janela do navegador</p>
+            </div>
+          </div>
+          <div class="demo-card" style="max-width: 500px">
+            <div class="demo-card-header">
+              <span style="color: #22d3ee">position: fixed</span> — o header
+              fica parado enquanto a página rola
+            </div>
+            <div class="demo-area" style="padding: 0">
+              <div class="fixed-illustration">
+                <div class="fake-fixed">🔒 Navbar Fixa (position: fixed)</div>
+                <div class="fake-scroll" style="margin-top: 36px">
+                  <div class="fake-line" style="width: 80%"></div>
+                  <div class="fake-line" style="width: 60%"></div>
+                  <div class="fake-line" style="width: 90%"></div>
+                  <div class="fake-line" style="width: 50%"></div>
+                  <div class="fake-line" style="width: 70%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            <strong style="color: #22d3ee">→ fixed</strong>
+            O elemento fica preso na janela do navegador (viewport). Mesmo
+            rolando a página, ele continua no mesmo lugar. Muito usado em
+            navbars fixas e botões flutuantes.
+          </div>
+        </div>
+      </div>
+
+      <!-- STICKY -->
+      <div class="section" id="pos-sticky">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 05</div>
+            <div class="section-title">
+              <h2 style="color: #a78bfa">Position: Sticky</h2>
+              <p>// começa no fluxo, gruda ao rolar</p>
+            </div>
+          </div>
+          <div class="demo-card" style="max-width: 500px">
+            <div class="demo-card-header">
+              <span style="color: #a78bfa">position: sticky + top: 0</span> —
+              role o conteúdo abaixo
+            </div>
+            <div class="demo-area" style="padding: 0">
+              <div class="sticky-illustration">
+                <div class="sticky-inner">
+                  <div class="fake-sticky">
+                    📌 Header Sticky (gruda ao rolar)
+                  </div>
+                  <div class="sticky-content-line"></div>
+                  <div class="sticky-content-line" style="width: 85%"></div>
+                  <div class="sticky-content-line" style="width: 60%"></div>
+                  <div class="sticky-content-line"></div>
+                  <div class="sticky-content-line" style="width: 75%"></div>
+                  <div class="sticky-content-line" style="width: 90%"></div>
+                  <div class="sticky-content-line" style="width: 55%"></div>
+                  <div class="sticky-content-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            <strong style="color: #a78bfa">→ sticky</strong>
+            Meio-termo entre relative e fixed. Começa no fluxo normal, mas
+            quando atinge o limite definido (ex: top: 0) "gruda". Quando o pai
+            sair da tela, some junto. Ótimo para headers de seções.
+          </div>
+
+          <div style="margin-top: 24px">
+            <div class="label-secao">tabela resumo · positions</div>
+            <div class="tabela">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Position</th>
+                    <th>Sai do fluxo?</th>
+                    <th>top/left funciona?</th>
+                    <th>Referência</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="color: #94a3b8">static</td>
+                    <td>❌ Não</td>
+                    <td>❌ Não</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f59e0b">relative</td>
+                    <td>❌ (reserva espaço)</td>
+                    <td>✅ Sim</td>
+                    <td>Posição original</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f43f5e">absolute</td>
+                    <td>✅ Sim</td>
+                    <td>✅ Sim</td>
+                    <td>Pai com position ≠ static</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #22d3ee">fixed</td>
+                    <td>✅ Sim</td>
+                    <td>✅ Sim</td>
+                    <td>Janela (viewport)</td>
+                  </tr>
+                  <tr>
+                    <td style="color: #a78bfa">sticky</td>
+                    <td>❌ (até grudar)</td>
+                    <td>✅ (ponto de grude)</td>
+                    <td>Pai + viewport</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="dica" style="border-left: 3px solid #f59e0b">
+              💡 <strong>Combo mais usado:</strong>
+              <strong style="color: #f59e0b">position: relative</strong> no pai
+              + <strong style="color: #f43f5e">position: absolute</strong> no
+              filho. Controle total para posicionar um elemento em qualquer
+              canto do pai.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSET -->
+      <div class="section" id="pos-inset">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 06</div>
+            <div class="section-title">
+              <h2 style="color: #34d399">inset</h2>
+              <p>// shorthand de top / right / bottom / left</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Sem inset — <span style="color: #666">4 linhas de código</span>
+              </div>
+              <div class="demo-area" style="padding: 12px">
+                <div class="inset-pai">
+                  <span class="inset-label">pai (relative)</span>
+                  <div class="box-verbose">
+                    top: 20px<br />right: 20px<br />bottom: 20px<br />left: 20px
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Com <span style="color: #34d399">inset: 20px</span> — 1 linha,
+                mesmo resultado
+              </div>
+              <div class="demo-area" style="padding: 12px">
+                <div class="inset-pai">
+                  <span class="inset-label">pai (relative)</span>
+                  <div class="box-inset">inset: 20px</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #34d399">inset: 0</span> — cobre o pai
+                inteiro (muito usado!)
+              </div>
+              <div class="demo-area" style="padding: 12px">
+                <div class="inset-pai">
+                  <span class="inset-label">pai (relative)</span>
+                  <div class="box-inset-zero">
+                    inset: 0<br /><span style="opacity: 0.5; font-size: 10px"
+                      >top:0 right:0 bottom:0 left:0</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #34d399">inset: 10px 30px 40px 10px</span> —
+                valores diferentes
+              </div>
+              <div class="demo-area" style="padding: 12px">
+                <div class="inset-pai">
+                  <span class="inset-label">pai (relative)</span>
+                  <div class="box-inset-diff">
+                    top: 10px<br />right: 30px<br />bottom: 40px<br />left: 10px
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabela-inset">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sintaxe</th>
+                  <th>Equivale a</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>inset: 20px</td>
+                  <td>top: 20px · right: 20px · bottom: 20px · left: 20px</td>
+                </tr>
+                <tr>
+                  <td>inset: 10px 20px</td>
+                  <td>top/bottom: 10px · right/left: 20px</td>
+                </tr>
+                <tr>
+                  <td>inset: 10px 20px 30px 40px</td>
+                  <td>top: 10px · right: 20px · bottom: 30px · left: 40px</td>
+                </tr>
+                <tr>
+                  <td>inset: 0</td>
+                  <td>
+                    top: 0 · right: 0 · bottom: 0 · left: 0 (cobre o pai todo)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Z-INDEX -->
+      <div class="section" id="pos-zindex">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M03 · 07</div>
+            <div class="section-title">
+              <h2 style="color: #f472b6">z-index</h2>
+              <p>// profundidade — quem fica na frente</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Sem <span style="color: #f472b6">z-index</span> — quem vem por
+                último no HTML fica na frente
+              </div>
+              <div class="demo-area">
+                <div class="z-stack">
+                  <div class="z-box z1-a">
+                    z-index: auto
+                    <div class="z-numero">HTML: 1º</div>
+                  </div>
+                  <div class="z-box z1-b">
+                    z-index: auto
+                    <div class="z-numero">HTML: 2º</div>
+                  </div>
+                  <div class="z-box z1-c">
+                    z-index: auto
+                    <div class="z-numero">HTML: 3º</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Com <span style="color: #f472b6">z-index</span> — maior número
+                vence
+              </div>
+              <div class="demo-area">
+                <div class="z-stack">
+                  <div class="z-box z2-a">
+                    z-index: 3 🏆
+                    <div class="z-numero">HTML: 1º</div>
+                  </div>
+                  <div class="z-box z2-b">
+                    z-index: 1
+                    <div class="z-numero">HTML: 2º</div>
+                  </div>
+                  <div class="z-box z2-c">
+                    z-index: 2
+                    <div class="z-numero">HTML: 3º</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Exemplo real —
+                <span style="color: #f472b6">modal + overlay</span>
+              </div>
+              <div class="demo-area" style="padding: 0">
+                <div class="z-modal-demo">
+                  <div class="z-page-content">
+                    <div class="z-linha"></div>
+                    <div class="z-linha" style="width: 70%"></div>
+                    <div class="z-linha" style="width: 85%"></div>
+                  </div>
+                  <div class="z-overlay">
+                    <div class="z-modal">
+                      🗂️ Modal<br /><span style="opacity: 0.6; font-size: 10px"
+                        >z-index: 20</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div style="padding: 10px 12px">
+                  <div class="z-tags">
+                    <span class="z-tag" style="color: #bbb; border-color: #333"
+                      >página: z-index padrão</span
+                    >
+                    <span
+                      class="z-tag"
+                      style="color: #888; border-color: rgba(0, 0, 0, 0.5)"
+                      >overlay: z-index 10</span
+                    >
+                    <span
+                      class="z-tag"
+                      style="
+                        color: #f472b6;
+                        border-color: rgba(244, 114, 182, 0.3);
+                      "
+                      >modal: z-index 20</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                ⚠️ <span style="color: #f472b6">z-index só funciona</span> com
+                position ≠ static
+              </div>
+              <div class="demo-area">
+                <div style="display: flex; flex-direction: column; gap: 12px">
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        color: #f87171;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      ❌ não funciona:
+                    </div>
+                    <div
+                      class="box"
+                      style="
+                        background: rgba(248, 113, 113, 0.1);
+                        border-color: rgba(248, 113, 113, 0.2);
+                        color: #f87171;
+                      "
+                    >
+                      position: static · z-index: 999
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        color: #34d399;
+                        margin-bottom: 6px;
+                      "
+                    >
+                      ✅ funciona:
+                    </div>
+                    <div
+                      class="box"
+                      style="
+                        background: rgba(52, 211, 153, 0.1);
+                        border-color: rgba(52, 211, 153, 0.2);
+                        color: #34d399;
+                      "
+                    >
+                      relative/absolute/fixed/sticky + z-index
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="dica"
+            style="margin-top: 20px; border-left: 3px solid #f472b6"
+          >
+            💡 <strong>Combo do dia a dia — overlay que cobre o pai:</strong
+            ><br /><br />
+            .overlay { position: absolute;
+            <strong style="color: #34d399">inset: 0;</strong>
+            <strong style="color: #f472b6">z-index: 10;</strong> background:
+            rgba(0,0,0,0.5); }
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       M04 — SELETORES AVANÇADOS
+  ═══════════════════════════════ -->
+
+      <!-- VARIÁVEIS CSS -->
+      <div class="section" id="sel-variaveis">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M04 · 01</div>
+            <div class="section-title">
+              <h2 style="color: #34d399">Variáveis CSS</h2>
+              <p>
+                // --custom-properties · define uma vez, usa em qualquer lugar
+              </p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                Definindo e usando uma variável
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 12px;
+                    line-height: 2;
+                    color: #999;
+                  "
+                >
+                  <span style="color: #34d399">:root</span> {<br />
+                  &nbsp;&nbsp;<span style="color: #34d399">--cor-principal</span
+                  >: lightblue;<br />
+                  &nbsp;&nbsp;<span style="color: #34d399">--tamanho</span>:
+                  16px;<br />
+                  }<br /><br />
+                  <span style="color: #888">p</span> {<br />
+                  &nbsp;&nbsp;color:
+                  <span style="color: #34d399">var(--cor-principal)</span
+                  >;<br />
+                  &nbsp;&nbsp;font-size:
+                  <span style="color: #34d399">var(--tamanho)</span>;<br />
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">Resultado visual</div>
+              <div
+                class="demo-area"
+                style="display: flex; flex-direction: column; gap: 10px"
+              >
+                <div class="var-box">→ usando --cor-principal</div>
+                <div class="var-box">→ usando --cor-principal</div>
+                <div class="var-box">→ usando --cor-principal</div>
+              </div>
+            </div>
+            <div class="demo-card full">
+              <div class="demo-card-header">
+                ⭐ Sobrescrevendo a variável em um
+                <span style="color: #34d399">elemento específico</span>
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                  "
+                >
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 12px;
+                        line-height: 2;
+                        color: #999;
+                      "
+                    >
+                      <span style="color: #34d399">:root</span> {
+                      <span style="color: #34d399">--bg-color</span>: lightblue;
+                      }<br /><br />
+                      <span style="color: #888">body</span> { background:
+                      <span style="color: #34d399">var(--bg-color)</span>; }<br /><br />
+                      <span style="color: #888">div</span> {<br />
+                      &nbsp;&nbsp;<span style="color: #f97316">--bg-color</span
+                      >: lightgreen;
+                      <span style="color: #444">/* sobrescreve */</span><br />
+                      &nbsp;&nbsp;background:
+                      <span style="color: #34d399">var(--bg-color)</span>;<br />
+                      }
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-family: &quot;JetBrains Mono&quot;, monospace;
+                        font-size: 11px;
+                        color: var(--text-muted);
+                        margin-bottom: 10px;
+                      "
+                    >
+                      → resultado:
+                    </div>
+                    <div
+                      class="scope-block"
+                      style="
+                        border-color: rgba(52, 211, 153, 0.2);
+                        background: rgba(52, 211, 153, 0.03);
+                      "
+                    >
+                      <span class="scope-label" style="color: #34d399"
+                        >:root → --bg-color: lightblue</span
+                      >
+                      <div
+                        class="scope-item"
+                        style="
+                          background: lightblue;
+                          color: #333;
+                          margin-top: 12px;
+                        "
+                      >
+                        body usa lightblue
+                      </div>
+                      <div
+                        class="scope-block"
+                        style="
+                          border-color: rgba(249, 115, 22, 0.3);
+                          background: rgba(249, 115, 22, 0.03);
+                          margin-top: 14px;
+                        "
+                      >
+                        <span class="scope-label" style="color: #f97316"
+                          >div → --bg-color: lightgreen (sobrescreveu!)</span
+                        >
+                        <div
+                          class="scope-item"
+                          style="
+                            background: lightgreen;
+                            color: #333;
+                            margin-top: 12px;
+                          "
+                        >
+                          div usa lightgreen
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            Variáveis CSS começam com <strong>--</strong> e são definidas no
+            <strong>:root</strong>. Para usar, chame com
+            <strong>var(--nome)</strong>. Você pode
+            <strong>sobrescrever a variável em qualquer elemento</strong> — ela
+            passa a ter aquele valor só dentro daquele elemento e seus filhos.
+          </div>
+        </div>
+      </div>
+
+      <!-- PSEUDO-CLASSES -->
+      <div class="section" id="sel-pseudoclasses">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M04 · 02</div>
+            <div class="section-title">
+              <h2 style="color: #f472b6">Pseudo-classes</h2>
+              <p>// :pseudo-class · selecionam por estado ou posição</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #f472b6">:hover</span> — passa o mouse em
+                cima
+              </div>
+              <div
+                class="demo-area"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100px;
+                "
+              >
+                <div class="pc-btn">Passe o mouse aqui ✦</div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #f472b6">:not()</span> — seleciona quem NÃO
+                tem a classe
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-bottom: 10px;
+                  "
+                >
+                  div:not(.destaque) → opacity: 0.3
+                </div>
+                <div class="pc-lista">
+                  <div class="pc-item">item 1</div>
+                  <div class="pc-item destaque">item 2 (.destaque)</div>
+                  <div class="pc-item">item 3</div>
+                  <div class="pc-item destaque">item 4 (.destaque)</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #f472b6">:has()</span> — seleciona o pai se
+                o filho corresponder
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-bottom: 10px;
+                  "
+                >
+                  .card:has(input:checked) → destaca o card
+                </div>
+                <div class="pc-has-card">
+                  <label
+                    ><input type="checkbox" /> Marque para destacar o card
+                    inteiro</label
+                  >
+                </div>
+                <div class="pc-has-card">
+                  <label><input type="checkbox" /> Esse também funciona</label>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #f472b6">:nth-child(n)</span> — seleciona
+                pelo número
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-bottom: 12px;
+                  "
+                >
+                  :nth-child(even) → destaca os pares
+                </div>
+                <div class="pc-nth">
+                  <div class="pc-nth-item">1</div>
+                  <div class="pc-nth-item">2</div>
+                  <div class="pc-nth-item">3</div>
+                  <div class="pc-nth-item">4</div>
+                  <div class="pc-nth-item">5</div>
+                  <div class="pc-nth-item">6</div>
+                </div>
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-top: 14px;
+                    line-height: 1.8;
+                  "
+                >
+                  odd → ímpares (1,3,5...)<br />
+                  even → pares (2,4,6...)<br />
+                  2n+1 → fórmula personalizada
+                </div>
+              </div>
+            </div>
+            <div class="demo-card full">
+              <div class="demo-card-header">
+                <span style="color: #f472b6">:root</span> — o elemento raiz da
+                página
+              </div>
+              <div class="demo-area">
+                <div class="root-demo">
+                  :root é onde você define suas variáveis globais.<br />
+                  Representa o elemento de mais alto nível do documento — na
+                  prática equivale ao &lt;html&gt;, mas com especificidade
+                  maior.<br /><br />
+                  <span style="color: #f472b6">:root</span> { &nbsp;<span
+                    style="color: #34d399"
+                    >--cor</span
+                  >: red; &nbsp;<span style="color: #34d399">--fonte</span>:
+                  16px; &nbsp;}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            Pseudo-classes usam <strong>: (dois pontos simples)</strong> e
+            selecionam por <strong>estado</strong> (hover, checked) ou
+            <strong>posição estrutural</strong> (nth-child). O
+            <strong>:has()</strong> é especialmente poderoso — primeiro seletor
+            CSS que "olha para o filho para estilizar o pai".
+          </div>
+        </div>
+      </div>
+
+      <!-- PSEUDO-ELEMENTS -->
+      <div class="section" id="sel-pseudoelements">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M04 · 03</div>
+            <div class="section-title">
+              <h2 style="color: #a78bfa">Pseudo-elements</h2>
+              <p>// ::pseudo-element · estilizam partes específicas</p>
+            </div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #a78bfa">::first-letter</span> — estiliza a
+                primeira letra
+              </div>
+              <div class="demo-area pe-first-letter">
+                <p>
+                  Esse é um exemplo de texto onde apenas a primeira letra recebe
+                  um estilo especial com ::first-letter. Muito usado em artigos
+                  e textos editoriais.
+                </p>
+              </div>
+            </div>
+            <div class="demo-card">
+              <div class="demo-card-header">
+                <span style="color: #a78bfa">::before</span> e
+                <span style="color: #a78bfa">::after</span> — insere conteúdo
+                decorativo
+              </div>
+              <div class="demo-area">
+                <div
+                  style="
+                    font-family: &quot;JetBrains Mono&quot;, monospace;
+                    font-size: 11px;
+                    color: var(--text-muted);
+                    margin-bottom: 12px;
+                  "
+                >
+                  ::before adiciona antes · ::after depois
+                </div>
+                <div class="pe-before-after">
+                  <div class="pe-item">Item com ::before (seta)</div>
+                  <div class="pe-item com-after">
+                    Item com ::before e ::after (check)
+                  </div>
+                  <div class="pe-item">Item com ::before (seta)</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-card full">
+              <div class="demo-card-header">
+                Uso real — <span style="color: #a78bfa">::before</span> como
+                elemento decorativo (sem texto)
+              </div>
+              <div
+                class="demo-area"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px"
+              >
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                      font-size: 12px;
+                      line-height: 2;
+                      color: #999;
+                    "
+                  >
+                    .texto<span style="color: #a78bfa">::before</span> {<br />
+                    &nbsp;&nbsp;content: <span style="color: #34d399">''</span>;
+                    <span style="color: #444">/* vazio! */</span><br />
+                    &nbsp;&nbsp;position: absolute;<br />
+                    &nbsp;&nbsp;left: 0;<br />
+                    &nbsp;&nbsp;width: 4px;<br />
+                    &nbsp;&nbsp;height: 100%;<br />
+                    &nbsp;&nbsp;background: purple;<br />
+                    }
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    justify-content: center;
+                  "
+                >
+                  <div class="pe-decorativo">
+                    Parágrafo com barra decorativa criada pelo ::before. Nenhum
+                    elemento extra no HTML.
+                  </div>
+                  <div class="pe-decorativo">
+                    Outro parágrafo com a mesma barra, sem tocar no HTML.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="explicacao">
+            Pseudo-elements usam <strong>:: (dois pontos duplos)</strong> e
+            criam "partes virtuais" estilizáveis. O <strong>::before</strong> e
+            <strong>::after</strong> inserem conteúdo antes ou depois via CSS.
+            Sempre precisam da propriedade <strong>content</strong> (pode ser ''
+            vazio para decoração).
+          </div>
+
+          <div style="margin-top: 24px">
+            <div class="label-secao">tabela resumo · seletores avançados</div>
+            <div class="tabela">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Seletor</th>
+                    <th>Tipo</th>
+                    <th>O que faz</th>
+                    <th>Sintaxe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="color: #34d399">--variavel</td>
+                    <td>Variável</td>
+                    <td>
+                      Guarda valor para reutilizar. Sobrescrevível por elemento.
+                    </td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >var(--nome)</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f472b6">:hover</td>
+                    <td>Pseudo-class</td>
+                    <td>Quando o mouse passa por cima</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >a:hover</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f472b6">:not()</td>
+                    <td>Pseudo-class</td>
+                    <td>Seleciona quem NÃO corresponde</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >div:not(.ativo)</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f472b6">:has()</td>
+                    <td>Pseudo-class</td>
+                    <td>Seleciona o pai se contiver o filho</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >div:has(img)</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f472b6">:root</td>
+                    <td>Pseudo-class</td>
+                    <td>Elemento raiz. Usado para variáveis globais.</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >:root { --x: 1; }</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #f472b6">:nth-child(n)</td>
+                    <td>Pseudo-class</td>
+                    <td>Seleciona pelo número. Aceita odd, even e fórmulas.</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >li:nth-child(2)</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #a78bfa">::first-letter</td>
+                    <td>Pseudo-element</td>
+                    <td>Estiliza só a primeira letra</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >p::first-letter</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #a78bfa">::before</td>
+                    <td>Pseudo-element</td>
+                    <td>Insere conteúdo antes via CSS. Precisa de content.</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >div::before</code
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #a78bfa">::after</td>
+                    <td>Pseudo-element</td>
+                    <td>Insere conteúdo depois via CSS. Precisa de content.</td>
+                    <td>
+                      <code
+                        style="
+                          font-family: &quot;JetBrains Mono&quot;, monospace;
+                        "
+                        >div::after</code
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       M05 — LAYOUT (FLEXBOX VS GRID)
+  ═══════════════════════════════ -->
+      <div class="section" id="layout-flex-grid">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">M05 · 01</div>
+            <div class="section-title">
+              <h2>
+                <span style="color: var(--m01)">Flexbox</span>
+                <span style="color: #333"> vs </span>
+                <span style="color: var(--m02)">Grid</span>
+              </h2>
+              <p>// display: flex ←→ display: grid</p>
+            </div>
+          </div>
+
+          <!-- DEMO 1 -->
+          <div style="margin-bottom: 48px">
+            <div class="secao-titulo">
+              <h2 style="font-size: 1.1rem; color: var(--text)">
+                01. Comportamento padrão
+              </h2>
+            </div>
+            <div class="secao-desc">
+              // O que acontece quando você só escreve display: flex ou display:
+              grid
+            </div>
+            <div class="demo-wrapper">
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span
+                    class="c-flex"
+                    style="color: var(--m01); font-weight: 700"
+                    >display: flex</span
+                  >
+                  — os filhos ficam em linha
+                </div>
+                <div class="demo-area">
+                  <div class="flex-row">
+                    <div class="item item-flex">A</div>
+                    <div class="item item-flex">B</div>
+                    <div class="item item-flex">C</div>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m02); font-weight: 700"
+                    >display: grid</span
+                  >
+                  +
+                  <span style="color: var(--m02); font-weight: 700"
+                    >grid-template-columns: repeat(3, 1fr)</span
+                  >
+                </div>
+                <div class="demo-area">
+                  <div class="grid-auto">
+                    <div class="item item-grid">A</div>
+                    <div class="item item-grid">B</div>
+                    <div class="item item-grid">C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="explicacao-wrapper">
+              <div class="explicacao">
+                <strong class="c-flex">→ Flex</strong>Pensa em 1 dimensão: uma
+                linha OU uma coluna de cada vez. Por padrão, coloca tudo em
+                linha. Os itens ocupam só o espaço que precisam.
+              </div>
+              <div class="explicacao">
+                <strong class="c-grid">→ Grid</strong>Pensa em 2 dimensões:
+                linhas E colunas ao mesmo tempo. Você define quantas colunas
+                quer e o grid divide igualmente.
+              </div>
+            </div>
+          </div>
+
+          <!-- DEMO 2 -->
+          <div style="margin-bottom: 48px">
+            <div class="secao-titulo">
+              <h2 style="font-size: 1.1rem; color: var(--text)">
+                02. Direção e proporção
+              </h2>
+            </div>
+            <div class="secao-desc">
+              // Flex muda a direção. Grid controla as proporções das colunas.
+            </div>
+            <div class="demo-wrapper">
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m01); font-weight: 700"
+                    >flex-direction: column</span
+                  >
+                  — empilha na vertical
+                </div>
+                <div class="demo-area">
+                  <div class="flex-col">
+                    <div class="item item-flex">Item 1</div>
+                    <div class="item item-flex">Item 2</div>
+                    <div class="item item-flex">Item 3</div>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m02); font-weight: 700"
+                    >grid-template-columns: 1fr 2fr</span
+                  >
+                  — segunda coluna é o dobro
+                </div>
+                <div class="demo-area">
+                  <div class="grid-col">
+                    <div class="item item-grid">1fr</div>
+                    <div class="item item-grid">2fr (dobro)</div>
+                    <div class="item item-grid">1fr</div>
+                    <div class="item item-grid">2fr (dobro)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="explicacao-wrapper">
+              <div class="explicacao">
+                <strong class="c-flex">→ Flex</strong>flex-direction: row
+                (linha, padrão) ou column (coluna). Simples assim.
+              </div>
+              <div class="explicacao">
+                <strong class="c-grid">→ Grid</strong>O "fr" é uma fração. 1fr
+                2fr = divide em 3 partes, dá 1 pra primeira e 2 pra segunda.
+              </div>
+            </div>
+          </div>
+
+          <!-- DEMO 3 -->
+          <div style="margin-bottom: 48px">
+            <div class="secao-titulo">
+              <h2 style="font-size: 1.1rem; color: var(--text)">
+                03. Quebra de linha e áreas
+              </h2>
+            </div>
+            <div class="secao-desc">
+              // Flex quebra linha automaticamente. Grid pode mesclar células.
+            </div>
+            <div class="demo-wrapper">
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m01); font-weight: 700"
+                    >flex-wrap: wrap</span
+                  >
+                  — quebra quando não cabe
+                </div>
+                <div class="demo-area">
+                  <div class="flex-wrap-demo">
+                    <div class="item item-flex" style="padding: 14px 28px">
+                      A
+                    </div>
+                    <div class="item item-flex" style="padding: 14px 28px">
+                      B
+                    </div>
+                    <div class="item item-flex" style="padding: 14px 28px">
+                      C
+                    </div>
+                    <div class="item item-flex" style="padding: 14px 28px">
+                      D
+                    </div>
+                    <div class="item item-flex" style="padding: 14px 28px">
+                      E
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m02); font-weight: 700"
+                    >grid-column: span 2</span
+                  >
+                  — item ocupando 2 colunas
+                </div>
+                <div class="demo-area">
+                  <div class="grid-template">
+                    <div class="item item-grid">A (span 2)</div>
+                    <div class="item item-grid">B</div>
+                    <div class="item item-grid">C</div>
+                    <div class="item item-grid">D</div>
+                    <div class="item item-grid">E (span 4)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="explicacao-wrapper">
+              <div class="explicacao">
+                <strong class="c-flex">→ Flex</strong>Com flex-wrap: wrap,
+                quando os itens não cabem, descem automaticamente. O flex decide
+                onde quebrar.
+              </div>
+              <div class="explicacao">
+                <strong class="c-grid">→ Grid</strong>grid-column: span 2 faz um
+                item ocupar 2 colunas, como mesclar células no Excel. Controle
+                total.
+              </div>
+            </div>
+          </div>
+
+          <!-- DEMO 4 -->
+          <div style="margin-bottom: 48px">
+            <div class="secao-titulo">
+              <h2 style="font-size: 1.1rem; color: var(--text)">
+                04. Alinhamento
+              </h2>
+            </div>
+            <div class="secao-desc">
+              // Os dois são ótimos para alinhar, mas de formas diferentes.
+            </div>
+            <div class="demo-wrapper">
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m01); font-weight: 700"
+                    >align-items: center</span
+                  >
+                  +
+                  <span style="color: var(--m01); font-weight: 700"
+                    >justify-content: space-between</span
+                  >
+                </div>
+                <div class="demo-area">
+                  <div class="flex-align">
+                    <div class="item item-flex">Alto</div>
+                    <div class="item item-flex">Médio</div>
+                    <div class="item item-flex">Alto</div>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-card">
+                <div class="demo-card-header">
+                  <span style="color: var(--m02); font-weight: 700"
+                    >place-items: center</span
+                  >
+                  — centraliza em linha e coluna
+                </div>
+                <div class="demo-area">
+                  <div class="grid-center">
+                    <div class="item item-grid">A</div>
+                    <div class="item item-grid">B</div>
+                    <div class="item item-grid">C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="explicacao-wrapper">
+              <div class="explicacao">
+                <strong class="c-flex">→ Flex</strong>align-items controla o
+                eixo cruzado e justify-content o eixo principal. Com isso você
+                centraliza e distribui como quiser.
+              </div>
+              <div class="explicacao">
+                <strong class="c-grid">→ Grid</strong>place-items centraliza nos
+                dois eixos de uma vez. Atalho pra align-items + justify-items
+                juntos.
+              </div>
+            </div>
+          </div>
+
+          <!-- QUANDO USAR -->
+          <hr class="divisor" />
+          <div class="quando-usar">
+            <div class="quando-card flex-card">
+              <h3>⚡ Use Flexbox quando...</h3>
+              <ul>
+                <li>Alinhar itens em uma linha (navbar, botões)</li>
+                <li>Centralizar algo na tela</li>
+                <li>Distribuir espaço entre itens</li>
+                <li>Criar componente simples (card, header)</li>
+                <li>O layout for em uma só direção</li>
+              </ul>
+            </div>
+            <div class="quando-card grid-card">
+              <h3>🎯 Use Grid quando...</h3>
+              <ul>
+                <li>Criar o layout geral da página</li>
+                <li>Precisar de linhas E colunas</li>
+                <li>Item ocupar múltiplas colunas/linhas</li>
+                <li>Montar galerias de imagem</li>
+                <li>O layout for complexo e bidimensional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="resumo">
+            💡 <strong>Resumo de uma linha:</strong><br /><br />
+            <span class="c-flex">Flexbox</span> = <strong>1 dimensão</strong> →
+            linha OU coluna. Ótimo pra alinhar componentes.<br />
+            <span class="c-grid">Grid</span> = <strong>2 dimensões</strong> →
+            linha E coluna. Ótimo pra montar o esqueleto da página.<br /><br />
+            <strong>Na prática você vai usar os dois juntos</strong>: Grid pra
+            estrutura, Flex pra organizar os elementos de cada seção. ✅
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════
+       EXTRA — VS CODE
+  ═══════════════════════════════ -->
+      <div class="section" id="vscode">
+        <div class="section-inner">
+          <div class="section-header">
+            <div class="section-num">Extra</div>
+            <div class="section-title">
+              <h2 style="color: var(--m06)">Dicas VS Code</h2>
+              <p>// atalhos para turbinar a produtividade</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="dica-item">
+                <span class="dica-key">alt + clique</span
+                ><span class="dica-desc"
+                  >Cria múltiplos cursores — você digita em vários lugares ao
+                  mesmo tempo</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">alt + shift + arrasto</span
+                ><span class="dica-desc"
+                  >Seleciona múltiplas linhas em coluna — ótimo para editar
+                  listas e propriedades CSS alinhadas</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">shift + ←→↑↓</span
+                ><span class="dica-desc"
+                  >Seleciona texto caractere a caractere ou linha a linha com o
+                  teclado</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">ctrl + seta</span
+                ><span class="dica-desc"
+                  >Pula palavra por palavra — combinado com shift seleciona em
+                  todas as linhas ativas</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">ctrl + shift + P</span
+                ><span class="dica-desc"
+                  >Abre a paleta de comandos — acessa qualquer função do VS Code
+                  digitando o nome</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">ctrl + shift + V</span
+                ><span class="dica-desc"
+                  >Abre preview de arquivos .md em tempo real enquanto você
+                  escreve</span
+                >
+              </div>
+              <div class="dica-item">
+                <span class="dica-key">alt + Z</span
+                ><span class="dica-desc"
+                  >Converte px para rem (extensão px to rem instalada)</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <p>Dev Study · Rocketseat Fullstack · em constante atualização 🚀</p>
+      </div>
+    </div>
+    <!-- end .main -->
+
+    <script>
+      // ── Smooth scroll for nav links
+      document.querySelectorAll('.nav-item[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute("href"));
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // ── IntersectionObserver for active sidebar item
+      const sections = document.querySelectorAll(".section[id]");
+      const navItems = document.querySelectorAll(".nav-item");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              navItems.forEach((item) => {
+                item.classList.remove("active");
+                if (item.getAttribute("href") === "#" + id) {
+                  item.classList.add("active");
+                  // Scroll nav item into view
+                  item.scrollIntoView({ block: "nearest" });
+                }
+              });
+            }
+          });
+        },
+        {
+          rootMargin: "-10% 0px -70% 0px",
+          threshold: 0,
+        },
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>

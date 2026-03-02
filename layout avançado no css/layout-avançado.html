@@ -47,10 +47,22 @@
   <hr>
 
   <h1>Position</h1>
+  <p>o padrão é static</p>
   <h2>Relative</h2>
+  <p>- vai manter o normal flow <br>
+    - deslocamento relativo a ele mesmo <br>
+    - z-index: controla a "profundidade" do elemento
+    - posição: bottom, top, right, left
+  </p>
   <h2>Absolute</h2>
+  <p>- Ele sai completamente do fluxo — os outros elementos agem como se ele não existisse.
+    <br>
+    - Se posiciona em relação ao pai mais próximo com position: relative. Se não tiver nenhum pai relative, vai usar o body inteiro como referência.
+  </p>
   <h2>Fixed</h2>
+  <p>fica fixo na tela</p>
   <h2>Sticky</h2>
+  <p>fixo e relative - ele fixa na tela depois da rolagem</p>
   <div class="box"></div>
   <div class="box position"></div>
   <div class="box"></div>

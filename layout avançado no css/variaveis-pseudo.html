@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Variáveis, Pseudo-classes e Pseudo-elements</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+    :root {
+      --cor-var: #34d399;
+      --cor-pseudo-class: #f472b6;
+      --cor-pseudo-el: #a78bfa;
+      --bg: #0f0f0f;
+      --card-bg: #181818;
+      --border: #2a2a2a;
+      --muted: #555;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: #e5e5e5;
+      padding: 48px 32px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── SEÇÃO ── */
+    .secao {
+      max-width: 960px;
+      margin: 0 auto 72px auto;
+    }
+
+    .secao-titulo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .secao-titulo h2 { font-size: 1.4rem; font-weight: 800; }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .secao-desc {
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    .demo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .demo-card.full { grid-column: 1 / -1; }
+
+    .demo-card-header {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .demo-card-header span { font-weight: 700; }
+
+    .demo-area {
+      padding: 20px;
+    }
+
+    .explicacao {
+      margin-top: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.9;
+      color: #999;
+    }
+
+    .explicacao strong { color: white; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    hr.divisor {
+      max-width: 960px;
+      margin: 0 auto 64px auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ════════════════════════════
+       VARIÁVEIS
+    ════════════════════════════ */
+
+    /* exemplo de variável sendo sobrescrita num elemento específico */
+    .var-demo-root {
+      --demo-color: var(--cor-var);
+    }
+
+    .var-box {
+      background: rgba(52,211,153,0.08);
+      border: 2px solid var(--demo-color, var(--cor-var));
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--demo-color, var(--cor-var));
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .var-box:last-child { margin-bottom: 0; }
+
+    /* sobrescrevendo a variável só nesse elemento */
+    .var-box.diferente {
+      --demo-color: #f97316;
+      background: rgba(249,115,22,0.08);
+      border-color: var(--demo-color);
+      color: var(--demo-color);
+    }
+
+    .var-scope {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .scope-block {
+      border: 1px dashed #2a2a2a;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .scope-label {
+      position: absolute;
+      top: -10px;
+      left: 12px;
+      background: var(--card-bg);
+      padding: 0 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .scope-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* ════════════════════════════
+       PSEUDO-CLASSES
+    ════════════════════════════ */
+
+    /* hover */
+    .pc-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(244,114,182,0.1);
+      border: 1px solid rgba(244,114,182,0.3);
+      color: var(--cor-pseudo-class);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .pc-btn:hover {
+      background: rgba(244,114,182,0.25);
+      transform: translateY(-2px);
+    }
+
+    /* not() */
+    .pc-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pc-item {
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(244,114,182,0.1);
+      border: 1px solid rgba(244,114,182,0.2);
+      color: var(--cor-pseudo-class);
+    }
+
+    /* :not(.destaque) → os que não têm a classe ficam opacos */
+    .pc-item:not(.destaque) {
+      opacity: 0.3;
+    }
+
+    /* has() */
+    .pc-has-card {
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #666;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pc-has-card:has(input:checked) {
+      border-color: rgba(244,114,182,0.5);
+      color: var(--cor-pseudo-class);
+      background: rgba(244,114,182,0.05);
+    }
+
+    .pc-has-card label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    /* nth-child */
+    .pc-nth {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pc-nth-item {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #444;
+    }
+
+    /* destaca só os pares */
+    .pc-nth-item:nth-child(even) {
+      background: rgba(244,114,182,0.1);
+      border-color: rgba(244,114,182,0.3);
+      color: var(--cor-pseudo-class);
+    }
+
+    /* root */
+    .root-demo {
+      background: rgba(244,114,182,0.05);
+      border: 1px dashed rgba(244,114,182,0.2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════
+       PSEUDO-ELEMENTS
+    ════════════════════════════ */
+
+    .pe-first-letter p::first-letter {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--cor-pseudo-el);
+      float: left;
+      line-height: 1;
+      margin-right: 6px;
+    }
+
+    .pe-first-letter p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #bbb;
+    }
+
+    .pe-before-after {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pe-item {
+      position: relative;
+      padding: 12px 16px;
+      border-radius: 6px;
+      background: rgba(167,139,250,0.05);
+      border: 1px solid rgba(167,139,250,0.15);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .pe-item::before {
+      content: '→ ';
+      color: var(--cor-pseudo-el);
+      font-weight: 700;
+    }
+
+    .pe-item.com-after::after {
+      content: ' ✓';
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .pe-decorativo {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.8;
+    }
+
+    .pe-decorativo::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 4px;
+      height: calc(100% - 8px);
+      background: var(--cor-pseudo-el);
+      border-radius: 2px;
+    }
+
+    /* ── TABELA RESUMO ── */
+    .tabela {
+      max-width: 960px;
+      margin: 0 auto 40px auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tabela table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .tabela th {
+      background: #1a1a1a;
+      padding: 12px 16px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tabela td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1a1a1a;
+      color: #bbb;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .tabela tr:last-child td { border-bottom: none; }
+    .tabela td:first-child { font-weight: 700; white-space: nowrap; }
+
+    .label-secao {
+      max-width: 960px;
+      margin: 0 auto 20px auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <span style="color:var(--cor-var)">Variáveis</span> ·
+      <span style="color:var(--cor-pseudo-class)">Pseudo-classes</span> ·
+      <span style="color:var(--cor-pseudo-el)">Pseudo-elements</span>
+    </h1>
+    <p>// --custom-properties · :pseudo-class · ::pseudo-element</p>
+  </header>
+
+  <!-- ════════════════════════════
+       VARIÁVEIS CSS
+  ════════════════════════════ -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--cor-var)">01. Variáveis CSS</h2>
+      <span class="badge" style="background:rgba(52,211,153,0.1);color:var(--cor-var);border:1px solid rgba(52,211,153,0.2)">--custom-properties</span>
+    </div>
+    <p class="secao-desc">// Guarda valores para reutilizar. Define uma vez, usa em qualquer lugar.</p>
+
+    <div class="demo-grid">
+
+      <div class="demo-card">
+        <div class="demo-card-header">Definindo e usando uma variável</div>
+        <div class="demo-area">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;color:#999">
+            <span style="color:var(--cor-var)">:root</span> {<br>
+            &nbsp;&nbsp;<span style="color:var(--cor-var)">--cor-principal</span>: lightblue;<br>
+            &nbsp;&nbsp;<span style="color:var(--cor-var)">--tamanho</span>: 16px;<br>
+            }<br><br>
+            <span style="color:#888">p</span> {<br>
+            &nbsp;&nbsp;color: <span style="color:var(--cor-var)">var(--cor-principal)</span>;<br>
+            &nbsp;&nbsp;font-size: <span style="color:var(--cor-var)">var(--tamanho)</span>;<br>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header">Resultado visual</div>
+        <div class="demo-area" style="display:flex;flex-direction:column;gap:10px">
+          <div class="var-box">→ usando --cor-principal</div>
+          <div class="var-box">→ usando --cor-principal</div>
+          <div class="var-box">→ usando --cor-principal</div>
+        </div>
+      </div>
+
+      <div class="demo-card full">
+        <div class="demo-card-header">⭐ Sobrescrevendo a variável em um <span style="color:var(--cor-var)">elemento específico</span></div>
+        <div class="demo-area">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;color:#999">
+                <span style="color:var(--cor-var)">:root</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--cor-var)">--bg-color</span>: lightblue;<br>
+                }<br><br>
+                <span style="color:#888">body</span> {<br>
+                &nbsp;&nbsp;background: <span style="color:var(--cor-var)">var(--bg-color)</span>;<br>
+                }<br><br>
+                <span style="color:#888">div</span> {<br>
+                &nbsp;&nbsp;<span style="color:#f97316">--bg-color</span>: lightgreen; <span style="color:#444">/* sobrescreve só aqui */</span><br>
+                &nbsp;&nbsp;background: <span style="color:var(--cor-var)">var(--bg-color)</span>;<br>
+                }
+              </div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:10px">→ resultado:</div>
+
+              <div class="scope-block" style="border-color:rgba(52,211,153,0.2);background:rgba(52,211,153,0.03)">
+                <span class="scope-label" style="color:var(--cor-var)">:root → --bg-color: lightblue</span>
+                <div class="scope-item" style="background:lightblue;color:#333;margin-top:12px">body usa lightblue</div>
+
+                <div class="scope-block" style="border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.03);margin-top:14px">
+                  <span class="scope-label" style="color:#f97316">div → --bg-color: lightgreen (sobrescreveu!)</span>
+                  <div class="scope-item" style="background:lightgreen;color:#333;margin-top:12px">div usa lightgreen</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="explicacao">
+      Variáveis CSS começam com <strong>--</strong> e são definidas normalmente no <strong>:root</strong> (que representa o elemento raiz da página, ou seja, vale pra tudo).
+      Para usar, você chama com <strong>var(--nome)</strong>. O mais importante: você pode <strong>sobrescrever a variável em qualquer elemento específico</strong> — ela passa a ter aquele novo valor só dentro daquele elemento e dos filhos dele, sem afetar o resto da página.
+    </div>
+  </div>
+
+  <hr class="divisor">
+
+  <!-- ════════════════════════════
+       PSEUDO-CLASSES
+  ════════════════════════════ -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--cor-pseudo-class)">02. Pseudo-classes</h2>
+      <span class="badge" style="background:rgba(244,114,182,0.1);color:var(--cor-pseudo-class);border:1px solid rgba(244,114,182,0.2)">:pseudo-class</span>
+    </div>
+    <p class="secao-desc">// Selecionam elementos com base em estado ou posição. Usam : (dois pontos simples).</p>
+
+    <div class="demo-grid">
+
+      <!-- HOVER -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-class)">:hover</span> — passa o mouse em cima</div>
+        <div class="demo-area" style="display:flex;align-items:center;justify-content:center;min-height:100px">
+          <div class="pc-btn">Passe o mouse aqui ✦</div>
+        </div>
+      </div>
+
+      <!-- NOT -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-class)">:not()</span> — seleciona quem NÃO tem a classe</div>
+        <div class="demo-area">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:10px">
+            div:not(.destaque) → opacity: 0.3
+          </div>
+          <div class="pc-lista">
+            <div class="pc-item">item 1</div>
+            <div class="pc-item destaque">item 2 (.destaque)</div>
+            <div class="pc-item">item 3</div>
+            <div class="pc-item destaque">item 4 (.destaque)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HAS -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-class)">:has()</span> — seleciona o pai se o filho corresponder</div>
+        <div class="demo-area">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:10px">
+            .card:has(input:checked) → destaca o card
+          </div>
+          <div class="pc-has-card">
+            <label>
+              <input type="checkbox">
+              Marque para destacar o card inteiro
+            </label>
+          </div>
+          <div class="pc-has-card">
+            <label>
+              <input type="checkbox">
+              Esse também funciona
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- NTH-CHILD -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-class)">:nth-child(n)</span> — seleciona pelo número</div>
+        <div class="demo-area">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px">
+            :nth-child(even) → destaca os pares
+          </div>
+          <div class="pc-nth">
+            <div class="pc-nth-item">1</div>
+            <div class="pc-nth-item">2</div>
+            <div class="pc-nth-item">3</div>
+            <div class="pc-nth-item">4</div>
+            <div class="pc-nth-item">5</div>
+            <div class="pc-nth-item">6</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;line-height:1.8">
+            odd → ímpares (1,3,5...)<br>
+            even → pares (2,4,6...)<br>
+            2n+1 → fórmula personalizada
+          </div>
+        </div>
+      </div>
+
+      <!-- ROOT -->
+      <div class="demo-card full">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-class)">:root</span> — o elemento raiz da página (acima do html)</div>
+        <div class="demo-area">
+          <div class="root-demo">
+            :root é onde você define suas variáveis globais.<br>
+            Ele representa o elemento de mais alto nível do documento — na prática equivale ao &lt;html&gt;, mas com especificidade maior.<br><br>
+            <span style="color:var(--cor-pseudo-class)">:root</span> { &nbsp;<span style="color:var(--cor-var)">--cor</span>: red; &nbsp;<span style="color:var(--cor-var)">--fonte</span>: 16px; &nbsp;}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="explicacao">
+      Pseudo-classes usam <strong>: (dois pontos simples)</strong> e selecionam elementos com base em <strong>estado</strong> (hover, checked) ou <strong>posição estrutural</strong> (nth-child, first-child, last-child).
+      O <strong>:not()</strong> e o <strong>:has()</strong> são funcionais — recebem um seletor como argumento. O :has() é especialmente poderoso pois é o primeiro seletor CSS que "olha para o filho para estilizar o pai".
+    </div>
+  </div>
+
+  <hr class="divisor">
+
+  <!-- ════════════════════════════
+       PSEUDO-ELEMENTS
+  ════════════════════════════ -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--cor-pseudo-el)">03. Pseudo-elements</h2>
+      <span class="badge" style="background:rgba(167,139,250,0.1);color:var(--cor-pseudo-el);border:1px solid rgba(167,139,250,0.2)">::pseudo-element</span>
+    </div>
+    <p class="secao-desc">// Estilizam partes específicas de um elemento. Usam :: (dois pontos duplos).</p>
+
+    <div class="demo-grid">
+
+      <!-- FIRST-LETTER -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-el)">::first-letter</span> — estiliza a primeira letra</div>
+        <div class="demo-area pe-first-letter">
+          <p>Esse é um exemplo de texto onde apenas a primeira letra recebe um estilo especial com ::first-letter. Muito usado em artigos e textos editoriais.</p>
+        </div>
+      </div>
+
+      <!-- BEFORE / AFTER -->
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--cor-pseudo-el)">::before</span> e <span style="color:var(--cor-pseudo-el)">::after</span> — insere conteúdo decorativo</div>
+        <div class="demo-area">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px">
+            ::before adiciona conteúdo antes · ::after depois
+          </div>
+          <div class="pe-before-after">
+            <div class="pe-item">Item com ::before (seta)</div>
+            <div class="pe-item com-after">Item com ::before e ::after (check)</div>
+            <div class="pe-item">Item com ::before (seta)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEFORE DECORATIVO -->
+      <div class="demo-card full">
+        <div class="demo-card-header">Uso real — <span style="color:var(--cor-pseudo-el)">::before</span> como elemento decorativo (sem conteúdo de texto)</div>
+        <div class="demo-area" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;color:#999">
+              .texto<span style="color:var(--cor-pseudo-el)">::before</span> {<br>
+              &nbsp;&nbsp;content: <span style="color:#34d399">''</span>; <span style="color:#444">/* vazio! */</span><br>
+              &nbsp;&nbsp;position: absolute;<br>
+              &nbsp;&nbsp;left: 0;<br>
+              &nbsp;&nbsp;width: 4px;<br>
+              &nbsp;&nbsp;height: 100%;<br>
+              &nbsp;&nbsp;background: purple;<br>
+              }
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+            <div class="pe-decorativo">Isso é um parágrafo com uma barra decorativa criada pelo ::before. Nenhum elemento extra foi adicionado no HTML.</div>
+            <div class="pe-decorativo">Outro parágrafo com a mesma barra, sem adicionar nada novo no HTML.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="explicacao">
+      Pseudo-elements usam <strong>:: (dois pontos duplos)</strong> e criam "partes virtuais" de um elemento que você pode estilizar. O <strong>::before</strong> e <strong>::after</strong> são os mais usados — eles inserem conteúdo antes ou depois do elemento diretamente pelo CSS, sem tocar no HTML. Exigem sempre a propriedade <strong>content</strong> (pode ser texto, ícone, ou <strong>''</strong> vazio quando for só decoração).
+    </div>
+  </div>
+
+  <!-- ── TABELA RESUMO ── -->
+  <p class="label-secao">tabela resumo</p>
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Seletor</th>
+          <th>Tipo</th>
+          <th>O que faz</th>
+          <th>Sintaxe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--cor-var)">--variavel</td>
+          <td>Variável</td>
+          <td>Guarda um valor para reutilizar. Sobrescrevível por elemento.</td>
+          <td><code>var(--nome)</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-class)">:hover</td>
+          <td>Pseudo-class</td>
+          <td>Quando o mouse passa por cima do elemento</td>
+          <td><code>a:hover</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-class)">:not()</td>
+          <td>Pseudo-class</td>
+          <td>Seleciona elementos que NÃO correspondem ao seletor</td>
+          <td><code>div:not(.ativo)</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-class)">:has()</td>
+          <td>Pseudo-class</td>
+          <td>Seleciona o pai se ele contiver o seletor filho</td>
+          <td><code>div:has(img)</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-class)">:root</td>
+          <td>Pseudo-class</td>
+          <td>Elemento raiz da página. Usado para variáveis globais.</td>
+          <td><code>:root { --x: 1; }</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-class)">:nth-child(n)</td>
+          <td>Pseudo-class</td>
+          <td>Seleciona pelo número de posição. Aceita odd, even e fórmulas.</td>
+          <td><code>li:nth-child(2)</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-el)">::first-letter</td>
+          <td>Pseudo-element</td>
+          <td>Estiliza apenas a primeira letra do elemento</td>
+          <td><code>p::first-letter</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-el)">::before</td>
+          <td>Pseudo-element</td>
+          <td>Insere conteúdo antes do elemento via CSS. Precisa de content.</td>
+          <td><code>div::before</code></td>
+        </tr>
+        <tr>
+          <td style="color:var(--cor-pseudo-el)">::after</td>
+          <td>Pseudo-element</td>
+          <td>Insere conteúdo depois do elemento via CSS. Precisa de content.</td>
+          <td><code>div::after</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

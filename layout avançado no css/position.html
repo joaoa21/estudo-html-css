@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Positions - Estudo Visual</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+    :root {
+      --static-color: #94a3b8;
+      --relative-color: #f59e0b;
+      --absolute-color: #f43f5e;
+      --fixed-color: #22d3ee;
+      --sticky-color: #a78bfa;
+      --bg: #0f0f0f;
+      --card-bg: #181818;
+      --border: #2a2a2a;
+      --text: #e5e5e5;
+      --muted: #555;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 48px 32px 120px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── SEÇÃO ── */
+    .secao {
+      max-width: 1000px;
+      margin: 0 auto 64px auto;
+    }
+
+    .secao-titulo {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .secao-titulo h2 { font-size: 1.4rem; font-weight: 800; }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .secao-desc {
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 680px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    .demo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .demo-card-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .demo-card-header span { font-weight: 700; }
+
+    .demo-area {
+      padding: 20px;
+      min-height: 150px;
+      position: relative;
+    }
+
+    /* ── ITEMS GENÉRICOS ── */
+    .box {
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border: 1px solid;
+    }
+
+    .ghost {
+      background: #222;
+      border-color: #333;
+      color: #444;
+    }
+
+    /* ── STATIC ── */
+    .static-color { background: rgba(148,163,184,0.1); border-color: rgba(148,163,184,0.3); color: var(--static-color); }
+
+    .static-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── RELATIVE ── */
+    .relative-color { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: var(--relative-color); }
+
+    .relative-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .box-relative {
+      position: relative;
+      top: 16px;
+      left: 24px;
+    }
+
+    /* ── ABSOLUTE ── */
+    .absolute-color { background: rgba(244,63,94,0.1); border-color: rgba(244,63,94,0.3); color: var(--absolute-color); }
+
+    .absolute-container {
+      position: relative;
+      background: #1a1a1a;
+      border: 1px dashed #333;
+      border-radius: 8px;
+      height: 130px;
+    }
+
+    .box-absolute {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .box-absolute-2 {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+    }
+
+    /* ── FIXED ── */
+    .fixed-color { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--fixed-color); }
+
+    .fixed-illustration {
+      background: #111;
+      border-radius: 8px;
+      height: 130px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #222;
+    }
+
+    .fake-scroll {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .fake-line {
+      height: 10px;
+      border-radius: 4px;
+      background: #2a2a2a;
+    }
+
+    .fake-fixed {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: rgba(34,211,238,0.15);
+      border-bottom: 1px solid rgba(34,211,238,0.4);
+      color: var(--fixed-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 8px 12px;
+    }
+
+    /* ── STICKY ── */
+    .sticky-color { background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.3); color: var(--sticky-color); }
+
+    .sticky-illustration {
+      background: #111;
+      border-radius: 8px;
+      height: 130px;
+      overflow-y: auto;
+      border: 1px solid #222;
+    }
+
+    .sticky-inner {
+      padding: 0 10px 20px;
+    }
+
+    .fake-sticky {
+      position: sticky;
+      top: 0;
+      background: rgba(167,139,250,0.15);
+      border-bottom: 1px solid rgba(167,139,250,0.4);
+      color: var(--sticky-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 8px 12px;
+      margin: 0 -10px;
+    }
+
+    .sticky-content-line {
+      height: 10px;
+      border-radius: 4px;
+      background: #2a2a2a;
+      margin-top: 10px;
+    }
+
+    /* ── EXPLICAÇÃO ── */
+    .explicacao {
+      margin-top: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.9;
+      color: #999;
+    }
+
+    .explicacao strong { color: white; display: block; margin-bottom: 4px; font-size: 14px; }
+
+    /* ── TABELA RESUMO ── */
+    .tabela {
+      max-width: 1000px;
+      margin: 0 auto 40px auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tabela table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .tabela th {
+      background: #1a1a1a;
+      padding: 14px 18px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tabela td {
+      padding: 13px 18px;
+      border-bottom: 1px solid #1e1e1e;
+      color: #bbb;
+      vertical-align: top;
+    }
+
+    .tabela tr:last-child td { border-bottom: none; }
+
+    .tabela td:first-child { font-weight: 700; }
+
+    /* ── DICA FINAL ── */
+    .dica {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-left: 3px solid var(--relative-color);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #999;
+    }
+
+    .dica strong { color: white; }
+
+    .label-secao {
+      max-width: 1000px;
+      margin: 0 auto 20px auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📌 CSS Positions</h1>
+    <p>// static · relative · absolute · fixed · sticky</p>
+  </header>
+
+  <!-- ── STATIC ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--static-color)">01. static</h2>
+      <span class="badge" style="background:rgba(148,163,184,0.1);color:var(--static-color);border:1px solid rgba(148,163,184,0.2)">padrão</span>
+    </div>
+    <p class="secao-desc">// Todo elemento já nasce com position: static. É o fluxo normal da página.</p>
+
+    <div class="demo-card">
+      <div class="demo-card-header">Os elementos seguem o <span style="color:var(--static-color)">fluxo normal</span> — um embaixo do outro</div>
+      <div class="demo-area">
+        <div class="static-flow">
+          <div class="box static-color">Elemento 1</div>
+          <div class="box static-color">Elemento 2</div>
+          <div class="box static-color">Elemento 3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--static-color)">→ static</strong>
+      É o padrão. Você não precisa escrever, já vem assim. O elemento segue o fluxo normal da página, um depois do outro. As propriedades top, bottom, left, right <strong>não funcionam</strong> aqui.
+    </div>
+  </div>
+
+  <!-- ── RELATIVE ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--relative-color)">02. relative</h2>
+      <span class="badge" style="background:rgba(245,158,11,0.1);color:var(--relative-color);border:1px solid rgba(245,158,11,0.2)">desloca a si mesmo</span>
+    </div>
+    <p class="secao-desc">// O elemento se move em relação à sua posição original. O espaço que ele ocupava continua reservado.</p>
+
+    <div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-card-header">Sem <span style="color:var(--relative-color)">position: relative</span></div>
+        <div class="demo-area">
+          <div class="relative-flow">
+            <div class="box static-color">Elemento 1</div>
+            <div class="box static-color">Elemento 2</div>
+            <div class="box static-color">Elemento 3</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header">Com <span style="color:var(--relative-color)">position: relative + top: 16px left: 24px</span></div>
+        <div class="demo-area">
+          <div class="relative-flow">
+            <div class="box static-color">Elemento 1</div>
+            <div class="box relative-color box-relative">Elemento 2 ← deslocado</div>
+            <div class="box static-color">Elemento 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--relative-color)">→ relative</strong>
+      O elemento se desloca da sua posição original usando top, bottom, left, right. Mas o espaço que ele ocupava <strong>continua lá</strong> — veja que o Elemento 3 não subiu, ele ainda respeita o espaço do Elemento 2. Muito usado como "âncora" para o absolute.
+    </div>
+  </div>
+
+  <!-- ── ABSOLUTE ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--absolute-color)">03. absolute</h2>
+      <span class="badge" style="background:rgba(244,63,94,0.1);color:var(--absolute-color);border:1px solid rgba(244,63,94,0.2)">sai do fluxo</span>
+    </div>
+    <p class="secao-desc">// O elemento sai do fluxo. Se posiciona em relação ao pai mais próximo com position: relative (ou ao body).</p>
+
+    <div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-card-header">Pai com <span style="color:var(--relative-color)">position: relative</span> — filho se posiciona dentro</div>
+        <div class="demo-area">
+          <div class="absolute-container">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#333;padding:8px;display:block">pai (relative)</span>
+            <div class="box absolute-color box-absolute">top: 12px right: 12px</div>
+            <div class="box absolute-color box-absolute-2">bottom: 12px left: 12px</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-card-header">O absolute <span style="color:var(--absolute-color)">sai do fluxo</span> — outros elementos ignoram ele</div>
+        <div class="demo-area" style="position:relative">
+          <div class="static-flow">
+            <div class="box static-color">Elemento 1</div>
+            <div class="box static-color">Elemento 2</div>
+          </div>
+          <div class="box absolute-color" style="position:absolute;top:50%;right:20px;transform:translateY(-50%)">Absolute<br>(flutuando)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--absolute-color)">→ absolute</strong>
+      Ele sai completamente do fluxo — os outros elementos agem como se ele não existisse. Se posiciona usando top, bottom, left, right em relação ao <strong>pai com position: relative</strong> mais próximo. Se não tiver nenhum pai relative, vai usar o body inteiro como referência.
+    </div>
+  </div>
+
+  <!-- ── FIXED ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--fixed-color)">04. fixed</h2>
+      <span class="badge" style="background:rgba(34,211,238,0.1);color:var(--fixed-color);border:1px solid rgba(34,211,238,0.2)">fixo na tela</span>
+    </div>
+    <p class="secao-desc">// O elemento fica fixo na janela do navegador. Mesmo rolando a página, ele não se move.</p>
+
+    <div class="demo-card" style="max-width:500px">
+      <div class="demo-card-header"><span style="color:var(--fixed-color)">position: fixed</span> — o header fica parado enquanto a página rola</div>
+      <div class="demo-area" style="padding:0">
+        <div class="fixed-illustration">
+          <div class="fake-fixed">🔒 Navbar Fixa (position: fixed)</div>
+          <div class="fake-scroll" style="margin-top:36px">
+            <div class="fake-line" style="width:80%"></div>
+            <div class="fake-line" style="width:60%"></div>
+            <div class="fake-line" style="width:90%"></div>
+            <div class="fake-line" style="width:50%"></div>
+            <div class="fake-line" style="width:70%"></div>
+            <div class="fake-line" style="width:65%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--fixed-color)">→ fixed</strong>
+      O elemento fica preso na janela do navegador (viewport). Mesmo que o usuário role a página, ele continua no mesmo lugar. Muito usado em navbars fixas, botões flutuantes e cookies banners. Se posiciona em relação à janela, não ao pai.
+    </div>
+  </div>
+
+  <!-- ── STICKY ── -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--sticky-color)">05. sticky</h2>
+      <span class="badge" style="background:rgba(167,139,250,0.1);color:var(--sticky-color);border:1px solid rgba(167,139,250,0.2)">gruda ao rolar</span>
+    </div>
+    <p class="secao-desc">// Começa no fluxo normal. Mas quando você rola a página e ele atinge o limite definido, ele "gruda" e fica fixo.</p>
+
+    <div class="demo-card" style="max-width:500px">
+      <div class="demo-card-header"><span style="color:var(--sticky-color)">position: sticky + top: 0</span> — role o conteúdo abaixo</div>
+      <div class="demo-area" style="padding:0">
+        <div class="sticky-illustration">
+          <div class="sticky-inner">
+            <div class="fake-sticky">📌 Header Sticky (gruda ao rolar)</div>
+            <div class="sticky-content-line"></div>
+            <div class="sticky-content-line" style="width:85%"></div>
+            <div class="sticky-content-line" style="width:60%"></div>
+            <div class="sticky-content-line"></div>
+            <div class="sticky-content-line" style="width:75%"></div>
+            <div class="sticky-content-line" style="width:90%"></div>
+            <div class="sticky-content-line" style="width:55%"></div>
+            <div class="sticky-content-line"></div>
+            <div class="sticky-content-line" style="width:70%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--sticky-color)">→ sticky</strong>
+      É um meio-termo entre relative e fixed. O elemento começa no fluxo normal, mas quando o usuário rola e ele chega no limite definido (ex: top: 0), ele "gruda" e fica fixo ali. Quando o pai dele sair da tela, ele some junto. Ótimo para headers de seções e menus laterais.
+    </div>
+  </div>
+
+  <!-- ── TABELA RESUMO ── -->
+  <p class="label-secao">tabela resumo</p>
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Sai do fluxo?</th>
+          <th>top/left/right/bottom funciona?</th>
+          <th>Referência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--static-color)">static</td>
+          <td>❌ Não</td>
+          <td>❌ Não</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--relative-color)">relative</td>
+          <td>❌ Não (reserva espaço)</td>
+          <td>✅ Sim</td>
+          <td>Posição original do elemento</td>
+        </tr>
+        <tr>
+          <td style="color:var(--absolute-color)">absolute</td>
+          <td>✅ Sim</td>
+          <td>✅ Sim</td>
+          <td>Pai com position ≠ static</td>
+        </tr>
+        <tr>
+          <td style="color:var(--fixed-color)">fixed</td>
+          <td>✅ Sim</td>
+          <td>✅ Sim</td>
+          <td>Janela do navegador (viewport)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--sticky-color)">sticky</td>
+          <td>❌ Não (até grudar)</td>
+          <td>✅ Sim (define o ponto de "grude")</td>
+          <td>Pai + viewport</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="dica">
+    💡 <strong>O combo mais usado no dia a dia:</strong><br>
+    Colocar <strong style="color:var(--relative-color)">position: relative</strong> no pai e <strong style="color:var(--absolute-color)">position: absolute</strong> no filho. Isso te dá controle total pra posicionar um elemento em qualquer canto do pai, como um ícone no canto de um card, uma badge em cima de uma imagem, etc.
+  </div>
+
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>inset & z-index - Estudo Visual</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+
+    :root {
+      --inset-color: #34d399;
+      --z-color: #f472b6;
+      --bg: #0f0f0f;
+      --card-bg: #181818;
+      --border: #2a2a2a;
+      --text: #e5e5e5;
+      --muted: #555;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 48px 32px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .secao {
+      max-width: 1000px;
+      margin: 0 auto 72px auto;
+    }
+
+    .secao-titulo {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .secao-titulo h2 { font-size: 1.4rem; font-weight: 800; }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .secao-desc {
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 680px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    .demo-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .demo-card-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .demo-card-header span { font-weight: 700; }
+
+    .demo-area {
+      padding: 20px;
+      position: relative;
+    }
+
+    .box {
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border: 1px solid;
+      text-align: center;
+    }
+
+    .explicacao {
+      margin-top: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.9;
+      color: #999;
+    }
+
+    .explicacao strong { color: white; display: block; margin-bottom: 4px; font-size: 14px; }
+
+    /* ══════════════════════════════
+       INSET
+    ══════════════════════════════ */
+
+    .inset-pai {
+      position: relative;
+      background: #1a1a1a;
+      border: 1px dashed #333;
+      border-radius: 8px;
+      height: 180px;
+    }
+
+    .inset-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      padding: 6px 10px;
+    }
+
+    /* versão verbosa */
+    .box-verbose {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.4);
+      border-radius: 6px;
+      color: var(--inset-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* versão inset */
+    .box-inset {
+      position: absolute;
+      inset: 20px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.4);
+      border-radius: 6px;
+      color: var(--inset-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* inset 0 (cobre o pai inteiro) */
+    .box-inset-zero {
+      position: absolute;
+      inset: 0;
+      background: rgba(52,211,153,0.08);
+      border: 2px solid rgba(52,211,153,0.5);
+      border-radius: 8px;
+      color: var(--inset-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* inset com valores diferentes */
+    .box-inset-diff {
+      position: absolute;
+      inset: 10px 30px 40px 10px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.4);
+      border-radius: 6px;
+      color: var(--inset-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── TABELA INSET ── */
+    .tabela-inset {
+      margin-top: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .tabela-inset table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .tabela-inset th {
+      background: #1a1a1a;
+      padding: 12px 16px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tabela-inset td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #1e1e1e;
+      color: #bbb;
+    }
+
+    .tabela-inset tr:last-child td { border-bottom: none; }
+    .tabela-inset td:first-child { color: var(--inset-color); font-weight: 700; }
+
+    /* ══════════════════════════════
+       Z-INDEX
+    ══════════════════════════════ */
+
+    .z-stack {
+      position: relative;
+      height: 180px;
+    }
+
+    .z-box {
+      position: absolute;
+      width: 120px;
+      height: 80px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid;
+    }
+
+    /* sem z-index */
+    .z1-a { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.4); color: var(--z-color); top: 20px; left: 20px; }
+    .z1-b { background: rgba(99,102,241,0.15);  border-color: rgba(99,102,241,0.4);  color: #818cf8; top: 50px; left: 70px; }
+    .z1-c { background: rgba(251,191,36,0.15);  border-color: rgba(251,191,36,0.4);  color: #fbbf24; top: 80px; left: 120px; }
+
+    /* com z-index */
+    .z2-a { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.4); color: var(--z-color); top: 20px; left: 20px; z-index: 3; }
+    .z2-b { background: rgba(99,102,241,0.15);  border-color: rgba(99,102,241,0.4);  color: #818cf8; top: 50px; left: 70px; z-index: 1; }
+    .z2-c { background: rgba(251,191,36,0.15);  border-color: rgba(251,191,36,0.4);  color: #fbbf24; top: 80px; left: 120px; z-index: 2; }
+
+    .z-numero {
+      position: absolute;
+      bottom: 4px;
+      right: 6px;
+      font-size: 10px;
+      opacity: 0.6;
+    }
+
+    /* z-index modal */
+    .z-modal-demo {
+      position: relative;
+      height: 180px;
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .z-page-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .z-linha { height: 10px; background: #2a2a2a; border-radius: 4px; }
+
+    .z-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .z-modal {
+      background: #222;
+      border: 1px solid rgba(244,114,182,0.3);
+      border-radius: 10px;
+      padding: 16px 24px;
+      z-index: 20;
+      color: var(--z-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .z-tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .z-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+
+    .dica {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-left: 3px solid var(--z-color);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #999;
+    }
+
+    .dica strong { color: white; }
+  </style>
+</head>
+<body>
+
+  <header style="margin-top: 80px;">
+    <h1>📐 inset <span style="color:#333">&</span> 🗂️ z-index</h1>
+    <p>// complemento de CSS Positions</p>
+  </header>
+
+  <!-- ══════════════════════════════
+       INSET
+  ══════════════════════════════ -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--inset-color)">01. inset</h2>
+      <span class="badge" style="background:rgba(52,211,153,0.1);color:var(--inset-color);border:1px solid rgba(52,211,153,0.2)">shorthand de top/right/bottom/left</span>
+    </div>
+    <p class="secao-desc">// inset é apenas um atalho para escrever top, right, bottom e left de uma vez.</p>
+
+    <div class="demo-grid">
+
+      <div class="demo-card">
+        <div class="demo-card-header">Sem inset — <span style="color:#666">4 linhas de código</span></div>
+        <div class="demo-area" style="padding:12px">
+          <div class="inset-pai">
+            <span class="inset-label">pai (relative)</span>
+            <div class="box-verbose">
+              top: 20px<br>right: 20px<br>bottom: 20px<br>left: 20px
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header">Com <span style="color:var(--inset-color)">inset: 20px</span> — 1 linha, mesmo resultado</div>
+        <div class="demo-area" style="padding:12px">
+          <div class="inset-pai">
+            <span class="inset-label">pai (relative)</span>
+            <div class="box-inset">inset: 20px</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--inset-color)">inset: 0</span> — cobre o pai inteiro (muito usado!)</div>
+        <div class="demo-area" style="padding:12px">
+          <div class="inset-pai">
+            <span class="inset-label">pai (relative)</span>
+            <div class="box-inset-zero">inset: 0<br><span style="opacity:0.5;font-size:10px">top:0 right:0 bottom:0 left:0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header"><span style="color:var(--inset-color)">inset: 10px 30px 40px 10px</span> — valores diferentes</div>
+        <div class="demo-area" style="padding:12px">
+          <div class="inset-pai">
+            <span class="inset-label">pai (relative)</span>
+            <div class="box-inset-diff">
+              top: 10px<br>right: 30px<br>bottom: 40px<br>left: 10px
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tabela-inset">
+      <table>
+        <thead>
+          <tr>
+            <th>Sintaxe</th>
+            <th>Equivale a</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>inset: 20px</td>
+            <td>top: 20px · right: 20px · bottom: 20px · left: 20px</td>
+          </tr>
+          <tr>
+            <td>inset: 10px 20px</td>
+            <td>top/bottom: 10px · right/left: 20px</td>
+          </tr>
+          <tr>
+            <td>inset: 10px 20px 30px 40px</td>
+            <td>top: 10px · right: 20px · bottom: 30px · left: 40px</td>
+          </tr>
+          <tr>
+            <td>inset: 0</td>
+            <td>top: 0 · right: 0 · bottom: 0 · left: 0 (cobre o pai todo)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--inset-color)">→ inset</strong>
+      Segue a mesma lógica do margin e padding shorthand: 1 valor = todos os lados, 2 valores = vertical/horizontal, 4 valores = top/right/bottom/left. O uso mais comum no dia a dia é <strong>inset: 0</strong> para fazer um elemento cobrir completamente o pai, como em overlays e modais.
+    </div>
+  </div>
+
+  <!-- ===== Z-INDEX ====== -->
+  
+  <div class="secao">
+    <div class="secao-titulo">
+      <h2 style="color:var(--z-color)">02. z-index</h2>
+      <span class="badge" style="background:rgba(244,114,182,0.1);color:var(--z-color);border:1px solid rgba(244,114,182,0.2)">profundidade / quem fica na frente</span>
+    </div>
+    <p class="secao-desc">// z-index define qual elemento fica na frente quando dois se sobrepõem. Maior número = mais na frente.</p>
+
+    <div class="demo-grid">
+
+      <div class="demo-card">
+        <div class="demo-card-header">Sem <span style="color:var(--z-color)">z-index</span> — quem vem por último no HTML fica na frente</div>
+        <div class="demo-area">
+          <div class="z-stack">
+            <div class="z-box z1-a">z-index: auto<div class="z-numero">HTML: 1º</div></div>
+            <div class="z-box z1-b">z-index: auto<div class="z-numero">HTML: 2º</div></div>
+            <div class="z-box z1-c">z-index: auto<div class="z-numero">HTML: 3º</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header">Com <span style="color:var(--z-color)">z-index</span> — maior número vence, independente da ordem</div>
+        <div class="demo-area">
+          <div class="z-stack">
+            <div class="z-box z2-a">z-index: 3 🏆<div class="z-numero">HTML: 1º</div></div>
+            <div class="z-box z2-b">z-index: 1<div class="z-numero">HTML: 2º</div></div>
+            <div class="z-box z2-c">z-index: 2<div class="z-numero">HTML: 3º</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header">Exemplo real — <span style="color:var(--z-color)">modal + overlay</span></div>
+        <div class="demo-area" style="padding:0">
+          <div class="z-modal-demo">
+            <div class="z-page-content">
+              <div class="z-linha"></div>
+              <div class="z-linha" style="width:70%"></div>
+              <div class="z-linha" style="width:85%"></div>
+              <div class="z-linha" style="width:60%"></div>
+            </div>
+            <div class="z-overlay">
+              <div class="z-modal">
+                🗂️ Modal<br>
+                <span style="opacity:0.6;font-size:10px">z-index: 20</span>
+              </div>
+            </div>
+          </div>
+          <div style="padding:10px 12px">
+            <div class="z-tags">
+              <span class="z-tag" style="color:#bbb;border-color:#333">página: z-index padrão</span>
+              <span class="z-tag" style="color:#888;border-color:rgba(0,0,0,0.5)">overlay: z-index: 10</span>
+              <span class="z-tag" style="color:var(--z-color);border-color:rgba(244,114,182,0.3)">modal: z-index: 20</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-header">⚠️ <span style="color:var(--z-color)">z-index só funciona</span> com position ≠ static</div>
+        <div class="demo-area">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:6px">❌ não funciona:</div>
+              <div class="box" style="background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.2);color:#f87171">
+                position: static · z-index: 999
+              </div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--inset-color);margin-bottom:6px">✅ funciona:</div>
+              <div class="box" style="background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.2);color:var(--inset-color)">
+                position: relative/absolute/fixed/sticky + z-index
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="explicacao">
+      <strong style="color:var(--z-color)">→ z-index</strong>
+      Pensa no z-index como a ordem das camadas num editor de imagem (tipo Photoshop ou Figma). Quem tem o número maior fica na frente. Mas atenção: <strong>z-index só funciona em elementos com position diferente de static</strong>. Não tem valor certo pra usar — o que importa é a ordem entre os elementos. Muitos projetos usam valores como 10, 100, 1000 pra dar espaço entre as camadas.
+    </div>
+  </div>
+
+  <div class="dica">
+    💡 <strong>Combo do dia a dia — overlay que cobre o pai:</strong><br><br>
+    <strong style="color:var(--inset-color)">inset: 0</strong> + <strong style="color:var(--z-color)">z-index</strong> juntos é um dos padrões mais usados em modais, tooltips e overlays:<br><br>
+    .overlay &#123;<br>
+    &nbsp;&nbsp;position: absolute;<br>
+    &nbsp;&nbsp;<strong style="color:var(--inset-color)">inset: 0;</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* cobre o pai inteiro */<br>
+    &nbsp;&nbsp;<strong style="color:var(--z-color)">z-index: 10;</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* fica na frente de tudo */<br>
+    &nbsp;&nbsp;background: rgba(0,0,0,0.5);<br>
+    &#125;
+  </div>
+
+</body>
+</html>
+
+</body>
+</html>
