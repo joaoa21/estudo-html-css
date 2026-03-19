@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Dev Study · HTML & CSS</title>
-  <meta name="description">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
 
@@ -19,7 +16,7 @@
       --accent-dim: rgba(139, 92, 246, 0.18);
       --accent-glow: rgba(139, 92, 246, 0.45);
       /* Module colors */
-      --m00: #6366f1;
+      --m04: #22d3ee;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -241,7 +238,7 @@
     .sidebar-item.active-m00::before { background: var(--m00); }
     .sidebar-item.active-m01::before { background: var(--m01); }
     .sidebar-item.active-m02::before { background: var(--m02); }
-    .sidebar-item.active-m03::before { background: var(--m03); }
+    .sidebar-item.active-m04::before { background: var(--m04); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -738,6 +735,22 @@
       </div>
 
       <div class="sidebar-module">
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m04)"></span>
+          Flexbox
+        </div>
+        <a class="sidebar-item" href="#flex-conceitos" data-module="m04">Conceitos & Eixos</a>
+        <a class="sidebar-item" href="#flex-direction" data-module="m04">Direction</a>
+        <a class="sidebar-item" href="#flex-justify" data-module="m04">Justify-Content</a>
+        <a class="sidebar-item" href="#flex-align" data-module="m04">Align-Items</a>
+        <a class="sidebar-item" href="#flex-gap" data-module="m04">Gap e Margin</a>
+        <a class="sidebar-item" href="#flex-multiline" data-module="m04">Multi Line</a>
+        <a class="sidebar-item" href="#flex-sizing" data-module="m04">Flex Basis / Grow / Shrink</a>
+        <a class="sidebar-item" href="#flex-shorthand" data-module="m04">Shorthand Flex</a>
+        <a class="sidebar-item" href="#flex-order" data-module="m04">Order</a>
+      </div>
+
+      <div class="sidebar-module">
         <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Transições & Animações</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Responsividade</div>
@@ -747,9 +760,9 @@
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>4/8 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>5/8 módulos</span></div>
       <div class="sidebar-progress-bar">
-        <div class="sidebar-progress-fill"></div>
+        <div class="sidebar-progress-fill" style="width:62.5%"></div>
       </div>
     </div>
   </nav>
@@ -1171,6 +1184,75 @@
           </div>
         </div>
         <div class="nota">💡 O <strong>inline-block</strong> resolve o problema dos elementos inline que não respeitam margin/padding vertical. Muito usado em links estilizados como botões.</div>
+
+        <div class="demo-card full" style="margin-top:16px">
+          <div class="demo-card-header">⚠️ O gap do <span style="color:var(--css-c)">baseline</span> — o espaço misterioso embaixo de imagens inline</div>
+          <div class="demo-area">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">
+
+              <!-- COM PROBLEMA -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:8px">❌ problema — gap aparece sem motivo</div>
+                <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:8px;padding:12px;position:relative">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.25);margin-bottom:6px">container (sem flex)</div>
+                  <!-- imagem fake -->
+                  <div style="display:inline;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.4);border-radius:50%;width:48px;height:48px;display:inline-block;vertical-align:baseline"></div>
+                  <!-- indicador do gap -->
+                  <div style="display:block;height:6px;background:rgba(248,113,113,0.3);border:1px dashed rgba(248,113,113,0.6);border-radius:2px;margin-top:0;position:relative">
+                    <span style="position:absolute;right:0;top:-16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171">← gap misterioso</span>
+                  </div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.35);margin-top:8px;line-height:1.8">
+                  O navegador reserva espaço para letras com descida<br>
+                  <span style="color:rgba(240,240,240,0.5)">(g, p, y, j...)</span> mesmo sem texto nenhum.
+                </div>
+              </div>
+
+              <!-- EXPLICAÇÃO DA BASELINE -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">por que acontece</div>
+                <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:13px;position:relative;overflow:hidden">
+                  <!-- linha de baseline visual -->
+                  <div style="position:absolute;bottom:28px;left:0;right:0;height:1px;background:rgba(245,158,11,0.4)"></div>
+                  <div style="position:absolute;bottom:12px;left:0;right:0;height:1px;background:rgba(248,113,113,0.3)"></div>
+                  <div style="display:flex;align-items:baseline;gap:8px;padding-bottom:28px">
+                    <div style="background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.4);border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;color:#818cf8;font-size:18px;flex-shrink:0">🙂</div>
+                    <span style="color:white;font-size:22px;line-height:1">Apg</span>
+                  </div>
+                  <span style="position:absolute;right:10px;bottom:30px;font-size:10px;color:rgba(245,158,11,0.7)">baseline →</span>
+                  <span style="position:absolute;right:10px;bottom:14px;font-size:10px;color:rgba(248,113,113,0.6)">descenders →</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.35);margin-top:8px;line-height:1.8">
+                  Elementos inline alinham na <span style="color:rgba(245,158,11,0.7)">baseline</span>.<br>
+                  O espaço abaixo é reservado para os <span style="color:rgba(248,113,113,0.6)">descenders</span>.
+                </div>
+              </div>
+            </div>
+
+            <!-- SOLUÇÕES -->
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:10px;letter-spacing:2px;text-transform:uppercase">3 formas de resolver</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+              <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:8px">✅ opção 1 — mais usada</div>
+                <div class="code"><span class="prop">img</span> {<br>&nbsp;&nbsp;<span class="prop">display</span>: <span class="hl">block</span>;<br>}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:8px">tira do fluxo inline → gap some</div>
+              </div>
+              <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:8px">✅ opção 2</div>
+                <div class="code"><span class="prop">img</span> {<br>&nbsp;&nbsp;<span class="prop">vertical-align</span>: <span class="hl">bottom</span>;<br>}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:8px">alinha na base → elimina o espaço</div>
+              </div>
+              <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:8px">✅ opção 3</div>
+                <div class="code"><span class="prop">.container</span> {<br>&nbsp;&nbsp;<span class="prop">line-height</span>: <span class="hl">0</span>;<br>}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:8px">zera o espaço da linha no pai</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.12);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.8">
+              💡 Se o container já for <strong style="color:white">display: flex</strong>, o problema não ocorre — o flex retira os filhos do fluxo inline automaticamente.
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2021,6 +2103,503 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 04 — FLEXBOX
+    ═══════════════════════════════════════════════ -->
+
+    <!-- flex-conceitos -->
+    <section class="topico" id="flex-conceitos">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Conceitos & Eixos</h2>
+            <p>// o modelo mental do Flexbox — container, itens e os dois eixos</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Container vs Itens</div>
+            <div class="card-body">
+              <div style="border:2px dashed rgba(34,211,238,0.3);border-radius:8px;padding:14px;background:rgba(34,211,238,0.04);margin-bottom:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--m04);margin-bottom:10px;letter-spacing:1px">CONTAINER — display: flex</div>
+                <div style="display:flex;gap:8px">
+                  <div style="flex:1;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);border-radius:5px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--m04);text-align:center">item 1</div>
+                  <div style="flex:1;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);border-radius:5px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--m04);text-align:center">item 2</div>
+                  <div style="flex:1;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);border-radius:5px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--m04);text-align:center">item 3</div>
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                O <strong style="color:white">container</strong> recebe <code style="color:var(--m04)">display: flex</code><br>
+                Os <strong style="color:white">itens</strong> são os filhos diretos — eles se organizam automaticamente.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Os dois eixos</div>
+            <div class="card-body">
+              <div style="position:relative;height:140px;background:rgba(14,14,14,0.8);border-radius:8px;overflow:hidden;margin-bottom:14px">
+                <!-- eixo principal -->
+                <div style="position:absolute;top:50%;left:10px;right:10px;height:2px;background:rgba(34,211,238,0.5);transform:translateY(-50%)"></div>
+                <div style="position:absolute;top:50%;right:8px;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--m04)">→ main axis</div>
+                <!-- eixo cruzado -->
+                <div style="position:absolute;left:50%;top:10px;bottom:10px;width:2px;background:rgba(167,139,250,0.5)"></div>
+                <div style="position:absolute;left:52%;top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a78bfa">↓ cross axis</div>
+                <!-- itens -->
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:6px">
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:4px;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700">A</div>
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:4px;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700">B</div>
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:4px;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700">C</div>
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                <span style="color:var(--m04)">main axis</span> → direção dos itens (horizontal por padrão)<br>
+                <span style="color:#a78bfa">cross axis</span> → perpendicular ao main (vertical por padrão)
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Propriedades do container vs propriedades dos itens</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:10px;letter-spacing:1px">CONTAINER (pai)</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:2">
+                  <span style="color:var(--m04)">display</span>: flex<br>
+                  <span style="color:var(--m04)">flex-direction</span><br>
+                  <span style="color:var(--m04)">justify-content</span><br>
+                  <span style="color:var(--m04)">align-items</span><br>
+                  <span style="color:var(--m04)">flex-wrap</span><br>
+                  <span style="color:var(--m04)">gap</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a78bfa;margin-bottom:10px;letter-spacing:1px">ITENS (filhos)</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:2">
+                  <span style="color:#a78bfa">flex-basis</span><br>
+                  <span style="color:#a78bfa">flex-grow</span><br>
+                  <span style="color:#a78bfa">flex-shrink</span><br>
+                  <span style="color:#a78bfa">flex</span> (shorthand)<br>
+                  <span style="color:#a78bfa">order</span><br>
+                  <span style="color:#a78bfa">align-self</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- flex-direction -->
+    <section class="topico" id="flex-direction">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">flex-direction</h2>
+            <p>// define a direção do main axis — onde os itens se organizam</p>
+          </div>
+        </div>
+        <div class="grade cols-3" style="grid-template-columns:repeat(2,1fr)">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">row</span> — padrão · horizontal →</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-direction:row;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">row-reverse</span> — horizontal ←</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-direction:row-reverse;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">column</span> — vertical ↓</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">column-reverse</span> — vertical ↑</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-direction:column-reverse;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04)">3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao">
+          <strong>flex-direction</strong> define o <strong>main axis</strong>. O cross axis é sempre perpendicular a ele — então quando você muda a direção, <strong>justify-content e align-items trocam de eixo junto</strong>. É um dos pontos que mais confunde no começo.
+        </div>
+      </div>
+    </section>
+
+    <!-- flex-justify -->
+    <section class="topico" id="flex-justify">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">justify-content</h2>
+            <p>// distribui os itens ao longo do main axis</p>
+          </div>
+        </div>
+        <div class="grade" style="grid-template-columns:repeat(2,1fr)">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-start</span> — padrão · agrupa no início</div>
+            <div class="demo-area"><div style="display:flex;justify-content:flex-start;gap:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-end</span> — agrupa no fim</div>
+            <div class="demo-area"><div style="display:flex;justify-content:flex-end;gap:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">center</span> — centraliza</div>
+            <div class="demo-area"><div style="display:flex;justify-content:center;gap:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">space-between</span> — primeiro e último nas bordas</div>
+            <div class="demo-area"><div style="display:flex;justify-content:space-between;"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">space-around</span> — espaço igual ao redor de cada item</div>
+            <div class="demo-area"><div style="display:flex;justify-content:space-around;"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">space-evenly</span> — espaço idêntico entre todos</div>
+            <div class="demo-area"><div style="display:flex;justify-content:space-evenly;"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div></div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>space-between vs space-evenly:</strong> between encosta o primeiro e o último nas bordas. evenly deixa o mesmo espaço em todos os lados, inclusive nas bordas.</div>
+      </div>
+    </section>
+
+    <!-- flex-align -->
+    <section class="topico" id="flex-align">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">align-items</h2>
+            <p>// alinha os itens no cross axis (perpendicular ao main)</p>
+          </div>
+        </div>
+        <div class="grade" style="grid-template-columns:repeat(2,1fr)">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">stretch</span> — padrão · estica pra preencher</div>
+            <div class="demo-area" style="min-height:120px"><div style="display:flex;align-items:stretch;gap:8px;height:80px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);width:60px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);width:60px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);width:60px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">center</span> — centraliza no eixo cruzado</div>
+            <div class="demo-area" style="min-height:120px"><div style="display:flex;align-items:center;gap:8px;height:80px;background:rgba(14,14,14,0.5);border-radius:6px;padding:0 8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:8px 16px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:18px 16px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 16px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-start</span> — alinha no topo</div>
+            <div class="demo-area" style="min-height:120px"><div style="display:flex;align-items:flex-start;gap:8px;height:80px;background:rgba(14,14,14,0.5);border-radius:6px;padding:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:8px 16px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:18px 16px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 16px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-end</span> — alinha na base</div>
+            <div class="demo-area" style="min-height:120px"><div style="display:flex;align-items:flex-end;gap:8px;height:80px;background:rgba(14,14,14,0.5);border-radius:6px;padding:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:8px 16px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:18px 16px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 16px">C</div></div></div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>Centralizar na tela</strong> (o combo mais usado): <code style="color:var(--m04)">display: flex · justify-content: center · align-items: center</code> → centraliza em ambos os eixos ao mesmo tempo.</div>
+      </div>
+    </section>
+
+    <!-- flex-gap -->
+    <section class="topico" id="flex-gap">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Gap e Margin</h2>
+            <p>// duas formas de criar espaço entre os itens</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">gap</span> — espaço entre todos os itens de uma vez</div>
+            <div class="demo-area">
+              <div style="margin-bottom:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">gap: 8px</div>
+                <div style="display:flex;gap:8px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">gap: 24px</div>
+                <div style="display:flex;gap:24px"><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">A</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">B</div><div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">C</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">margin: auto</span> — empurra itens específicos</div>
+            <div class="demo-area">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">último item com margin-left: auto</div>
+              <div style="display:flex;background:rgba(14,14,14,0.6);border-radius:6px;padding:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:10px 16px;margin-right:8px">Logo</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:10px 16px;margin-right:8px">Home</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:10px 16px;margin-left:auto">Login</div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-top:10px">→ padrão de navbar: logo + links à esq, botão à dir</div>
+            </div>
+          </div>
+        </div>
+          <div class="demo-card full">
+            <div class="demo-card-header"><span style="color:var(--m04)">margin: 0 auto</span> — centraliza um elemento block horizontalmente</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:10px">sem margin: 0 auto</div>
+                  <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:12px;">
+                    <div style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:5px;width:60%;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m04);font-weight:700">width: 60%</div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:10px">com margin: 0 auto</div>
+                  <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:12px;">
+                    <div style="background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:5px;width:60%;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m04);font-weight:700;margin:0 auto;text-align:center">width: 60% · margin: 0 auto</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:2">
+                <span style="color:white">Como funciona:</span> <code style="color:var(--m04)">margin: 0 auto</code> = top/bottom: 0 · left/right: auto<br>
+                O <code style="color:var(--m04)">auto</code> divide o espaço livre igualmente nos dois lados → centraliza.<br><br>
+                <span style="color:#f87171">⚠️ Duas condições obrigatórias:</span><br>
+                → O elemento precisa ser <strong style="color:white">display: block</strong> (ou inline-block)<br>
+                → O elemento precisa ter um <strong style="color:white">width definido</strong> — sem width, ele já ocupa 100% e não tem espaço sobrando
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+                <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:8px;padding:12px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:6px">❌ não funciona</div>
+                  <div class="code"><span class="prop">display</span>: inline;<br><span class="prop">margin</span>: 0 auto; <span class="com">← ignorado</span></div>
+                </div>
+                <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:12px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:6px">✅ funciona</div>
+                  <div class="code"><span class="prop">display</span>: block;<br><span class="prop">width</span>: 960px;<br><span class="prop">margin</span>: 0 auto;</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.15);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                💡 <strong style="color:white">Padrão clássico de layout:</strong> usado para centralizar o conteúdo principal da página com largura máxima.<br>
+                <span style="color:var(--m04)">.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }</span>
+              </div>
+            </div>
+          </div>
+        <div class="explicacao"><strong>gap</strong> é a forma moderna de espaçar — aplica entre todos os itens sem afetar as bordas externas. <strong>margin: auto</strong> consome todo o espaço livre disponível, empurrando os outros itens. Combinados, cobrem 99% dos casos de espaçamento em flex layouts.</div>
+      </div>
+    </section>
+
+    <!-- flex-multiline -->
+    <section class="topico" id="flex-multiline">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Multi Line — flex-wrap</h2>
+            <p>// o que acontece quando os itens não cabem em uma linha</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">nowrap</span> — padrão · os itens encolhem pra caber</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-wrap:nowrap;gap:8px;overflow:hidden">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;flex-shrink:1">Item 1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;flex-shrink:1">Item 2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;flex-shrink:1">Item 3</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;flex-shrink:1">Item 4</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;flex-shrink:1">Item 5</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">wrap</span> — quebra para a próxima linha</div>
+            <div class="demo-area">
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">Item 1</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">Item 2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">Item 3</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">Item 4</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">Item 5</div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">align-content — alinha as linhas quando há wrap</div>
+            <div class="card-body">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Quando há múltiplas linhas (com flex-wrap), <strong style="color:white">align-content</strong> controla como as linhas se distribuem no cross axis — funciona como um justify-content, mas para as linhas.<br><br>
+                <span style="color:var(--m04)">align-content: flex-start</span> → linhas agrupadas no topo<br>
+                <span style="color:var(--m04)">align-content: center</span> → linhas centralizadas<br>
+                <span style="color:var(--m04)">align-content: space-between</span> → linhas distribuídas
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- flex-sizing -->
+    <section class="topico" id="flex-sizing">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Flex Basis / Grow / Shrink</h2>
+            <p>// como o espaço disponível é distribuído entre os itens</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-basis</span> — tamanho inicial do item antes de crescer ou encolher</div>
+            <div class="demo-area">
+              <div style="display:flex;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-basis:120px;justify-content:center">basis: 120px</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-basis:200px;justify-content:center">basis: 200px</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-basis:80px;justify-content:center">basis: 80px</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-grow</span> — quanto o item cresce para ocupar espaço livre</div>
+            <div class="demo-area">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">grow: 1 / grow: 2 / grow: 1 → o do meio pega o dobro do espaço livre</div>
+              <div style="display:flex;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-grow:1;justify-content:center;padding:12px">grow: 1</div>
+                <div class="box" style="background:rgba(34,211,238,0.2);border-color:rgba(34,211,238,0.5);color:var(--m04);flex-grow:2;justify-content:center;padding:12px">grow: 2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-grow:1;justify-content:center;padding:12px">grow: 1</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m04)">flex-shrink</span> — quanto o item encolhe quando falta espaço</div>
+            <div class="demo-area">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">shrink: 1 (padrão encolhe) vs shrink: 0 (não encolhe)</div>
+              <div style="display:flex;gap:8px;overflow:hidden">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);flex-basis:200px;flex-shrink:1;justify-content:center;padding:12px;font-size:11px">shrink: 1 → encolhe</div>
+                <div class="box" style="background:rgba(244,114,182,0.1);border-color:rgba(244,114,182,0.3);color:var(--pink);flex-basis:200px;flex-shrink:0;justify-content:center;padding:12px;font-size:11px">shrink: 0 → fixo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao"><strong>flex-basis</strong> = ponto de partida do tamanho. <strong>flex-grow</strong> = como o item usa o espaço que sobrou. <strong>flex-shrink</strong> = como o item cede quando falta espaço. Os três juntos controlam o comportamento elástico de cada item.</div>
+      </div>
+    </section>
+
+    <!-- flex-shorthand -->
+    <section class="topico" id="flex-shorthand">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Shorthand Flex</h2>
+            <p>// flex: grow shrink basis — os três em uma linha só</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">Sintaxe completa</div>
+            <div class="card-body">
+              <div class="sh-titulo">sintaxe</div>
+              <div class="sh-syntax">flex: <span class="parte">[grow]</span> <span class="parte">[shrink]</span> <span class="parte">[basis]</span>;</div>
+              <div class="code">
+                <span class="prop">flex</span>: 1 1 auto; <span class="com">/* padrão */</span><br>
+                <span class="prop">flex</span>: 1; <span class="com">/* equivale a: flex-grow:1 · shrink:1 · basis:0 */</span><br>
+                <span class="prop">flex</span>: 0 0 200px; <span class="com">/* tamanho fixo de 200px, não cresce nem encolhe */</span><br>
+                <span class="prop">flex</span>: 2; <span class="com">/* cresce o dobro dos itens com flex: 1 */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Os atalhos mais usados no dia a dia</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Declaração</th><th>Grow</th><th>Shrink</th><th>Basis</th><th>Quando usar</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--m04)">flex: 1</td><td>1</td><td>1</td><td>0</td><td>Distribuir espaço igualmente entre os itens</td></tr>
+                    <tr><td style="color:var(--m04)">flex: auto</td><td>1</td><td>1</td><td>auto</td><td>Cresce e encolhe respeitando o conteúdo</td></tr>
+                    <tr><td style="color:var(--m04)">flex: none</td><td>0</td><td>0</td><td>auto</td><td>Item completamente rígido — tamanho do conteúdo</td></tr>
+                    <tr><td style="color:var(--m04)">flex: 0 0 Xpx</td><td>0</td><td>0</td><td>Xpx</td><td>Tamanho fixo — sidebar, avatar, ícones</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- flex-order -->
+    <section class="topico" id="flex-order">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m04)">M04</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m04)">Order</h2>
+            <p>// reordena visualmente os itens sem mudar o HTML</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header">Sem <span style="color:var(--m04)">order</span> — segue a ordem do HTML</div>
+            <div class="demo-area">
+              <div style="display:flex;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">1º</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">2º</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px">3º</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header">Com <span style="color:var(--m04)">order</span> — 3º item aparece primeiro visualmente</div>
+            <div class="demo-area">
+              <div style="display:flex;gap:8px">
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;order:2">1º no HTML</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);padding:12px 20px;order:3">2º no HTML</div>
+                <div class="box" style="background:rgba(34,211,238,0.2);border-color:rgba(34,211,238,0.6);color:var(--m04);padding:12px 20px;order:1">3º no HTML ← aparece primeiro</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao">O padrão de todos os itens é <strong>order: 0</strong>. Quem tem número menor aparece antes. Valores negativos também funcionam. Útil para reordenar layouts em mobile com media queries sem duplicar HTML.</div>
+
+        <div class="secao-divisor"></div>
+
+        <p class="label-secao">tabela resumo — flexbox</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Propriedade</th><th>Aplica em</th><th>O que faz</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m04)">display: flex</td><td>container</td><td>Ativa o flexbox</td></tr>
+              <tr><td style="color:var(--m04)">flex-direction</td><td>container</td><td>Define o main axis: row | row-reverse | column | column-reverse</td></tr>
+              <tr><td style="color:var(--m04)">justify-content</td><td>container</td><td>Distribui itens no main axis: flex-start | flex-end | center | space-between | space-around | space-evenly</td></tr>
+              <tr><td style="color:var(--m04)">align-items</td><td>container</td><td>Alinha itens no cross axis: stretch | center | flex-start | flex-end | baseline</td></tr>
+              <tr><td style="color:var(--m04)">flex-wrap</td><td>container</td><td>Permite quebra de linha: nowrap | wrap | wrap-reverse</td></tr>
+              <tr><td style="color:var(--m04)">gap</td><td>container</td><td>Espaço entre os itens</td></tr>
+              <tr><td style="color:#a78bfa">flex-basis</td><td>item</td><td>Tamanho inicial antes de crescer/encolher</td></tr>
+              <tr><td style="color:#a78bfa">flex-grow</td><td>item</td><td>Quanto do espaço livre o item absorve</td></tr>
+              <tr><td style="color:#a78bfa">flex-shrink</td><td>item</td><td>Quanto o item cede quando falta espaço</td></tr>
+              <tr><td style="color:#a78bfa">flex</td><td>item</td><td>Shorthand: grow shrink basis</td></tr>
+              <tr><td style="color:#a78bfa">order</td><td>item</td><td>Ordem visual do item (padrão: 0)</td></tr>
+              <tr><td style="color:#a78bfa">align-self</td><td>item</td><td>Sobrescreve align-items só para esse item</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
@@ -2047,7 +2626,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
