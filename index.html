@@ -17,6 +17,7 @@
       --accent-glow: rgba(139, 92, 246, 0.45);
       /* Module colors */
       --m04: #22d3ee;
+      --m05: #a78bfa;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -239,6 +240,7 @@
     .sidebar-item.active-m01::before { background: var(--m01); }
     .sidebar-item.active-m02::before { background: var(--m02); }
     .sidebar-item.active-m04::before { background: var(--m04); }
+    .sidebar-item.active-m05::before { background: var(--m05); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -751,6 +753,23 @@
       </div>
 
       <div class="sidebar-module">
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m05)"></span>
+          CSS Grid
+        </div>
+        <a class="sidebar-item" href="#grid-conceitos" data-module="m05">Conceitos & Fundamentos</a>
+        <a class="sidebar-item" href="#grid-template-columns" data-module="m05">grid-template-columns</a>
+        <a class="sidebar-item" href="#grid-template-rows" data-module="m05">grid-template-rows</a>
+        <a class="sidebar-item" href="#grid-column-row" data-module="m05">grid-column & grid-row</a>
+        <a class="sidebar-item" href="#grid-template-areas" data-module="m05">grid-template-areas</a>
+        <a class="sidebar-item" href="#grid-gap" data-module="m05">Gap</a>
+        <a class="sidebar-item" href="#grid-shorthand" data-module="m05">Shorthand grid-template</a>
+        <a class="sidebar-item" href="#grid-alinhamentos" data-module="m05">Alinhamentos</a>
+        <a class="sidebar-item" href="#grid-auto" data-module="m05">Propriedades grid auto</a>
+        <a class="sidebar-item" href="#grid-ou-flex" data-module="m05">Grid ou Flex?</a>
+      </div>
+
+      <div class="sidebar-module">
         <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Transições & Animações</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Responsividade</div>
@@ -760,9 +779,9 @@
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>5/8 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>6/8 módulos</span></div>
       <div class="sidebar-progress-bar">
-        <div class="sidebar-progress-fill" style="width:62.5%"></div>
+        <div class="sidebar-progress-fill" style="width:75%"></div>
       </div>
     </div>
   </nav>
@@ -2600,6 +2619,517 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 05 — CSS GRID
+    ═══════════════════════════════════════════════ -->
+
+    <!-- grid-conceitos -->
+    <section class="topico" id="grid-conceitos">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Conceitos & Fundamentos</h2>
+            <p>// o modelo mental do Grid — linhas, colunas, células e áreas</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">O que é o Grid</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,48px);gap:6px;margin-bottom:14px">
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">1</div>
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">2</div>
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">3</div>
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">4</div>
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">5</div>
+                <div style="background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05)">6</div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Grid divide o container em <strong style="color:white">linhas e colunas</strong> simultaneamente — como uma tabela, mas muito mais poderoso.<br><br>
+                <span style="color:var(--m05)">display: grid</span> no container → filhos viram células automáticas.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Vocabulário do Grid</div>
+            <div class="card-body">
+              <div style="position:relative;background:rgba(14,14,14,0.7);border-radius:8px;padding:8px;margin-bottom:14px">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,44px);gap:4px;position:relative">
+                  <!-- grid lines indicadas -->
+                  <div style="background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.35);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--m05)">célula</div>
+                  <div style="background:rgba(167,139,250,0.08);border:1px dashed rgba(167,139,250,0.2);border-radius:3px"></div>
+                  <div style="background:rgba(167,139,250,0.08);border:1px dashed rgba(167,139,250,0.2);border-radius:3px"></div>
+                  <div style="background:rgba(167,139,250,0.08);border:1px dashed rgba(167,139,250,0.2);border-radius:3px"></div>
+                  <div style="background:rgba(34,211,238,0.15);border:2px solid rgba(34,211,238,0.5);border-radius:3px;grid-column:span 2;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--m04)">área (span 2)</div>
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:2">
+                <span style="color:var(--m05)">grid line</span> → as linhas que dividem o grid (numeradas de 1)<br>
+                <span style="color:var(--m05)">track</span> → espaço entre duas grid lines (coluna ou linha)<br>
+                <span style="color:var(--m05)">cell</span> → interseção de uma linha e coluna<br>
+                <span style="color:var(--m05)">area</span> → grupo de células adjacentes
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Grid vs Flexbox — quando cada um entra</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div style="background:rgba(249,115,22,0.05);border:1px solid rgba(249,115,22,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--flex-color);margin-bottom:10px;letter-spacing:1px">FLEXBOX — 1 dimensão</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  → Navbar, botões, cards em linha<br>
+                  → Centralizar um elemento<br>
+                  → Componentes simples<br>
+                  → Quando o conteúdo dita o tamanho
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);margin-bottom:10px;letter-spacing:1px">GRID — 2 dimensões</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  → Layout geral da página<br>
+                  → Galerias de imagem<br>
+                  → Dashboards e painéis<br>
+                  → Quando o layout dita o tamanho
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid-template-columns -->
+    <section class="topico" id="grid-template-columns">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">grid-template-columns</h2>
+            <p>// define quantas colunas existem e qual o tamanho de cada uma</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">repeat(3, 1fr)</span> — 3 colunas iguais</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">1fr</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">1fr</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">1fr</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">1fr 2fr 1fr</span> — do meio é o dobro</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">1fr</div><div class="box" style="background:rgba(167,139,250,0.2);border-color:rgba(167,139,250,0.5);color:var(--m05);padding:14px">2fr</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">1fr</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">200px 1fr</span> — coluna fixa + fluida</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:200px 1fr;gap:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px;justify-content:center">200px fixo</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px;justify-content:center">1fr (resto)</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">repeat(auto-fill, minmax(120px, 1fr))</span> — responsivo automático</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:12px">A</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:12px">B</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:12px">C</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:12px">D</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:12px">E</div></div></div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>minmax(min, max)</strong> define um tamanho mínimo e máximo para a coluna. <code style="color:var(--m05)">minmax(120px, 1fr)</code> significa: no mínimo 120px, no máximo divide o espaço igualmente. Com <code style="color:var(--m05)">auto-fill</code>, o grid cria quantas colunas couberem — layout responsivo sem media query!</div>
+      </div>
+    </section>
+
+    <!-- grid-template-rows -->
+    <section class="topico" id="grid-template-rows">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">grid-template-rows</h2>
+            <p>// define a altura e quantidade de linhas explícitas do grid</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header">Linhas com alturas diferentes</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:60px 30px 50px;gap:8px">
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05)">60px</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05)">60px</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05)">60px</div>
+                <div class="box" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--m05)">30px</div>
+                <div class="box" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--m05)">30px</div>
+                <div class="box" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--m05)">30px</div>
+                <div class="box" style="background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.3);color:var(--m05)">50px</div>
+                <div class="box" style="background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.3);color:var(--m05)">50px</div>
+                <div class="box" style="background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.3);color:var(--m05)">50px</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header">Layout de página — header + main + footer</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-rows:50px 1fr 40px;gap:8px;height:200px">
+                <div class="box" style="background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.4);color:var(--m05)">header — 50px</div>
+                <div class="box" style="background:rgba(167,139,250,0.08);border-color:rgba(167,139,250,0.2);color:var(--m05)">main — 1fr (resto)</div>
+                <div class="box" style="background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.4);color:var(--m05)">footer — 40px</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao">Funciona exatamente como <strong>grid-template-columns</strong>, mas para o eixo vertical. Na maioria dos layouts reais você define as colunas e deixa as linhas em <strong>auto</strong> — elas crescem conforme o conteúdo. Definir rows explicitamente é útil para layouts de altura fixa, como um app de página inteira.</div>
+      </div>
+    </section>
+
+    <!-- grid-column-row -->
+    <section class="topico" id="grid-column-row">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">grid-column & grid-row</h2>
+            <p>// posiciona e expande itens usando as grid lines numeradas</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card full">
+            <div class="demo-card-header">Grid lines são numeradas a partir de 1 — você posiciona os itens entre elas</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+                <!-- item que ocupa col 1 a 3 -->
+                <div class="box" style="background:rgba(167,139,250,0.2);border-color:rgba(167,139,250,0.5);color:var(--m05);grid-column:1/3;padding:14px;justify-content:center">grid-column: 1 / 3</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">col 3</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">col 4</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);grid-column:span 4;padding:14px;justify-content:center">grid-column: span 4 (ocupa tudo)</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">A</div>
+                <div class="box" style="background:rgba(167,139,250,0.2);border-color:rgba(167,139,250,0.5);color:var(--m05);grid-column:2/4;padding:14px;justify-content:center">grid-column: 2 / 4</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">D</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Sintaxes equivalentes</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* linha inicial / linha final */</span><br>
+                <span class="prop">grid-column</span>: 1 / 3; <span class="com">/* da line 1 até line 3 */</span><br><br>
+                <span class="com">/* span — quantas colunas ocupa */</span><br>
+                <span class="prop">grid-column</span>: span 2; <span class="com">/* ocupa 2 colunas */</span><br><br>
+                <span class="com">/* até a última linha */</span><br>
+                <span class="prop">grid-column</span>: 1 / -1; <span class="com">/* ocupa tudo */</span><br><br>
+                <span class="com">/* funciona igual pra linhas */</span><br>
+                <span class="prop">grid-row</span>: 1 / 3; <span class="com">/* ocupa 2 linhas verticais */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Posicionamento explícito</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,44px);gap:6px">
+                <div class="box" style="background:rgba(167,139,250,0.2);border-color:rgba(167,139,250,0.5);color:var(--m05);grid-column:1;grid-row:1/3;font-size:10px;text-align:center">col:1<br>row:1/3</div>
+                <div class="box" style="background:rgba(34,211,238,0.15);border-color:rgba(34,211,238,0.4);color:var(--m04);grid-column:2/4;grid-row:1;font-size:10px">col:2/4 · row:1</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);grid-column:2;grid-row:2;font-size:10px">2,2</div>
+                <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);grid-column:3;grid-row:2;font-size:10px">3,2</div>
+                <div class="box" style="background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.3);color:var(--m04);grid-column:1/4;grid-row:3;font-size:10px;justify-content:center">col: 1/-1 · row: 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid-template-areas -->
+    <section class="topico" id="grid-template-areas">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">grid-template-areas</h2>
+            <p>// nomeia as áreas do grid com texto — layout visual no CSS</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Definindo as áreas no container</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.layout</span> {<br>
+                &nbsp;&nbsp;<span class="prop">display</span>: grid;<br>
+                &nbsp;&nbsp;<span class="prop">grid-template-columns</span>: 200px 1fr;<br>
+                &nbsp;&nbsp;<span class="prop">grid-template-rows</span>: 60px 1fr 50px;<br>
+                &nbsp;&nbsp;<span class="prop" style="color:var(--m05)">grid-template-areas</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">"header  header"</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">"sidebar main  "</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">"footer  footer"</span>;<br>
+                }<br><br>
+                <span class="sel">header</span> { <span class="prop">grid-area</span>: <span style="color:var(--m05)">header</span>; }<br>
+                <span class="sel">aside</span>  { <span class="prop">grid-area</span>: <span style="color:var(--m05)">sidebar</span>; }<br>
+                <span class="sel">main</span>   { <span class="prop">grid-area</span>: <span style="color:var(--m05)">main</span>; }<br>
+                <span class="sel">footer</span> { <span class="prop">grid-area</span>: <span style="color:var(--m05)">footer</span>; }
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Resultado visual</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:80px 1fr;grid-template-rows:44px 100px 36px;gap:6px;grid-template-areas:'header header' 'sidebar main' 'footer footer'">
+                <div style="grid-area:header;background:rgba(167,139,250,0.2);border:1px solid rgba(167,139,250,0.4);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);font-weight:700">header</div>
+                <div style="grid-area:sidebar;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700">sidebar</div>
+                <div style="grid-area:main;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);font-weight:700">main</div>
+                <div style="grid-area:footer;background:rgba(167,139,250,0.2);border:1px solid rgba(167,139,250,0.4);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);font-weight:700">footer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao">O <strong>grid-template-areas</strong> é uma das features mais elegantes do CSS — você desenha o layout com texto no próprio CSS. Cada string entre aspas é uma linha do grid, cada palavra é uma área. Repetir o mesmo nome faz o item ocupar múltiplas células. Use <strong>"."</strong> para deixar uma célula vazia.</div>
+      </div>
+    </section>
+
+    <!-- grid-gap -->
+    <section class="topico" id="grid-gap">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Gap no Grid</h2>
+            <p>// espaçamento entre colunas e linhas — pode ser diferente em cada eixo</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">gap: 16px</span> — mesmo espaço em todos os lados</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">A</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">B</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">C</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">D</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">E</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">F</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">gap: 8px 32px</span> — row-gap diferente de column-gap</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px 32px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">A</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">B</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">C</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">D</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">E</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:14px">F</div></div></div>
+          </div>
+        </div>
+        <div class="nota">💡 <code style="color:var(--m05)">gap: 8px 32px</code> = <strong>row-gap: 8px</strong> (vertical) + <strong>column-gap: 32px</strong> (horizontal). Mesma lógica do padding/margin shorthand — primeiro vertical, depois horizontal.</div>
+      </div>
+    </section>
+
+    <!-- grid-shorthand -->
+    <section class="topico" id="grid-shorthand">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Shorthand grid-template</h2>
+            <p>// rows e columns em uma linha só</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">grid-template — rows / columns</div>
+            <div class="card-body">
+              <div class="sh-titulo">sintaxe</div>
+              <div class="sh-syntax">grid-template: <span class="parte">[rows]</span> / <span class="parte">[columns]</span>;</div>
+              <div class="code">
+                <span class="com">/* verboso */</span><br>
+                <span class="prop">grid-template-rows</span>: 60px 1fr 50px;<br>
+                <span class="prop">grid-template-columns</span>: 200px 1fr;<br><br>
+                <span class="com">/* shorthand equivalente */</span><br>
+                <span class="prop">grid-template</span>: 60px 1fr 50px / 200px 1fr;<br><br>
+                <span class="com">/* com areas */</span><br>
+                <span class="prop">grid-template</span>:<br>
+                &nbsp;&nbsp;<span style="color:var(--green)">"header header"</span> 60px<br>
+                &nbsp;&nbsp;<span style="color:var(--green)">"sidebar main"</span> 1fr<br>
+                &nbsp;&nbsp;<span style="color:var(--green)">"footer footer"</span> 50px<br>
+                &nbsp;&nbsp;/ 200px 1fr;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid-alinhamentos -->
+    <section class="topico" id="grid-alinhamentos">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Alinhamentos</h2>
+            <p>// content, items e self — três níveis de controle</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card full">
+            <div class="card-header">Os três níveis de alinhamento no Grid</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);margin-bottom:10px;letter-spacing:1px">justify/align-content</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                    Distribui as <strong style="color:white">faixas do grid</strong> dentro do container quando sobra espaço.<br><br>
+                    Funciona como justify-content do flex, mas para as trilhas do grid inteiro.
+                  </div>
+                </div>
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);margin-bottom:10px;letter-spacing:1px">justify/align-items</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                    Alinha o <strong style="color:white">conteúdo dentro de cada célula</strong> — aplica para todos os itens ao mesmo tempo.<br><br>
+                    <span style="color:var(--m05)">place-items: center</span> centraliza tudo de uma vez.
+                  </div>
+                </div>
+                <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m05);margin-bottom:10px;letter-spacing:1px">justify/align-self</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                    Alinha <strong style="color:white">um item específico</strong> dentro da sua célula — sobrescreve o align-items só para aquele item.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">place-items: center</span> — centraliza conteúdo em todas as células</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(3,1fr);place-items:center;gap:8px;height:120px;background:rgba(14,14,14,0.6);border-radius:6px;padding:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:10px 18px">A</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:10px 18px">B</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);padding:10px 18px">C</div></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header"><span style="color:var(--m05)">align-self</span> — item individual com alinhamento próprio</div>
+            <div class="demo-area"><div style="display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch;gap:8px;height:120px;background:rgba(14,14,14,0.6);border-radius:6px;padding:8px"><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);align-self:flex-start;padding:10px 18px">start</div><div class="box" style="background:rgba(34,211,238,0.15);border-color:rgba(34,211,238,0.4);color:var(--m04);align-self:center;padding:10px 18px">center</div><div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.3);color:var(--m05);align-self:flex-end;padding:10px 18px">end</div></div></div>
+          </div>
+        </div>
+        <div class="tabela" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Propriedade</th><th>Aplica em</th><th>Controla</th><th>Valores comuns</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m05)">justify-content</td><td>container</td><td>Faixas de coluna no eixo horizontal</td><td>start · end · center · space-between · space-around</td></tr>
+              <tr><td style="color:var(--m05)">align-content</td><td>container</td><td>Faixas de linha no eixo vertical</td><td>start · end · center · space-between · space-around</td></tr>
+              <tr><td style="color:var(--m05)">justify-items</td><td>container</td><td>Conteúdo de cada célula — horizontal</td><td>start · end · center · stretch</td></tr>
+              <tr><td style="color:var(--m05)">align-items</td><td>container</td><td>Conteúdo de cada célula — vertical</td><td>start · end · center · stretch</td></tr>
+              <tr><td style="color:var(--m05)">place-items</td><td>container</td><td>Shorthand: align-items + justify-items</td><td>center · start end · etc.</td></tr>
+              <tr><td style="color:#a78bfa">justify-self</td><td>item</td><td>Esse item no eixo horizontal</td><td>start · end · center · stretch</td></tr>
+              <tr><td style="color:#a78bfa">align-self</td><td>item</td><td>Esse item no eixo vertical</td><td>start · end · center · stretch</td></tr>
+              <tr><td style="color:#a78bfa">place-self</td><td>item</td><td>Shorthand: align-self + justify-self</td><td>center · start end · etc.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid-auto -->
+    <section class="topico" id="grid-auto">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Propriedades grid auto</h2>
+            <p>// como o grid lida com itens além das trilhas explícitas</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">grid-auto-rows e grid-auto-columns</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.grid</span> {<br>
+                &nbsp;&nbsp;<span class="prop">display</span>: grid;<br>
+                &nbsp;&nbsp;<span class="prop">grid-template-columns</span>: repeat(3, 1fr);<br>
+                &nbsp;&nbsp;<span class="prop" style="color:var(--m05)">grid-auto-rows</span>: 80px; <span class="com">/* toda linha implícita terá 80px */</span><br>
+                &nbsp;&nbsp;<span class="prop" style="color:var(--m05)">grid-auto-rows</span>: minmax(80px, auto); <span class="com">/* mínimo 80px, cresce com conteúdo */</span><br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;margin-top:12px">
+                Quando você tem mais itens do que linhas definidas no <code style="color:var(--m05)">grid-template-rows</code>, o grid cria linhas <strong style="color:white">implícitas</strong> automaticamente. O <code style="color:var(--m05)">grid-auto-rows</code> define o tamanho dessas linhas extras.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">grid-auto-flow — direção de preenchimento automático</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">grid-auto-flow: row (padrão)</div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:row;gap:6px">
+                    <div class="box" style="background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.4);color:var(--m05);padding:10px;font-size:11px">1</div>
+                    <div class="box" style="background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.4);color:var(--m05);padding:10px;font-size:11px">2</div>
+                    <div class="box" style="background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.4);color:var(--m05);padding:10px;font-size:11px">3</div>
+                    <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--m05);padding:10px;font-size:11px">4</div>
+                    <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--m05);padding:10px;font-size:11px">5</div>
+                    <div class="box" style="background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--m05);padding:10px;font-size:11px">6</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.25);margin-top:6px">preenche linha por linha →</div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-bottom:8px">grid-auto-flow: column</div>
+                  <div style="display:grid;grid-template-rows:repeat(2,40px);grid-auto-flow:column;gap:6px">
+                    <div class="box" style="background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.35);color:var(--m04);padding:10px;font-size:11px">1</div>
+                    <div class="box" style="background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.35);color:var(--m04);padding:10px;font-size:11px">2</div>
+                    <div class="box" style="background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.2);color:var(--m04);padding:10px;font-size:11px">3</div>
+                    <div class="box" style="background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.2);color:var(--m04);padding:10px;font-size:11px">4</div>
+                    <div class="box" style="background:rgba(34,211,238,0.05);border-color:rgba(34,211,238,0.15);color:var(--m04);padding:10px;font-size:11px">5</div>
+                    <div class="box" style="background:rgba(34,211,238,0.05);border-color:rgba(34,211,238,0.15);color:var(--m04);padding:10px;font-size:11px">6</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.25);margin-top:6px">preenche coluna por coluna ↓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid-ou-flex -->
+    <section class="topico" id="grid-ou-flex">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m05)">M05</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m05)">Grid ou Flex?</h2>
+            <p>// guia de decisão rápida</p>
+          </div>
+        </div>
+        <div class="quando-usar">
+          <div class="quando-card" style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.2)">
+            <h3 style="color:var(--m05)">🎯 Use Grid quando...</h3>
+            <ul style="list-style:none;font-size:14px;line-height:2;color:rgba(240,240,240,0.6)">
+              <li style="color:rgba(240,240,240,0.6)">→ O layout é bidimensional (linhas E colunas)</li>
+              <li>→ Você precisa de posicionamento preciso das células</li>
+              <li>→ Os itens precisam se alinhar entre linhas diferentes</li>
+              <li>→ Está montando o esqueleto geral da página</li>
+              <li>→ Galerias, dashboards, painéis de cards</li>
+            </ul>
+          </div>
+          <div class="quando-card" style="background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.2)">
+            <h3 style="color:var(--flex-color)">⚡ Use Flex quando...</h3>
+            <ul style="list-style:none;font-size:14px;line-height:2;color:rgba(240,240,240,0.6)">
+              <li>→ O layout é unidimensional (linha OU coluna)</li>
+              <li>→ O conteúdo dita o tamanho dos itens</li>
+              <li>→ Quer distribuir espaço ou centralizar algo</li>
+              <li>→ Está organizando um componente (navbar, card, botões)</li>
+              <li>→ Os itens precisam quebrar linha naturalmente</li>
+            </ul>
+          </div>
+        </div>
+        <div class="resumo">
+          💡 <strong>A resposta certa na maioria dos casos:</strong><br><br>
+          Use <strong style="color:var(--m05)">Grid</strong> para o <strong>layout da página</strong> — a estrutura macro (header, sidebar, main, footer).<br>
+          Use <strong style="color:var(--flex-color)">Flex</strong> para os <strong>componentes dentro do layout</strong> — navbar, cards, listas, botões.<br><br>
+          <strong>Eles se complementam</strong> — um container Grid pode ter filhos Flex, e vice-versa. ✅
+        </div>
+
+        <div class="secao-divisor"></div>
+
+        <p class="label-secao">tabela resumo — CSS Grid</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Propriedade</th><th>Aplica em</th><th>O que faz</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m05)">display: grid</td><td>container</td><td>Ativa o CSS Grid</td></tr>
+              <tr><td style="color:var(--m05)">grid-template-columns</td><td>container</td><td>Define número e tamanho das colunas</td></tr>
+              <tr><td style="color:var(--m05)">grid-template-rows</td><td>container</td><td>Define número e tamanho das linhas</td></tr>
+              <tr><td style="color:var(--m05)">grid-template-areas</td><td>container</td><td>Nomeia áreas do grid com texto</td></tr>
+              <tr><td style="color:var(--m05)">grid-template</td><td>container</td><td>Shorthand: rows / columns (+ areas)</td></tr>
+              <tr><td style="color:var(--m05)">gap</td><td>container</td><td>Espaço entre células — row-gap column-gap</td></tr>
+              <tr><td style="color:var(--m05)">grid-auto-rows</td><td>container</td><td>Altura das linhas implícitas (criadas automaticamente)</td></tr>
+              <tr><td style="color:var(--m05)">grid-auto-flow</td><td>container</td><td>Direção de preenchimento: row | column | dense</td></tr>
+              <tr><td style="color:var(--m05)">place-items</td><td>container</td><td>Alinha conteúdo dentro de todas as células</td></tr>
+              <tr><td style="color:#a78bfa">grid-column</td><td>item</td><td>Posição e span horizontal: start / end ou span N</td></tr>
+              <tr><td style="color:#a78bfa">grid-row</td><td>item</td><td>Posição e span vertical: start / end ou span N</td></tr>
+              <tr><td style="color:#a78bfa">grid-area</td><td>item</td><td>Referencia uma área nomeada no grid-template-areas</td></tr>
+              <tr><td style="color:#a78bfa">place-self</td><td>item</td><td>Alinha esse item específico dentro da sua célula</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
@@ -2626,7 +3156,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
