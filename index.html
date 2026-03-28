@@ -18,6 +18,7 @@
       /* Module colors */
       --m04: #22d3ee;
       --m05: #a78bfa;
+      --m06: #34d399;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -241,6 +242,7 @@
     .sidebar-item.active-m02::before { background: var(--m02); }
     .sidebar-item.active-m04::before { background: var(--m04); }
     .sidebar-item.active-m05::before { background: var(--m05); }
+    .sidebar-item.active-m06::before { background: var(--m06); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -692,10 +694,12 @@
         <a class="sidebar-item" href="#html-estrutura" data-module="m00">Estrutura & Caminhos</a>
         <a class="sidebar-item" href="#css-anatomia" data-module="m00">Anatomia & Cascata</a>
         <a class="sidebar-item" href="#css-seletores" data-module="m00">Seletores & Combinators</a>
+        <a class="sidebar-item" href="#css-nesting" data-module="m00">CSS Nesting</a>
         <a class="sidebar-item" href="#css-display" data-module="m00">Display</a>
         <a class="sidebar-item" href="#css-boxmodel" data-module="m00">Box Model</a>
         <a class="sidebar-item" href="#css-boxsizing" data-module="m00">Box Sizing</a>
         <a class="sidebar-item" href="#css-background" data-module="m00">Background</a>
+        <a class="sidebar-item" href="#css-objectfit" data-module="m00">object-fit</a>
         <a class="sidebar-item" href="#css-shorthands" data-module="m00">Shorthands</a>
         <a class="sidebar-item" href="#vscode" data-module="m00">VS Code Tips</a>
       </div>
@@ -770,18 +774,34 @@
       </div>
 
       <div class="sidebar-module">
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m06)"></span>
+          Formulários HTML
+        </div>
+        <a class="sidebar-item" href="#form-estrutura" data-module="m06">Estrutura & form</a>
+        <a class="sidebar-item" href="#form-button" data-module="m06">Button</a>
+        <a class="sidebar-item" href="#form-inputs-texto" data-module="m06">Input Text, Number, Email, Password</a>
+        <a class="sidebar-item" href="#form-inputs-especiais" data-module="m06">File, Range, Color</a>
+        <a class="sidebar-item" href="#form-checkbox-radio" data-module="m06">Checkbox, Radio & Hidden</a>
+        <a class="sidebar-item" href="#form-novos-inputs" data-module="m06">Novos Inputs HTML5</a>
+        <a class="sidebar-item" href="#form-label" data-module="m06">Label</a>
+        <a class="sidebar-item" href="#form-textarea-select" data-module="m06">Textarea & Select</a>
+        <a class="sidebar-item" href="#form-fieldset" data-module="m06">Fieldset & Legend</a>
+        <a class="sidebar-item" href="#form-revisao" data-module="m06">Revisão & Atributos</a>
+      </div>
+
+      <div class="sidebar-module">
         <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Transições & Animações</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Responsividade</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Tipografia</div>
-        <div class="sidebar-item" style="opacity:0.25;cursor:default">Formulários</div>
       </div>
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>6/8 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>7/8 módulos</span></div>
       <div class="sidebar-progress-bar">
-        <div class="sidebar-progress-fill" style="width:75%"></div>
+        <div class="sidebar-progress-fill" style="width:87.5%"></div>
       </div>
     </div>
   </nav>
@@ -1154,8 +1174,140 @@
       </div>
     </section>
 
-    <!-- 07 DISPLAY -->
-    <section class="topico" id="css-display">
+    <!-- CSS NESTING -->
+    <section class="topico" id="css-nesting">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero">06.5</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--css-c)">CSS Nesting</h2>
+            <p>// seletores filhos dentro do pai — sem repetição, sem pré-processador</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Antes — CSS clássico repetitivo</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.card</span> { <span class="prop">background</span>: #111; }<br>
+                <span class="sel">.card h2</span> { <span class="prop">color</span>: white; }<br>
+                <span class="sel">.card p</span> { <span class="prop">color</span>: gray; }<br>
+                <span class="sel">.card:hover</span> { <span class="prop">background</span>: #222; }<br>
+                <span class="sel">.card .badge</span> { <span class="prop">color</span>: red; }<br><br>
+                <span class="com">/* .card repetido em todo lugar 😩 */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Agora — com CSS Nesting</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.card</span> {<br>
+                &nbsp;&nbsp;<span class="prop">background</span>: #111;<br><br>
+                &nbsp;&nbsp;<span class="sel">h2</span> { <span class="prop">color</span>: white; }<br>
+                &nbsp;&nbsp;<span class="sel">p</span>  { <span class="prop">color</span>: gray; }<br><br>
+                &nbsp;&nbsp;<span class="sel">&amp;:hover</span>  { <span class="prop">background</span>: #222; }<br>
+                &nbsp;&nbsp;<span class="sel">.badge</span>  { <span class="prop">color</span>: red; }<br>
+                }<br><br>
+                <span class="com">/* tudo agrupado, sem repetir .card ✅ */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">O <span style="color:var(--css-c)">&amp;</span> — representa o seletor pai</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:10px;letter-spacing:1px">COM &amp; — modifica o próprio elemento</div>
+                <div class="code">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;:hover</span>   { } <span class="com">/* .btn:hover */</span><br>
+                  &nbsp;&nbsp;<span class="sel">&amp;::after</span>  { } <span class="com">/* .btn::after */</span><br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.ativo</span>   { } <span class="com">/* .btn.ativo */</span><br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.large</span>   { } <span class="com">/* .btn.large */</span><br>
+                  &nbsp;&nbsp;<span class="sel">&amp; + &amp;</span>     { } <span class="com">/* .btn + .btn */</span><br>
+                  }
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:10px;letter-spacing:1px">SEM &amp; — seleciona descendente (filho)</div>
+                <div class="code">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">:hover</span>  { } <span class="com">/* filho em hover */</span><br>
+                  &nbsp;&nbsp;<span class="sel">.ativo</span> { } <span class="com">/* .btn .ativo (filho) */</span><br>
+                  &nbsp;&nbsp;<span class="sel">span</span>    { } <span class="com">/* span dentro de .btn */</span><br>
+                  }<br><br>
+                  <span class="com">/* sem & = descendente — quase sempre</span><br>
+                  <span class="com">&nbsp;&nbsp;&nbsp;o que você NÃO quer ao modificar */</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Nesting com media queries</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.hero</span> {<br>
+                &nbsp;&nbsp;<span class="prop">font-size</span>: 3rem;<br>
+                &nbsp;&nbsp;<span class="prop">padding</span>: 80px;<br><br>
+                &nbsp;&nbsp;<span class="sel">@media (max-width: 768px)</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">font-size</span>: 1.8rem;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">padding</span>: 40px;<br>
+                &nbsp;&nbsp;}<br>
+                }<br><br>
+                <span class="com">/* responsivo dentro do próprio componente */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Nesting profundo — com moderação</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">.nav</span> {<br>
+                &nbsp;&nbsp;<span class="sel">ul</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="sel">li</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sel">a</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">color</span>: white;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sel">&amp;:hover</span> { <span class="prop">color</span>: cyan; }<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;}<br>
+                }<br><br>
+                <span class="com">/* funciona — mas evite mais de 3 níveis */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">⚡ Exemplo real — componente completo com nesting</div>
+            <div class="card-body">
+              <div class="code" style="font-size:13px">
+                <span class="sel">.card</span> {<br>
+                &nbsp;&nbsp;<span class="prop">background</span>: #181818;<br>
+                &nbsp;&nbsp;<span class="prop">border-radius</span>: 12px;<br>
+                &nbsp;&nbsp;<span class="prop">padding</span>: 24px;<br>
+                &nbsp;&nbsp;<span class="prop">transition</span>: transform 0.2s;<br><br>
+                &nbsp;&nbsp;<span class="sel">h2</span> { <span class="prop">font-size</span>: 1.4rem; <span class="prop">color</span>: white; }<br>
+                &nbsp;&nbsp;<span class="sel">p</span>  { <span class="prop">color</span>: #999; <span class="prop">line-height</span>: 1.7; }<br><br>
+                &nbsp;&nbsp;<span class="sel">&amp;:hover</span> { <span class="prop">transform</span>: translateY(-4px); }<br><br>
+                &nbsp;&nbsp;<span class="sel">&amp;.destaque</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">border</span>: 2px solid cyan;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="sel">h2</span> { <span class="prop">color</span>: cyan; } <span class="com">/* h2 dentro de .card.destaque */</span><br>
+                &nbsp;&nbsp;}<br><br>
+                &nbsp;&nbsp;<span class="sel">@media (max-width: 600px)</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">padding</span>: 16px;<br>
+                &nbsp;&nbsp;}<br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">
+          💡 <strong>Suporte nativo:</strong> funciona em todos os browsers modernos desde 2023 — Chrome 112+, Firefox 117+, Safari 16.5+. Sem Sass, sem PostCSS, sem build tool.<br><br>
+          ⚠️ <strong>Regra de ouro:</strong> no máximo 3 níveis de profundidade. Mais que isso gera seletores com especificidade muito alta, difíceis de sobrescrever e de ler.
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 DISPLAY -->    <section class="topico" id="css-display">
       <div class="topico-inner">
         <div class="cap-header">
           <div class="cap-numero">07</div>
@@ -1409,6 +1561,91 @@
           </table>
         </div>
         <div class="nota">💡 <strong>Combo mais usado:</strong> <code style="color:var(--green)">cover + no-repeat</code> → preenche tudo sem repetição. Padrão de banners e hero sections.</div>
+      </div>
+    </section>
+
+    <!-- object-fit -->
+    <section class="topico" id="css-objectfit">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero">10.5</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--css-c)">object-fit</h2>
+            <p>// controla como uma imagem preenche o espaço disponível — sem distorcer</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card full">
+            <div class="demo-card-header">O problema — imagens com proporções diferentes quebram o grid</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+                <div style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;height:120px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c)">paisagem 16:9</div>
+                <div style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;height:200px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c)">retrato 9:16</div>
+                <div style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;height:150px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c)">quadrado 1:1</div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-top:10px">→ cada imagem tem altura diferente, o grid fica torto</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">A solução — <span style="color:var(--css-c)">height: 100%</span> + <span style="color:var(--css-c)">object-fit: cover</span></div>
+            <div class="card-body">
+              <div class="code">
+                <span class="sel">#featured</span> {<br>
+                &nbsp;&nbsp;<span class="prop">display</span>: grid;<br>
+                &nbsp;&nbsp;<span class="prop">grid-template-columns</span>: repeat(3, 1fr);<br>
+                &nbsp;&nbsp;<span class="prop">grid-auto-rows</span>: 200px; <span class="com">/* altura da célula */</span><br><br>
+                &nbsp;&nbsp;<span class="sel">img</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">width</span>: 100%;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">height</span>: 100%;  <span class="com">/* ocupa a célula inteira */</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">object-fit</span>: cover; <span class="com">/* recorta sem distorcer */</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">display</span>: block; <span class="com">/* elimina gap do baseline */</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">Visualizando o <span style="color:var(--css-c)">object-fit: cover</span></div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;grid-auto-rows:140px">
+                <div style="background:linear-gradient(135deg,rgba(99,102,241,0.4),rgba(34,211,238,0.4));border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+                  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#6366f1,#22d3ee);opacity:0.3"></div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:white;text-align:center;z-index:1;padding:8px">todas com<br>mesma altura<br>✅</div>
+                </div>
+                <div style="background:linear-gradient(135deg,rgba(244,114,182,0.4),rgba(167,139,250,0.4));border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+                  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#f472b6,#a78bfa);opacity:0.3"></div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:white;text-align:center;z-index:1;padding:8px">recorta o<br>excesso<br>✅</div>
+                </div>
+                <div style="background:linear-gradient(135deg,rgba(52,211,153,0.4),rgba(99,102,241,0.4));border-radius:6px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+                  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#34d399,#6366f1);opacity:0.3"></div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:white;text-align:center;z-index:1;padding:8px">sem<br>distorção<br>✅</div>
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-top:10px">→ grid-auto-rows: 140px define a altura fixa das células</div>
+            </div>
+          </div>
+
+          <div class="card full">
+            <div class="card-header">Valores do <span style="color:var(--css-c)">object-fit</span></div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Valor</th><th>Comportamento</th><th>Quando usar</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--css-c)">cover</td><td>Preenche tudo — recorta o excesso. Mantém proporção.</td><td>Grids de imagem, thumbnails, banners ⭐ mais usado</td></tr>
+                    <tr><td style="color:var(--css-c)">contain</td><td>Mostra a imagem inteira — pode sobrar espaço vazio.</td><td>Logos, ícones, imagens que não podem ser cortadas</td></tr>
+                    <tr><td style="color:var(--css-c)">fill</td><td>Estica para preencher — distorce a imagem.</td><td>Quase nunca — só se a proporção não importar</td></tr>
+                    <tr><td style="color:var(--css-c)">none</td><td>Tamanho original — pode transbordar ou sobrar espaço.</td><td>Quando quer o tamanho real da imagem</td></tr>
+                    <tr><td style="color:var(--css-c)">scale-down</td><td>Menor entre none e contain — nunca amplia.</td><td>Logos pequenos que não devem ser ampliados</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">⚠️ <strong>O height: 100% precisa de uma altura de referência na célula.</strong> Sem <code style="color:var(--css-c)">grid-auto-rows</code> ou altura explícita no container, a imagem encolhe para zero. O <code style="color:var(--css-c)">object-fit</code> funciona igual ao <code style="color:var(--css-c)">background-size</code> — a diferença é que um é para tags <code>&lt;img&gt;</code> e o outro para imagens de fundo via CSS.</div>
       </div>
     </section>
 
@@ -3130,6 +3367,587 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 06 — FORMULÁRIOS HTML
+    ═══════════════════════════════════════════════ -->
+
+    <!-- form-estrutura -->
+    <section class="topico" id="form-estrutura">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Estrutura & &lt;form&gt;</h2>
+            <p>// o container de todos os campos — atributos essenciais</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Anatomia do &lt;form&gt;</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="tag">&lt;form</span><br>
+                &nbsp;&nbsp;<span class="attr">action</span>=<span class="val">"/enviar"</span> <span class="com">← onde os dados vão</span><br>
+                &nbsp;&nbsp;<span class="attr">method</span>=<span class="val">"post"</span> &nbsp;<span class="com">← GET ou POST</span><br>
+                &nbsp;&nbsp;<span class="attr">novalidate</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="com">← desativa validação nativa</span><br>
+                <span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="com">&lt;!-- campos aqui --&gt;</span><br>
+                <span class="tag">&lt;/form&gt;</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">GET vs POST</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Método</th><th>Quando usar</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--m06)">GET</td><td>Busca, filtros — dados vão na URL. Visível e compartilhável.</td></tr>
+                    <tr><td style="color:var(--m06)">POST</td><td>Login, cadastro, envio de arquivos — dados no corpo da requisição. Seguro para dados sensíveis.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Atributos comuns dos campos do formulário</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Atributo</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--m06)">name</td><td>Identifica o campo no envio — obrigatório para o dado ser enviado</td><td><code>name="email"</code></td></tr>
+                    <tr><td style="color:var(--m06)">id</td><td>Liga o campo ao &lt;label&gt; via for=</td><td><code>id="email"</code></td></tr>
+                    <tr><td style="color:var(--m06)">value</td><td>Valor inicial ou valor enviado (em checkbox/radio)</td><td><code>value="sim"</code></td></tr>
+                    <tr><td style="color:var(--m06)">placeholder</td><td>Texto de dica dentro do campo — some ao digitar</td><td><code>placeholder="Digite aqui"</code></td></tr>
+                    <tr><td style="color:var(--m06)">required</td><td>Campo obrigatório — bloqueia envio se vazio</td><td><code>required</code></td></tr>
+                    <tr><td style="color:var(--m06)">disabled</td><td>Desativa o campo — não é enviado no form</td><td><code>disabled</code></td></tr>
+                    <tr><td style="color:var(--m06)">readonly</td><td>Só leitura — é enviado, mas não editável</td><td><code>readonly</code></td></tr>
+                    <tr><td style="color:var(--m06)">autofocus</td><td>Foca automaticamente ao carregar a página</td><td><code>autofocus</code></td></tr>
+                    <tr><td style="color:var(--m06)">autocomplete</td><td>Ativa ou desativa o preenchimento automático do navegador</td><td><code>autocomplete="off"</code></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- form-button -->
+    <section class="topico" id="form-button">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Button</h2>
+            <p>// três tipos de botão — cada um com comportamento diferente</p>
+          </div>
+        </div>
+        <div class="grade cols-3" style="grid-template-columns:repeat(3,1fr)">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="submit"</span> — padrão</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;Enviar<br>
+                <span class="tag">&lt;/button&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Envia o formulário ao clicar. É o tipo padrão quando você não especifica — cuidado!</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="reset"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"reset"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;Limpar<br>
+                <span class="tag">&lt;/button&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Limpa todos os campos do formulário de volta aos valores iniciais.</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="button"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"button"</span><br>
+                &nbsp;&nbsp;<span class="attr">onclick</span>=<span class="val">"fn()"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;Clique<br>
+                <span class="tag">&lt;/button&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Não faz nada por padrão — usado para ações via JavaScript.</div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">⚠️ Sempre declare o <strong>type</strong> no botão. Sem ele, o padrão é <code style="color:var(--m06)">submit</code> — um botão dentro de um form sem type declarado vai submeter o form ao ser clicado, o que causa bugs difíceis de rastrear.</div>
+      </div>
+    </section>
+
+    <!-- form-inputs-texto -->
+    <section class="topico" id="form-inputs-texto">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Input Text, Number, Email, Password</h2>
+            <p>// os inputs de texto mais usados no dia a dia</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="text"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"text"</span><br>
+                &nbsp;&nbsp;<span class="attr">name</span>=<span class="val">"nome"</span><br>
+                &nbsp;&nbsp;<span class="attr">placeholder</span>=<span class="val">"Seu nome"</span><br>
+                &nbsp;&nbsp;<span class="attr">maxlength</span>=<span class="val">"50"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Campo de texto livre. <code style="color:var(--m06)">maxlength</code> limita caracteres.</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="number"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"number"</span><br>
+                &nbsp;&nbsp;<span class="attr">min</span>=<span class="val">"0"</span><br>
+                &nbsp;&nbsp;<span class="attr">max</span>=<span class="val">"100"</span><br>
+                &nbsp;&nbsp;<span class="attr">step</span>=<span class="val">"5"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Aceita apenas números. <code style="color:var(--m06)">step</code> define o incremento das setas.</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="email"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"email"</span><br>
+                &nbsp;&nbsp;<span class="attr">name</span>=<span class="val">"email"</span><br>
+                &nbsp;&nbsp;<span class="attr">required</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Valida formato de e-mail automaticamente. Teclado mobile exibe @ por padrão.</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="password"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"password"</span><br>
+                &nbsp;&nbsp;<span class="attr">name</span>=<span class="val">"senha"</span><br>
+                &nbsp;&nbsp;<span class="attr">minlength</span>=<span class="val">"8"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Oculta os caracteres digitados. <code style="color:var(--m06)">minlength</code> exige tamanho mínimo.</div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 O <strong>type</strong> do input faz muito mais do que parecer — ele muda o teclado no mobile, ativa validação nativa e altera o comportamento de preenchimento automático do navegador.</div>
+      </div>
+    </section>
+
+    <!-- form-inputs-especiais -->
+    <section class="topico" id="form-inputs-especiais">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">File, Range, Color</h2>
+            <p>// inputs com interface visual própria do navegador</p>
+          </div>
+        </div>
+        <div class="grade cols-3" style="grid-template-columns:repeat(3,1fr)">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="file"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"file"</span><br>
+                &nbsp;&nbsp;<span class="attr">accept</span>=<span class="val">".jpg,.png"</span><br>
+                &nbsp;&nbsp;<span class="attr">multiple</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">
+                Abre seletor de arquivo.<br>
+                <code style="color:var(--m06)">accept</code> filtra extensões.<br>
+                <code style="color:var(--m06)">multiple</code> permite vários arquivos.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="range"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"range"</span><br>
+                &nbsp;&nbsp;<span class="attr">min</span>=<span class="val">"0"</span><br>
+                &nbsp;&nbsp;<span class="attr">max</span>=<span class="val">"100"</span><br>
+                &nbsp;&nbsp;<span class="attr">value</span>=<span class="val">"50"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Slider visual. Bom para volume, brilho, filtros.</div>
+              <input type="range" min="0" max="100" value="50" style="width:100%;margin-top:10px;accent-color:var(--m06)">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="color"</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"color"</span><br>
+                &nbsp;&nbsp;<span class="attr">value</span>=<span class="val">"#34d399"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Abre color picker nativo do sistema.</div>
+              <input type="color" value="#34d399" style="margin-top:10px;width:48px;height:36px;border:none;background:none;cursor:pointer">
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 O atributo <strong>accent-color</strong> no CSS permite colorir a interface nativa desses inputs (range, checkbox, radio) com a cor do seu design: <code style="color:var(--m06)">accent-color: #34d399;</code></div>
+      </div>
+    </section>
+
+    <!-- form-checkbox-radio -->
+    <section class="topico" id="form-checkbox-radio">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Checkbox, Radio & Hidden</h2>
+            <p>// seleção única, múltipla e campos invisíveis</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="checkbox"</span> — múltipla escolha</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="com">/* mesmo name, values diferentes */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"checkbox"</span> <span class="attr">name</span>=<span class="val">"skills"</span> <span class="attr">value</span>=<span class="val">"html"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"checkbox"</span> <span class="attr">name</span>=<span class="val">"skills"</span> <span class="attr">value</span>=<span class="val">"css"</span> <span class="attr">checked</span><span class="tag">&gt;</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="checkbox" style="accent-color:var(--m06)"> HTML</label>
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="checkbox" checked style="accent-color:var(--m06)"> CSS</label>
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="checkbox" style="accent-color:var(--m06)"> JavaScript</label>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">type="radio"</span> — escolha única</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="com">/* mesmo name = grupo exclusivo */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"radio"</span> <span class="attr">name</span>=<span class="val">"plano"</span> <span class="attr">value</span>=<span class="val">"free"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"radio"</span> <span class="attr">name</span>=<span class="val">"plano"</span> <span class="attr">value</span>=<span class="val">"pro"</span> <span class="attr">checked</span><span class="tag">&gt;</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="radio" name="demo-plano" value="free" style="accent-color:var(--m06)"> Free</label>
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="radio" name="demo-plano" value="pro" checked style="accent-color:var(--m06)"> Pro</label>
+                <label style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.6);cursor:pointer"><input type="radio" name="demo-plano" value="enterprise" style="accent-color:var(--m06)"> Enterprise</label>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header"><span style="color:var(--m06)">type="hidden"</span> — campo invisível enviado junto com o form</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="com">/* invisível — usuário não vê */</span><br>
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"hidden"</span><br>
+                &nbsp;&nbsp;<span class="attr">name</span>=<span class="val">"user_id"</span><br>
+                &nbsp;&nbsp;<span class="attr">value</span>=<span class="val">"42"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Não aparece na tela, mas é enviado junto com o formulário.<br><br>
+                Usado para passar dados que o usuário não precisa ver — como IDs, tokens, origens de página, etc.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>Radio:</strong> o que agrupa é o atributo <code style="color:var(--m06)">name</code> idêntico — apenas um do grupo pode ser selecionado. <strong>Checkbox:</strong> cada um é independente, mesmo com o mesmo name.</div>
+      </div>
+    </section>
+
+    <!-- form-novos-inputs -->
+    <section class="topico" id="form-novos-inputs">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Novos Inputs HTML5</h2>
+            <p>// tipos modernos com validação e interface nativas</p>
+          </div>
+        </div>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>type</th><th>O que exibe</th><th>Validação automática</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m06)">date</td><td>Seletor de data nativo</td><td>Formato de data válido</td></tr>
+              <tr><td style="color:var(--m06)">time</td><td>Seletor de horário</td><td>Formato de hora válido</td></tr>
+              <tr><td style="color:var(--m06)">datetime-local</td><td>Data + hora juntos</td><td>Data e hora válidas</td></tr>
+              <tr><td style="color:var(--m06)">month</td><td>Seletor de mês/ano</td><td>Mês válido</td></tr>
+              <tr><td style="color:var(--m06)">week</td><td>Seletor de semana do ano</td><td>Semana válida</td></tr>
+              <tr><td style="color:var(--m06)">tel</td><td>Campo de telefone — abre teclado numérico no mobile</td><td>Nenhuma por padrão (use pattern)</td></tr>
+              <tr><td style="color:var(--m06)">url</td><td>Campo de URL</td><td>Formato de URL válido (http://...)</td></tr>
+              <tr><td style="color:var(--m06)">search</td><td>Campo de busca com botão X nativo</td><td>Nenhuma</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Atributo <span style="color:var(--m06)">pattern</span> — validação com regex</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* aceita só letras, 3 a 10 chars */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span><br>
+                &nbsp;&nbsp;<span class="attr">pattern</span>=<span class="val">"[A-Za-z]{3,10}"</span><br>
+                &nbsp;&nbsp;<span class="attr">title</span>=<span class="val">"Só letras, 3 a 10 chars"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Atributo <span style="color:var(--m06)">list</span> — sugestões com datalist</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="tag">&lt;input</span> <span class="attr">list</span>=<span class="val">"frutas"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;datalist</span> <span class="attr">id</span>=<span class="val">"frutas"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"Maçã"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"Banana"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;/datalist&gt;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- form-label -->
+    <section class="topico" id="form-label">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Label</h2>
+            <p>// o texto descritivo do campo — essencial para acessibilidade</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Associando label ao input via <span style="color:var(--m06)">for</span> e <span style="color:var(--m06)">id</span></div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="com">/* for do label = id do input */</span><br>
+                <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"nome"</span><span class="tag">&gt;</span>Seu nome<span class="tag">&lt;/label&gt;</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"nome"</span><span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Clicar no label foca o input automaticamente. Essencial para acessibilidade (leitores de tela).</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Label envolvendo o input — associação implícita</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="com">/* input dentro do label — sem for/id */</span><br>
+                <span class="tag">&lt;label&gt;</span><br>
+                &nbsp;&nbsp;Seu nome<br>
+                &nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;/label&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Associação automática por hierarquia — mais usado em checkboxes e radios.</div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>Sempre use label.</strong> Além da acessibilidade, aumenta a área clicável do campo — especialmente importante em checkbox e radio, onde clicar no texto também deve marcar/desmarcar.</div>
+      </div>
+    </section>
+
+    <!-- form-textarea-select -->
+    <section class="topico" id="form-textarea-select">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Textarea & Select</h2>
+            <p>// texto longo e lista de opções</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">&lt;textarea&gt;</span> — campo de texto multilinha</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="tag">&lt;textarea</span><br>
+                &nbsp;&nbsp;<span class="attr">name</span>=<span class="val">"mensagem"</span><br>
+                &nbsp;&nbsp;<span class="attr">rows</span>=<span class="val">"4"</span><br>
+                &nbsp;&nbsp;<span class="attr">cols</span>=<span class="val">"40"</span><br>
+                &nbsp;&nbsp;<span class="attr">placeholder</span>=<span class="val">"Sua mensagem..."</span><br>
+                &nbsp;&nbsp;<span class="attr">resize</span>=<span class="val">"none"</span> <span class="com">← no CSS</span><br>
+                <span class="tag">&gt;&lt;/textarea&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">
+                Diferente do input — tem tag de fechamento.<br>
+                Conteúdo padrão vai entre as tags, não no value.<br>
+                CSS <code style="color:var(--m06)">resize: none</code> impede o usuário de redimensionar.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">&lt;select&gt;</span> — lista suspensa</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="val">"pais"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">""</span><span class="tag">&gt;</span>Selecione...<span class="tag">&lt;/option&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"br"</span> <span class="attr">selected</span><span class="tag">&gt;</span>Brasil<span class="tag">&lt;/option&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"pt"</span><span class="tag">&gt;</span>Portugal<span class="tag">&lt;/option&gt;</span><br>
+                <span class="tag">&lt;/select&gt;</span><br><br>
+                <span class="com">/* multiple permite selecionar vários */</span><br>
+                <span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="val">"skills"</span> <span class="attr">multiple</span><span class="tag">&gt;</span>...
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header"><span style="color:var(--m06)">&lt;optgroup&gt;</span> — agrupando opções no select</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="val">"cidade"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;optgroup</span> <span class="attr">label</span>=<span class="val">"Nordeste"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"rec"</span><span class="tag">&gt;</span>Recife<span class="tag">&lt;/option&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"for"</span><span class="tag">&gt;</span>Fortaleza<span class="tag">&lt;/option&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;/optgroup&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;optgroup</span> <span class="attr">label</span>=<span class="val">"Sudeste"</span><span class="tag">&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"sp"</span><span class="tag">&gt;</span>São Paulo<span class="tag">&lt;/option&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;/optgroup&gt;</span><br>
+                <span class="tag">&lt;/select&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                O <strong style="color:white">&lt;optgroup&gt;</strong> cria categorias visuais dentro do select — o label do grupo aparece em negrito mas não pode ser selecionado.<br><br>
+                Útil para selects longos com muitas opções agrupadas por categoria.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- form-fieldset -->
+    <section class="topico" id="form-fieldset">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Fieldset & Legend</h2>
+            <p>// agrupa campos relacionados com borda e título semânticos</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Código</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="tag">&lt;fieldset&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;legend&gt;</span>Dados pessoais<span class="tag">&lt;/legend&gt;</span><br><br>
+                &nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"nome"</span><span class="tag">&gt;</span>Nome<span class="tag">&lt;/label&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"nome"</span><span class="tag">&gt;</span><br><br>
+                &nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"email"</span><span class="tag">&gt;</span>Email<span class="tag">&lt;/label&gt;</span><br>
+                &nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">id</span>=<span class="val">"email"</span><span class="tag">&gt;</span><br>
+                <span class="tag">&lt;/fieldset&gt;</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Resultado visual e comportamento</div>
+            <div class="card-body">
+              <fieldset style="border:1px solid rgba(52,211,153,0.3);border-radius:8px;padding:16px;background:rgba(52,211,153,0.03)">
+                <legend style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m06);padding:0 8px">Dados pessoais</legend>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4)">Nome</label>
+                    <input type="text" placeholder="Seu nome" style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.6);outline:none">
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <label style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4)">Email</label>
+                    <input type="email" placeholder="seu@email.com" style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.6);outline:none">
+                  </div>
+                </div>
+              </fieldset>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.35);margin-top:12px;line-height:1.8">Adicionar <code style="color:var(--m06)">disabled</code> no fieldset desativa todos os campos do grupo de uma vez.</div>
+            </div>
+          </div>
+        </div>
+        <div class="explicacao"><strong>&lt;fieldset&gt;</strong> agrupa campos relacionados semanticamente — leitores de tela anunciam o grupo ao entrar nele. <strong>&lt;legend&gt;</strong> é o título do grupo. Apesar do estilo padrão do navegador ser feio, é totalmente customizável no CSS e importante para acessibilidade em formulários longos.</div>
+      </div>
+    </section>
+
+    <!-- form-revisao -->
+    <section class="topico" id="form-revisao">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Revisão & Atributos de Validação</h2>
+            <p>// validação nativa do HTML antes de chegar no JavaScript</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card full">
+            <div class="card-header">Atributos de validação nativa</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Atributo</th><th>Funciona em</th><th>O que valida</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--m06)">required</td><td>todos</td><td>Campo não pode estar vazio</td></tr>
+                    <tr><td style="color:var(--m06)">minlength / maxlength</td><td>text, password, textarea</td><td>Tamanho mínimo/máximo de caracteres</td></tr>
+                    <tr><td style="color:var(--m06)">min / max</td><td>number, range, date</td><td>Valor mínimo e máximo</td></tr>
+                    <tr><td style="color:var(--m06)">pattern</td><td>text, email, tel, url</td><td>Regex — valida o formato</td></tr>
+                    <tr><td style="color:var(--m06)">type</td><td>input</td><td>Valida email, url e outros formatos automaticamente</td></tr>
+                    <tr><td style="color:var(--m06)">novalidate</td><td>form</td><td>Desativa toda a validação nativa do form</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="secao-divisor"></div>
+
+        <p class="label-secao">tabela resumo — formulários HTML</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Elemento / Type</th><th>O que é</th><th>Detalhe importante</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m06)">&lt;form&gt;</td><td>Container do formulário</td><td>action + method definem o destino e o modo de envio</td></tr>
+              <tr><td style="color:var(--m06)">&lt;label&gt;</td><td>Texto descritivo do campo</td><td>Liga ao campo via for="id" — essencial para acessibilidade</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="text"&gt;</td><td>Campo de texto livre</td><td>maxlength limita caracteres</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="email"&gt;</td><td>Campo de email</td><td>Valida formato automaticamente</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="password"&gt;</td><td>Campo de senha</td><td>Oculta caracteres — use minlength</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="number"&gt;</td><td>Campo numérico</td><td>min, max e step controlam o intervalo</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="checkbox"&gt;</td><td>Múltipla escolha</td><td>Mesmo name, values diferentes</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="radio"&gt;</td><td>Escolha única</td><td>Mesmo name = grupo exclusivo</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="file"&gt;</td><td>Upload de arquivo</td><td>accept filtra tipos, multiple permite vários</td></tr>
+              <tr><td style="color:var(--m06)">&lt;input type="hidden"&gt;</td><td>Campo invisível</td><td>Enviado no form mas não aparece na tela</td></tr>
+              <tr><td style="color:var(--m06)">&lt;textarea&gt;</td><td>Texto multilinha</td><td>Conteúdo entre tags, não no value</td></tr>
+              <tr><td style="color:var(--m06)">&lt;select&gt; + &lt;option&gt;</td><td>Lista suspensa</td><td>selected define opção padrão, multiple permite vários</td></tr>
+              <tr><td style="color:var(--m06)">&lt;fieldset&gt; + &lt;legend&gt;</td><td>Grupo de campos</td><td>disabled no fieldset desativa todos os filhos</td></tr>
+              <tr><td style="color:var(--m06)">&lt;button type="submit"&gt;</td><td>Envia o formulário</td><td>Sempre declare o type — padrão é submit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
@@ -3156,7 +3974,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
