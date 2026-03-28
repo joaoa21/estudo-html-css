@@ -697,6 +697,7 @@
         <a class="sidebar-item" href="#css-nesting" data-module="m00">CSS Nesting</a>
         <a class="sidebar-item" href="#css-display" data-module="m00">Display</a>
         <a class="sidebar-item" href="#css-boxmodel" data-module="m00">Box Model</a>
+        <a class="sidebar-item" href="#css-overflow" data-module="m00">Overflow</a>
         <a class="sidebar-item" href="#css-boxsizing" data-module="m00">Box Sizing</a>
         <a class="sidebar-item" href="#css-background" data-module="m00">Background</a>
         <a class="sidebar-item" href="#css-objectfit" data-module="m00">object-fit</a>
@@ -1490,6 +1491,147 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERFLOW -->
+    <section class="topico" id="css-overflow">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero">08.5</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--css-c)">Overflow</h2>
+            <p>// o que acontece quando o conteúdo é maior que o container</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card full">
+            <div class="demo-card-header">Os 4 valores principais</div>
+            <div class="demo-area" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+              <!-- visible -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:6px">visible — padrão</div>
+                <div style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:6px;height:80px;overflow:visible;position:relative">
+                  <div style="background:rgba(99,102,241,0.25);border:1px solid rgba(99,102,241,0.5);border-radius:4px;padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--css-c);width:140%;position:absolute;top:24px;left:8px">conteúdo transborda visível</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">O conteúdo sai do container mas continua visível.</div>
+              </div>
+              <!-- hidden -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:6px">hidden</div>
+                <div style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:6px;height:80px;overflow:hidden;position:relative">
+                  <div style="background:rgba(99,102,241,0.25);border:1px solid rgba(99,102,241,0.5);border-radius:4px;padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--css-c);width:140%;position:absolute;top:24px;left:8px">conteúdo cortado</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">O que sai é cortado — não aparece e não tem scroll.</div>
+              </div>
+              <!-- scroll -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:6px">scroll</div>
+                <div style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:6px;height:80px;overflow:scroll">
+                  <div style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.5);line-height:1.8;width:200px">
+                    linha 1<br>linha 2<br>linha 3<br>linha 4<br>linha 5
+                  </div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">Sempre mostra scrollbar, mesmo sem precisar.</div>
+              </div>
+              <!-- auto -->
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:6px">auto ⭐</div>
+                <div style="background:rgba(14,14,14,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:6px;height:80px;overflow:auto">
+                  <div style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.5);line-height:1.8">
+                    linha 1<br>linha 2<br>linha 3<br>linha 4<br>linha 5
+                  </div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">Scrollbar só quando precisa — o mais usado.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">overflow-x e overflow-y separados</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* controle por eixo */</span><br>
+                <span class="prop">overflow-x</span>: hidden; <span class="com">/* corta horizontal */</span><br>
+                <span class="prop">overflow-y</span>: auto;   <span class="com">/* scroll vertical */</span><br><br>
+                <span class="com">/* shorthand: vertical / horizontal */</span><br>
+                <span class="prop">overflow</span>: hidden auto;<br><br>
+                <span class="com">/* scroll só no eixo y — padrão de sidebar */</span><br>
+                <span class="sel">.sidebar</span> {<br>
+                &nbsp;&nbsp;<span class="prop">height</span>: 100vh;<br>
+                &nbsp;&nbsp;<span class="prop">overflow-y</span>: auto;<br>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">⭐ <span style="color:var(--css-c)">overflow: hidden</span> para segurar border-radius</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171;margin-bottom:6px">❌ sem overflow: hidden</div>
+                  <div style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(20,20,20,0.8)">
+                    <div style="background:rgba(99,102,241,0.3);height:60px;border-radius:0"></div>
+                    <div style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">a imagem vaza nos cantos</div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);margin-bottom:6px">✅ com overflow: hidden</div>
+                  <div style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(20,20,20,0.8);overflow:hidden">
+                    <div style="background:rgba(99,102,241,0.3);height:60px;border-radius:0"></div>
+                    <div style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">cantos arredondados respeitados</div>
+                  </div>
+                </div>
+              </div>
+              <div class="code">
+                <span class="sel">.card</span> {<br>
+                &nbsp;&nbsp;<span class="prop">border-radius</span>: 12px;<br>
+                &nbsp;&nbsp;<span class="prop">overflow</span>: hidden; <span class="com">/* garante que a img respeite o radius */</span><br>
+                }<br>
+                <span class="sel">.card img</span> { <span class="prop">width</span>: 100%; <span class="prop">display</span>: block; }
+              </div>
+            </div>
+          </div>
+
+          <div class="card full">
+            <div class="card-header">⚠️ overflow: hidden e position: absolute — atenção!</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  Um filho com <strong style="color:white">position: absolute</strong> pode sair dos limites do pai.<br><br>
+                  Colocar <strong style="color:white">overflow: hidden</strong> no pai corta esse filho se ele sair da área — isso pode ser o comportamento desejado ou um bug dependendo do contexto.<br><br>
+                  <span style="color:#f87171">⚠️ Cuidado:</span> se você tem um tooltip ou dropdown com position absolute dentro de um elemento com overflow: hidden, ele vai ser cortado.
+                </div>
+              </div>
+              <div class="code">
+                <span class="sel">.container</span> {<br>
+                &nbsp;&nbsp;<span class="prop">position</span>: relative;<br>
+                &nbsp;&nbsp;<span class="prop">overflow</span>: hidden; <span class="com">/* corta o absolute filho */</span><br>
+                }<br><br>
+                <span class="sel">.badge</span> {<br>
+                &nbsp;&nbsp;<span class="prop">position</span>: absolute;<br>
+                &nbsp;&nbsp;<span class="prop">top</span>: -8px;<br>
+                &nbsp;&nbsp;<span class="prop">right</span>: -8px;<br>
+                &nbsp;&nbsp;<span class="com">/* vai ser cortado se sair do container */</span><br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabela" style="margin-top:0">
+          <table>
+            <thead><tr><th>Valor</th><th>O que faz</th><th>Quando usar</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--css-c)">visible</td><td>Conteúdo transborda e fica visível — padrão</td><td>Quando não quer nenhum comportamento especial</td></tr>
+              <tr><td style="color:var(--css-c)">hidden</td><td>Corta tudo que sai do container</td><td>Segurar border-radius, esconder conteúdo, efeitos visuais</td></tr>
+              <tr><td style="color:var(--css-c)">auto</td><td>Scroll aparece só quando necessário</td><td>Containers com conteúdo variável ⭐</td></tr>
+              <tr><td style="color:var(--css-c)">scroll</td><td>Scrollbar sempre visível mesmo sem precisar</td><td>Evite — prefira auto</td></tr>
+              <tr><td style="color:var(--css-c)">overflow-x / overflow-y</td><td>Controla cada eixo separadamente</td><td>Sidebar scrollável, tabelas com scroll horizontal</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
