@@ -780,6 +780,7 @@
           Formulários HTML
         </div>
         <a class="sidebar-item" href="#form-estrutura" data-module="m06">Estrutura & form</a>
+        <a class="sidebar-item" href="#form-atributos" data-module="m06">Atributos Gerais</a>
         <a class="sidebar-item" href="#form-button" data-module="m06">Button</a>
         <a class="sidebar-item" href="#form-inputs-texto" data-module="m06">Input Text, Number, Email, Password</a>
         <a class="sidebar-item" href="#form-inputs-especiais" data-module="m06">File, Range, Color</a>
@@ -2755,6 +2756,50 @@
           </div>
         </div>
           <div class="demo-card full">
+            <div class="demo-card-header">Entendendo o <span style="color:var(--m04)">auto</span> — o que acontece em cada caso</div>
+            <div class="demo-area">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+
+                <!-- margin-left: auto -->
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:8px">margin-left: auto</div>
+                  <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0;height:52px">
+                    <div style="flex:1;border:1.5px dashed rgba(34,211,238,0.25);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(34,211,238,0.4)">espaço →</div>
+                    <div style="background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700;flex-shrink:0">.box</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px">→ empurra para a direita</div>
+                </div>
+
+                <!-- margin-right: auto -->
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:8px">margin-right: auto</div>
+                  <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0;height:52px">
+                    <div style="background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700;flex-shrink:0">.box</div>
+                    <div style="flex:1;border:1.5px dashed rgba(34,211,238,0.25);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(34,211,238,0.4)">← espaço</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px">→ empurra para a esquerda</div>
+                </div>
+
+                <!-- margin: 0 auto -->
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:8px">margin: 0 auto (os dois)</div>
+                  <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0;height:52px">
+                    <div style="flex:1;border:1.5px dashed rgba(34,211,238,0.25);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(34,211,238,0.4)">←</div>
+                    <div style="background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);font-weight:700;flex-shrink:0">.box</div>
+                    <div style="flex:1;border:1.5px dashed rgba(34,211,238,0.25);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(34,211,238,0.4)">→</div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px">→ centraliza</div>
+                </div>
+              </div>
+
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;border-top:1px solid rgba(255,255,255,0.05);padding-top:14px">
+                O <code style="color:var(--m04)">auto</code> consome <strong style="color:white">todo o espaço livre disponível</strong> no lado em que é aplicado.<br>
+                Com os dois lados em auto, o espaço é dividido igualmente — resultado: centralizado.
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-card full">
             <div class="demo-card-header"><span style="color:var(--m04)">margin: 0 auto</span> — centraliza um elemento block horizontalmente</div>
             <div class="demo-area">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
@@ -2794,6 +2839,49 @@
               </div>
             </div>
           </div>
+        <div class="demo-card full" style="margin-top:0">
+          <div class="demo-card-header">Como o <span style="color:var(--m04)">margin: auto</span> direciona o espaço livre</div>
+          <div class="demo-area">
+            <div style="display:flex;flex-direction:column;gap:16px">
+
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:6px">margin-left: auto → empurra para a direita</div>
+                <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0">
+                  <div style="flex:1;border:1.5px dashed rgba(255,255,255,0.1);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25)">espaço livre →</div>
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m04);font-weight:700;flex-shrink:0">.elemento</div>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:6px">margin-right: auto → empurra para a esquerda</div>
+                <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0">
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m04);font-weight:700;flex-shrink:0">.elemento</div>
+                  <div style="flex:1;border:1.5px dashed rgba(255,255,255,0.1);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25)">← espaço livre</div>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:6px">margin: 0 auto (os dois juntos) → centraliza</div>
+                <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:0">
+                  <div style="flex:1;border:1.5px dashed rgba(255,255,255,0.1);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25)">←</div>
+                  <div style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.4);border-radius:5px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m04);font-weight:700;flex-shrink:0">.elemento</div>
+                  <div style="flex:1;border:1.5px dashed rgba(255,255,255,0.1);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25)">→</div>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m04);margin-bottom:6px">dentro do flex — empurra itens específicos (padrão de navbar)</div>
+                <div style="background:rgba(14,14,14,0.7);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px">
+                  <div style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);border-radius:5px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);font-weight:700;flex-shrink:0">logo</div>
+                  <div style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);border-radius:5px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);font-weight:700;flex-shrink:0">home</div>
+                  <div style="flex:1;border:1.5px dashed rgba(255,255,255,0.1);border-radius:4px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.25)">margin-left: auto ↓</div>
+                  <div style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);border-radius:5px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--yellow);font-weight:700;flex-shrink:0">login</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.3);margin-top:8px">→ margin-left: auto no .login consome todo o espaço livre — empurra só ele para a direita</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="explicacao"><strong>gap</strong> é a forma moderna de espaçar — aplica entre todos os itens sem afetar as bordas externas. <strong>margin: auto</strong> consome todo o espaço livre disponível, empurrando os outros itens. Combinados, cobrem 99% dos casos de espaçamento em flex layouts.</div>
       </div>
     </section>
@@ -3577,6 +3665,160 @@
       </div>
     </section>
 
+    <!-- form-atributos -->
+    <section class="topico" id="form-atributos">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m06)">M06</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m06)">Atributos Gerais dos Inputs</h2>
+            <p>// funcionam na maioria dos campos de formulário</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+
+          <!-- value -->
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">value</span> — valor do campo</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="com">/* valor inicial preenchido */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">value</span>=<span class="val">"João"</span><span class="tag">&gt;</span><br><br>
+                <span class="com">/* em checkbox/radio — o que é enviado */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"radio"</span> <span class="attr">name</span>=<span class="val">"plano"</span> <span class="attr">value</span>=<span class="val">"pro"</span><span class="tag">&gt;</span><br><br>
+                <span class="com">/* em button — o texto do botão */</span><br>
+                <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"submit"</span> <span class="attr">value</span>=<span class="val">"Enviar"</span><span class="tag">&gt;</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Em inputs de texto → define o valor inicial já preenchido.<br><br>
+                Em checkbox e radio → define <strong style="color:white">o que é enviado</strong> quando marcado (o usuário não vê esse valor).<br><br>
+                Em submit/reset → define o texto do botão.
+              </div>
+            </div>
+          </div>
+
+          <!-- placeholder -->
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">placeholder</span> — dica dentro do campo</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="tag">&lt;input</span><br>
+                &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"email"</span><br>
+                &nbsp;&nbsp;<span class="attr">placeholder</span>=<span class="val">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a6c7c496c64686065276a6664">[email&#160;protected]</a>"</span><br>
+                <span class="tag">&gt;</span>
+              </div>
+              <div>
+                <input type="email" placeholder="seu@email.com" style="width:100%;background:rgba(14,14,14,0.8);border:1px solid rgba(52,211,153,0.25);border-radius:6px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:rgba(240,240,240,0.7);outline:none;margin-bottom:8px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.35);line-height:1.7">Texto de dica que aparece quando o campo está vazio. Some ao digitar. <strong style="color:white">Não substitui o label</strong> — use os dois.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- required, disabled, readonly -->
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">required</span> · <span style="color:var(--m06)">disabled</span> · <span style="color:var(--m06)">readonly</span> — atributos booleanos</div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:8px">required</div>
+                  <div class="code" style="margin-bottom:10px">
+                    <span class="tag">&lt;input</span> <span class="attr">required</span><span class="tag">&gt;</span>
+                  </div>
+                  <input type="text" required placeholder="obrigatório *" style="width:100%;background:rgba(14,14,14,0.8);border:1px solid rgba(52,211,153,0.3);border-radius:6px;padding:9px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.6);outline:none">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">Bloqueia o envio se vazio. Navegador exibe aviso nativo.</div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:8px">disabled</div>
+                  <div class="code" style="margin-bottom:10px">
+                    <span class="tag">&lt;input</span> <span class="attr">disabled</span><span class="tag">&gt;</span>
+                  </div>
+                  <input type="text" disabled value="não editável" style="width:100%;background:rgba(14,14,14,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:9px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.25);outline:none;cursor:not-allowed">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">Desativa o campo. <strong style="color:white">Não é enviado</strong> no form.</div>
+                </div>
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:8px">readonly</div>
+                  <div class="code" style="margin-bottom:10px">
+                    <span class="tag">&lt;input</span> <span class="attr">readonly</span><span class="tag">&gt;</span>
+                  </div>
+                  <input type="text" readonly value="só leitura" style="width:100%;background:rgba(14,14,14,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:9px 10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);outline:none">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.3);margin-top:6px;line-height:1.6">Não editável, mas <strong style="color:white">é enviado</strong> no form.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- autofocus e autocomplete -->
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">autofocus</span> · <span style="color:var(--m06)">autocomplete</span></div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* foca automaticamente ao carregar */</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">autofocus</span><span class="tag">&gt;</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">O cursor já aparece nesse campo quando a página carrega. Use com moderação — só um por página.</div>
+              </div>
+              <div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* desativa sugestões do navegador */</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">autocomplete</span>=<span class="val">"off"</span><span class="tag">&gt;</span><br><br>
+                  <span class="com">/* dica semântica para o navegador */</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">autocomplete</span>=<span class="val">"email"</span><span class="tag">&gt;</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">autocomplete</span>=<span class="val">"current-password"</span><span class="tag">&gt;</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Com valores semânticos, o navegador preenche com o dado certo automaticamente.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- size e form -->
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m06)">size</span> · <span style="color:var(--m06)">form</span> — os menos conhecidos</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:8px">size</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* largura em número de caracteres */</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">size</span>=<span class="val">"10"</span><span class="tag">&gt;</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">size</span>=<span class="val">"30"</span><span class="tag">&gt;</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Define a largura visual em quantidade de caracteres. <strong style="color:white">Não limita</strong> o que o usuário pode digitar — use <code style="color:var(--m06)">maxlength</code> pra isso. Na prática, prefira controlar largura via CSS (<code style="color:var(--m06)">width</code>).</div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:8px">form</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="tag">&lt;form</span> <span class="attr">id</span>=<span class="val">"meu-form"</span><span class="tag">&gt;</span><br>
+                  &nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Enviar<span class="tag">&lt;/button&gt;</span><br>
+                  <span class="tag">&lt;/form&gt;</span><br><br>
+                  <span class="com">/* input FORA do form, mas vinculado */</span><br>
+                  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">form</span>=<span class="val">"meu-form"</span><span class="tag">&gt;</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Vincula um campo a um form mesmo estando fora dele no HTML. O valor de <code style="color:var(--m06)">form</code> deve bater com o <code style="color:var(--m06)">id</code> do form.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tabela" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Atributo</th><th>Tipo</th><th>O que faz</th><th>Detalhe</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m06)">value</td><td>texto / radio / checkbox</td><td>Valor inicial ou valor enviado</td><td>Em checkbox/radio — o que chega no back-end</td></tr>
+              <tr><td style="color:var(--m06)">placeholder</td><td>texto</td><td>Dica dentro do campo</td><td>Não substitui o label</td></tr>
+              <tr><td style="color:var(--m06)">required</td><td>todos</td><td>Campo obrigatório</td><td>Bloqueia envio se vazio</td></tr>
+              <tr><td style="color:var(--m06)">disabled</td><td>todos</td><td>Desativa o campo</td><td>Não é enviado no form</td></tr>
+              <tr><td style="color:var(--m06)">readonly</td><td>texto</td><td>Só leitura</td><td>É enviado no form</td></tr>
+              <tr><td style="color:var(--m06)">autofocus</td><td>todos</td><td>Foca ao carregar a página</td><td>Só um por página</td></tr>
+              <tr><td style="color:var(--m06)">autocomplete</td><td>texto</td><td>Sugestões do navegador</td><td>Use valores semânticos: email, name, tel...</td></tr>
+              <tr><td style="color:var(--m06)">size</td><td>texto</td><td>Largura em nº de caracteres</td><td>Prefira controlar via CSS width</td></tr>
+              <tr><td style="color:var(--m06)">form</td><td>todos</td><td>Vincula campo a um form externo</td><td>Valor deve ser o id do form</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- form-button -->
     <section class="topico" id="form-button">
       <div class="topico-inner">
@@ -3694,6 +3936,68 @@
           </div>
         </div>
         <div class="nota">💡 O <strong>type</strong> do input faz muito mais do que parecer — ele muda o teclado no mobile, ativa validação nativa e altera o comportamento de preenchimento automático do navegador.</div>
+
+        <div class="demo-card full" style="margin-top:16px">
+          <div class="demo-card-header">⭐ <span style="color:var(--m06)">pattern</span> — validação com regex direto no HTML</div>
+          <div class="demo-area">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m06);margin-bottom:10px;letter-spacing:1px">POR QUE USAR COM EMAIL</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  O <code style="color:var(--m06)">type="email"</code> valida que existe um <strong style="color:white">@</strong> e um domínio, mas aceita coisas como <code style="color:#f87171">a@b</code>.<br><br>
+                  Com <code style="color:var(--m06)">pattern</code> você define exatamente o formato que espera — nenhum caractere a mais, nenhum a menos.
+                </div>
+              </div>
+              <div class="code">
+                <span class="com">/* type="email" aceita — pattern rejeita */</span><br>
+                <span style="color:#f87171">a@b</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="com">← sem .com, .br...</span><br>
+                <span style="color:#f87171">@dominio.com</span> <span class="com">← sem usuário</span><br>
+                <span style="color:#f87171">usuario@</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="com">← sem domínio</span><br><br>
+                <span class="com">/* com pattern — só aceita o formato certo */</span><br>
+                <span style="color:var(--green)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6411171105160d0b24000b090d0a0d0b4a070b09">[email&#160;protected]</a></span> ✅<br>
+                <span style="color:var(--green)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c626361694c69617c7e697f6d226f6361226e7e">[email&#160;protected]</a></span> ✅
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="card">
+                <div class="card-header">Email com pattern</div>
+                <div class="card-body">
+                  <div class="code" style="margin-bottom:12px">
+                    <span class="tag">&lt;input</span><br>
+                    &nbsp;&nbsp;<span class="attr">type</span>=<span class="val">"email"</span><br>
+                    &nbsp;&nbsp;<span class="attr">pattern</span>=<span class="val">"[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}"</span><br>
+                    &nbsp;&nbsp;<span class="attr">title</span>=<span class="val">"Digite um email válido"</span><br>
+                    &nbsp;&nbsp;<span class="attr">required</span><br>
+                    <span class="tag">&gt;</span>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.35);line-height:1.8">
+                    O <code style="color:var(--m06)">title</code> define a mensagem exibida quando a validação falha.
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">Outros usos comuns</div>
+                <div class="card-body">
+                  <div class="code">
+                    <span class="com">/* só letras, 3 a 20 chars */</span><br>
+                    <span class="attr">pattern</span>=<span class="val">"[A-Za-z]{3,20}"</span><br><br>
+                    <span class="com">/* CPF — 000.000.000-00 */</span><br>
+                    <span class="attr">pattern</span>=<span class="val">"\d{3}\.\d{3}\.\d{3}-\d{2}"</span><br><br>
+                    <span class="com">/* CEP — 00000-000 */</span><br>
+                    <span class="attr">pattern</span>=<span class="val">"[0-9]{5}-[0-9]{3}"</span><br><br>
+                    <span class="com">/* senha: mín 8 chars, letras e números */</span><br>
+                    <span class="attr">pattern</span>=<span class="val">"(?=.*\d)(?=.*[a-z]).{8,}"</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.15);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+              ⚠️ <strong style="color:white">pattern não dispensa validação no back-end.</strong> Qualquer pessoa pode inspecionar o HTML e remover o atributo. O pattern é uma camada de UX — para dar feedback imediato ao usuário — mas a validação real sempre precisa acontecer no servidor também.
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -4096,6 +4400,7 @@
     </div>
 
   </main>
+
 
   <script>
     // Smooth scroll
