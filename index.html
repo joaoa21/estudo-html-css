@@ -19,6 +19,7 @@
       --m04: #22d3ee;
       --m05: #a78bfa;
       --m06: #34d399;
+      --m07: #f59e0b;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -243,6 +244,7 @@
     .sidebar-item.active-m04::before { background: var(--m04); }
     .sidebar-item.active-m05::before { background: var(--m05); }
     .sidebar-item.active-m06::before { background: var(--m06); }
+    .sidebar-item.active-m07::before { background: var(--m07); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -694,6 +696,8 @@
         <a class="sidebar-item" href="#html-estrutura" data-module="m00">Estrutura & Caminhos</a>
         <a class="sidebar-item" href="#css-anatomia" data-module="m00">Anatomia & Cascata</a>
         <a class="sidebar-item" href="#css-seletores" data-module="m00">Seletores & Combinators</a>
+        <a class="sidebar-item" href="#css-seletores-especiais" data-module="m00">( ) vs [ ] — Seletores especiais</a>
+        <a class="sidebar-item" href="#css-nesting-espaco" data-module="m00">&amp;.classe vs &amp; .classe</a>
         <a class="sidebar-item" href="#css-nesting" data-module="m00">CSS Nesting</a>
         <a class="sidebar-item" href="#css-display" data-module="m00">Display</a>
         <a class="sidebar-item" href="#css-boxmodel" data-module="m00">Box Model</a>
@@ -793,17 +797,30 @@
       </div>
 
       <div class="sidebar-module">
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m07)"></span>
+          CSS Functions
+        </div>
+        <a class="sidebar-item" href="#fn-transform" data-module="m07">Funções de transformação</a>
+        <a class="sidebar-item" href="#fn-matematicas" data-module="m07">Funções matemáticas</a>
+        <a class="sidebar-item" href="#fn-filtro" data-module="m07">Funções de filtro</a>
+        <a class="sidebar-item" href="#fn-cores" data-module="m07">Funções de cores</a>
+        <a class="sidebar-item" href="#fn-degradê" data-module="m07">Funções de degradê</a>
+        <a class="sidebar-item" href="#fn-formas" data-module="m07">Funções de formas</a>
+        <a class="sidebar-item" href="#fn-referencia" data-module="m07">Funções de referência</a>
+      </div>
+
+      <div class="sidebar-module">
         <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
-        <div class="sidebar-item" style="opacity:0.25;cursor:default">CSS Functions</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Responsividade</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Animations & Transitions</div>
       </div>
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>7/8 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>8/8 módulos</span></div>
       <div class="sidebar-progress-bar">
-        <div class="sidebar-progress-fill" style="width:87.5%"></div>
+        <div class="sidebar-progress-fill" style="width:100%"></div>
       </div>
     </div>
   </nav>
@@ -868,6 +885,36 @@
                 <span class="hl">&amp;lt;</span> → &lt; &nbsp; <span class="hl">&amp;gt;</span> → &gt; &nbsp; <span class="hl">&amp;amp;</span> → &amp;<br>
                 <span class="hl">&amp;nbsp;</span> → espaço &nbsp; <span class="tag">&lt;br/&gt;</span> → quebra linha
               </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Tags visuais vs Tags semânticas — qual a diferença?</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:10px;letter-spacing:1px">APENAS VISUAIS — sem significado</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:2.2">
+                  <span style="color:var(--html-c)">&lt;b&gt;</span> → <b>negrito</b> visual — não diz que é importante<br>
+                  <span style="color:var(--html-c)">&lt;i&gt;</span> → <i>itálico</i> visual — não diz que é ênfase<br>
+                  <span style="color:var(--html-c)">&lt;u&gt;</span> → <u>sublinhado</u> — sem significado extra<br>
+                  <span style="color:var(--html-c)">&lt;s&gt;</span> → <s>riscado</s> — só visual, sem semântica<br>
+                  <span style="color:var(--html-c)">&lt;sup&gt;</span> → sobrescrito: x<sup>2</sup> · e<sup>mc²</sup><br>
+                  <span style="color:var(--html-c)">&lt;sub&gt;</span> → subscrito: H<sub>2</sub>O · CO<sub>2</sub>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:10px;letter-spacing:1px">SEMÂNTICAS — comunicam significado</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:2.2">
+                  <span style="color:var(--html-c)">&lt;strong&gt;</span> → <strong>importância</strong> — leitores de tela enfatizam<br>
+                  <span style="color:var(--html-c)">&lt;em&gt;</span> → <em>ênfase</em> — entonação diferente para leitores<br>
+                  <span style="color:var(--html-c)">&lt;del&gt;</span> → <del>removido</del> — conteúdo deletado semanticamente<br>
+                  <span style="color:var(--html-c)">&lt;ins&gt;</span> → <ins>inserido</ins> — conteúdo adicionado semanticamente<br>
+                  <span style="color:var(--html-c)">&lt;mark&gt;</span> → <mark style="background:rgba(251,191,36,0.3);color:var(--yellow)">destacado</mark> — relevante no contexto<br>
+                  <span style="color:var(--html-c)">&lt;abbr&gt;</span> → abreviação com title explicativo
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.12);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+              💡 <strong style="color:white">Regra prática:</strong> prefira sempre as tags semânticas. Use <code style="color:var(--html-c)">&lt;strong&gt;</code> no lugar de <code style="color:var(--html-c)">&lt;b&gt;</code>, e <code style="color:var(--html-c)">&lt;em&gt;</code> no lugar de <code style="color:var(--html-c)">&lt;i&gt;</code>. As tags visuais puras (<code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;u&gt;</code>) existem mas não transmitem nenhuma informação para buscadores ou tecnologias assistivas. Reserve <code>&lt;sup&gt;</code> e <code>&lt;sub&gt;</code> para contextos matemáticos e científicos onde o posicionamento tem significado real.
             </div>
           </div>
           <div class="card full">
@@ -1176,8 +1223,179 @@
       </div>
     </section>
 
-    <!-- CSS NESTING -->
-    <section class="topico" id="css-nesting">
+    <!-- SELETORES ESPECIAIS -->
+    <section class="topico" id="css-seletores-especiais">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero">06.2</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--css-c)">Seletores especiais — ( ) vs [ ]</h2>
+            <p>// pseudo-classes funcionais vs seletores de atributo</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">Os três formatos e quando cada um aparece</div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pink);margin-bottom:10px;letter-spacing:1px">:pseudo-class</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="sel">a:hover</span><br>
+                  <span class="sel">input:focus</span><br>
+                  <span class="sel">li:first-child</span><br>
+                  <span class="sel">p:last-child</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Seleciona pelo <strong style="color:white">estado</strong> ou <strong style="color:white">posição</strong>. Dois pontos simples <code style="color:var(--pink)">:</code> antes do nome.</div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:10px;letter-spacing:1px">:funcional( ) — com parênteses</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="sel">:not(.ativo)</span><br>
+                  <span class="sel">:has(input:checked)</span><br>
+                  <span class="sel">:nth-child(2n+1)</span><br>
+                  <span class="sel">:is(h1, h2, h3)</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Pseudo-classes que recebem um <strong style="color:white">argumento</strong>. Os <code style="color:var(--css-c)">()</code> contêm um seletor ou expressão que o CSS avalia.</div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);margin-bottom:10px;letter-spacing:1px">[ ] — seletor de atributo</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="sel">[type="checkbox"]</span><br>
+                  <span class="sel">[disabled]</span><br>
+                  <span class="sel">[href^="https"]</span><br>
+                  <span class="sel">input[required]</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Seleciona pelo <strong style="color:white">atributo HTML</strong>. Os <code style="color:var(--yellow)">[]</code> contêm o nome do atributo e opcionalmente o valor.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Seletor de atributo [ ] — variações</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Sintaxe</th><th>Seleciona</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--yellow)">[attr]</td><td>Elemento que tem o atributo, qualquer valor</td></tr>
+                    <tr><td style="color:var(--yellow)">[attr="val"]</td><td>Atributo igual exatamente a "val"</td></tr>
+                    <tr><td style="color:var(--yellow)">[attr^="val"]</td><td>Atributo que começa com "val"</td></tr>
+                    <tr><td style="color:var(--yellow)">[attr$="val"]</td><td>Atributo que termina com "val"</td></tr>
+                    <tr><td style="color:var(--yellow)">[attr*="val"]</td><td>Atributo que contém "val" em qualquer posição</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Combinando os três — exemplo real</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* input de senha com foco */</span><br>
+                <span class="sel">input[type="password"]:focus</span> { <span class="prop">border-color</span>: cyan; }<br><br>
+                <span class="com">/* card que contém checkbox marcado */</span><br>
+                <span class="sel">.card:has(input[type="checkbox"]:checked)</span> {<br>
+                &nbsp;&nbsp;<span class="prop">background</span>: rgba(0,255,0,0.1);<br>
+                }<br><br>
+                <span class="com">/* links externos */</span><br>
+                <span class="sel">a[href^="http"]:not([href*="meusite.com"])</span> {<br>
+                &nbsp;&nbsp;<span class="prop">color</span>: orange;<br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>Resumo mental:</strong> use <code style="color:var(--pink)">:</code> para estados e posições, <code style="color:var(--css-c)">()</code> quando a pseudo-class precisa de um argumento, e <code style="color:var(--yellow)">[]</code> quando quer selecionar pelo atributo HTML.</div>
+      </div>
+    </section>
+
+    <!-- ESPAÇO NO NESTING -->
+    <section class="topico" id="css-nesting-espaco">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero">06.3</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--css-c)">&amp;.classe vs &amp; .classe — o espaço que muda tudo</h2>
+            <p>// modificar o próprio elemento vs selecionar um filho</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card full">
+            <div class="demo-card-header">Visualizando a diferença</div>
+            <div class="demo-area" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:10px">SEM espaço — &amp;.btn-primary</div>
+                <div class="code" style="margin-bottom:12px">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.btn-primary</span> { <span class="prop">background</span>: blue; }<br>
+                  }<br><br>
+                  <span class="com">/* compila para: .btn.btn-primary */</span><br>
+                  <span class="com">/* elemento com as DUAS classes */</span>
+                </div>
+                <div class="code">
+                  <span class="com">/* ✅ funciona */</span><br>
+                  <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="val">"btn btn-primary"</span><span class="tag">&gt;</span><br><br>
+                  <span class="com">/* ❌ não funciona */</span><br>
+                  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"btn"</span><span class="tag">&gt;</span><br>
+                  &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"btn-primary"</span><span class="tag">&gt;</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:10px">COM espaço — &amp; .btn-primary</div>
+                <div class="code" style="margin-bottom:12px">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">&amp; .btn-primary</span> { <span class="prop">background</span>: blue; }<br>
+                  }<br><br>
+                  <span class="com">/* compila para: .btn .btn-primary */</span><br>
+                  <span class="com">/* .btn-primary DENTRO de .btn */</span>
+                </div>
+                <div class="code">
+                  <span class="com">/* ✅ funciona */</span><br>
+                  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"btn"</span><span class="tag">&gt;</span><br>
+                  &nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"btn-primary"</span><span class="tag">&gt;</span><br><br>
+                  <span class="com">/* ❌ não funciona */</span><br>
+                  <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="val">"btn btn-primary"</span><span class="tag">&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Quando usar cada um no dia a dia</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:8px">SEM espaço — variações e estados do componente</div>
+                <div class="code">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.primary</span>  { <span class="prop">background</span>: blue; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.danger</span>   { <span class="prop">background</span>: red; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;.large</span>    { <span class="prop">padding</span>: 12px 24px; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;:hover</span>    { <span class="prop">opacity</span>: 0.8; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp;:disabled</span> { <span class="prop">opacity</span>: 0.4; }<br>
+                  }
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--css-c);margin-bottom:8px">COM espaço — estilizando filhos</div>
+                <div class="code">
+                  <span class="sel">.card</span> {<br>
+                  &nbsp;&nbsp;<span class="sel">&amp; h2</span>     { <span class="prop">font-size</span>: 1.4rem; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp; p</span>      { <span class="prop">color</span>: gray; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp; .badge</span> { <span class="prop">color</span>: cyan; }<br>
+                  &nbsp;&nbsp;<span class="sel">&amp; img</span>    { <span class="prop">width</span>: 100%; }<br>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">
+          💡 <strong>Regra simples:</strong><br>
+          <code style="color:var(--css-c)">&amp;.classe</code> → "o próprio elemento COM essa classe" — use para variações e estados<br>
+          <code style="color:var(--css-c)">&amp; .classe</code> → "elemento com essa classe DENTRO de mim" — use para filhos e descendentes
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS NESTING -->    <section class="topico" id="css-nesting">
       <div class="topico-inner">
         <div class="cap-header">
           <div class="cap-numero">06.5</div>
@@ -4394,6 +4612,435 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 07 — CSS FUNCTIONS
+    ═══════════════════════════════════════════════ -->
+
+    <!-- fn-transform -->
+    <section class="topico" id="fn-transform">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Transformação</h2>
+            <p>// mover, girar, escalar e distorcer elementos com transform</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">As funções do <span style="color:var(--m07)">transform</span></div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div class="code">
+                <span class="com">/* mover */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">translate</span>(20px, 10px);<br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">translateX</span>(20px);<br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">translateY</span>(-50%);<br><br>
+                <span class="com">/* girar */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">rotate</span>(45deg);<br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">rotate</span>(-90deg);<br><br>
+                <span class="com">/* escalar */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">scale</span>(1.5); <span class="com">/* 150% */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">scale</span>(1, 0.5); <span class="com">/* x, y */</span><br><br>
+                <span class="com">/* distorcer */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">skew</span>(10deg, 5deg);<br><br>
+                <span class="com">/* combinando */</span><br>
+                <span class="prop">transform</span>: <span style="color:var(--m07)">translateY</span>(-4px) <span style="color:var(--m07)">scale</span>(1.02);
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:rgba(14,14,14,0.7);border-radius:8px;padding:16px;align-items:center">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                    <div style="width:44px;height:44px;background:rgba(245,158,11,0.25);border:2px solid rgba(245,158,11,0.6);border-radius:6px"></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(240,240,240,0.35);text-align:center">normal</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                    <div style="width:44px;height:44px;background:rgba(245,158,11,0.25);border:2px solid rgba(245,158,11,0.6);border-radius:6px;transform:rotate(45deg)"></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(240,240,240,0.35);text-align:center">rotate<br>45deg</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                    <div style="width:44px;height:44px;background:rgba(245,158,11,0.25);border:2px solid rgba(245,158,11,0.6);border-radius:6px;transform:scale(1.35)"></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(240,240,240,0.35);text-align:center">scale<br>1.35</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                    <div style="width:44px;height:44px;background:rgba(245,158,11,0.25);border:2px solid rgba(245,158,11,0.6);border-radius:6px;transform:skew(15deg)"></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(240,240,240,0.35);text-align:center">skew<br>15deg</div>
+                  </div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  ⭐ <strong style="color:white">translateY(-50%)</strong> é um dos combos mais usados para centralização vertical:<br><br>
+                  <span style="color:var(--m07)">top: 50%; transform: translateY(-50%)</span><br>
+                  → move o elemento 50% para baixo, depois volta metade da sua própria altura = centralizado.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>transform não tira o elemento do fluxo</strong> — ao contrário de position, o espaço original do elemento continua reservado. Os outros elementos não são afetados pela transformação.</div>
+      </div>
+    </section>
+
+    <!-- fn-matematicas -->
+    <section class="topico" id="fn-matematicas">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções Matemáticas</h2>
+            <p>// calc(), min(), max(), clamp() — valores dinâmicos no CSS</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">calc()</span> — cálculo entre unidades diferentes</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="com">/* mistura unidades — impossível sem calc */</span><br>
+                <span class="prop">width</span>: <span style="color:var(--m07)">calc</span>(100% - 32px);<br>
+                <span class="prop">height</span>: <span style="color:var(--m07)">calc</span>(100vh - 60px);<br>
+                <span class="prop">margin-left</span>: <span style="color:var(--m07)">calc</span>(var(--sidebar-w) + 24px);<br><br>
+                <span class="com">/* operadores: + - * / */</span><br>
+                <span class="prop">font-size</span>: <span style="color:var(--m07)">calc</span>(1rem * 1.25);<br>
+                <span class="prop">padding</span>: <span style="color:var(--m07)">calc</span>(var(--spacing) / 2);
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                O poder do calc() está em <strong style="color:white">misturar unidades</strong> que o CSS não consegue resolver sozinho — como subtrair pixels de uma porcentagem.<br><br>
+                ⚠️ Espaço obrigatório em volta dos operadores <code style="color:var(--m07)">+</code> e <code style="color:var(--m07)">-</code>:<br>
+                <span style="color:#f87171">calc(100%-32px)</span> → erro<br>
+                <span style="color:var(--green)">calc(100% - 32px)</span> → correto
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">min()</span> · <span style="color:var(--m07)">max()</span> · <span style="color:var(--m07)">clamp()</span> — limites de valor</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:14px">
+                <span class="com">/* min() — usa o menor valor */</span><br>
+                <span class="prop">width</span>: <span style="color:var(--m07)">min</span>(500px, 90%); <span class="com">/* nunca passa de 500px */</span><br><br>
+                <span class="com">/* max() — usa o maior valor */</span><br>
+                <span class="prop">width</span>: <span style="color:var(--m07)">max</span>(300px, 50%); <span class="com">/* nunca fica menor que 300px */</span><br><br>
+                <span class="com">/* clamp(min, ideal, max) — os três limites */</span><br>
+                <span class="prop">font-size</span>: <span style="color:var(--m07)">clamp</span>(1rem, 2.5vw, 2rem);<br>
+                <span class="com">/* mínimo 1rem · cresce com vw · máximo 2rem */</span><br><br>
+                <span class="prop">width</span>: <span style="color:var(--m07)">clamp</span>(280px, 50%, 800px);
+              </div>
+              <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                ⭐ <strong style="color:white">clamp() é a função mais poderosa</strong> — substitui media queries para tipografia e larguras fluidas. O <code style="color:var(--m07)">font-size: clamp(1rem, 2.5vw, 2rem)</code> cria texto que cresce com a tela, mas nunca sai dos limites.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fn-filtro -->
+    <section class="topico" id="fn-filtro">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Filtro</h2>
+            <p>// efeitos visuais aplicados a elementos e fundos</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">filter vs backdrop-filter</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m07);margin-bottom:8px;letter-spacing:1px">filter — aplica no elemento</div>
+                <div class="code">
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">blur</span>(4px);<br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">brightness</span>(0.5); <span class="com">/* 50% brilho */</span><br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">contrast</span>(1.5);<br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">grayscale</span>(100%);<br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">saturate</span>(2);<br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">sepia</span>(80%);<br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">drop-shadow</span>(0 4px 8px rgba(0,0,0,0.3));<br><br>
+                  <span class="com">/* combinando */</span><br>
+                  <span class="prop">filter</span>: <span style="color:var(--m07)">brightness</span>(0.8) <span style="color:var(--m07)">contrast</span>(1.2);
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m07);margin-bottom:8px;letter-spacing:1px">backdrop-filter — aplica no fundo atrás</div>
+                <div class="code" style="margin-bottom:12px">
+                  <span class="com">/* glass morphism — efeito de vidro */</span><br>
+                  <span class="sel">.card</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">background</span>: rgba(255,255,255,0.1);<br>
+                  &nbsp;&nbsp;<span class="prop">backdrop-filter</span>: <span style="color:var(--m07)">blur</span>(12px);<br>
+                  &nbsp;&nbsp;<span class="prop">border</span>: 1px solid rgba(255,255,255,0.2);<br>
+                  }
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">
+                  O <code style="color:var(--m07)">backdrop-filter</code> desfoca o que está <strong style="color:white">atrás</strong> do elemento — o elemento em si continua nítido. Muito usado em navbars translúcidas e modais com blur.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fn-cores -->
+    <section class="topico" id="fn-cores">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Cores</h2>
+            <p>// rgb(), hsl(), oklch() e como usar transparência</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">Os formatos de cor em CSS</div>
+            <div class="card-body">
+              <div class="tabela" style="margin:0">
+                <table>
+                  <thead><tr><th>Função</th><th>Sintaxe</th><th>Quando usar</th></tr></thead>
+                  <tbody>
+                    <tr><td style="color:var(--m07)">rgb()</td><td><code>rgb(255, 99, 71)</code> ou <code>rgb(255 99 71)</code></td><td>Quando você tem os valores R G B em mãos</td></tr>
+                    <tr><td style="color:var(--m07)">rgba()</td><td><code>rgba(255, 99, 71, 0.5)</code></td><td>RGB com transparência — o 4º valor é o alpha (0-1)</td></tr>
+                    <tr><td style="color:var(--m07)">hsl()</td><td><code>hsl(9, 100%, 64%)</code></td><td>Matiz / Saturação / Luminosidade — mais intuitivo para criar paletas</td></tr>
+                    <tr><td style="color:var(--m07)">hsla()</td><td><code>hsla(9, 100%, 64%, 0.5)</code></td><td>HSL com transparência</td></tr>
+                    <tr><td style="color:var(--m07)">oklch()</td><td><code>oklch(0.7 0.2 30)</code></td><td>Formato moderno — percepção de cor mais uniforme entre tons</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Transparência moderna — canal alpha direto</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* forma antiga */</span><br>
+                <span class="prop">color</span>: rgba(255, 99, 71, 0.5);<br><br>
+                <span class="com">/* forma moderna — barra separando alpha */</span><br>
+                <span class="prop">color</span>: rgb(255 99 71 / 50%);<br>
+                <span class="prop">color</span>: hsl(9 100% 64% / 0.5);<br><br>
+                <span class="com">/* hex com transparência — últimos 2 dígitos */</span><br>
+                <span class="prop">color</span>: #ff634780; <span class="com">/* 80 hex = 50% alpha */</span><br>
+                <span class="prop">color</span>: #ff6347ff; <span class="com">/* ff = 100% opaco */</span><br>
+                <span class="prop">color</span>: #ff634700; <span class="com">/* 00 = 100% transparente */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Por que <span style="color:var(--m07)">hsl()</span> é mais intuitivo para criar paletas</div>
+            <div class="card-body">
+              <div style="display:flex;gap:6px;margin-bottom:14px">
+                <div style="flex:1;height:40px;background:hsl(220,80%,30%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:white">30%</div>
+                <div style="flex:1;height:40px;background:hsl(220,80%,45%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:white">45%</div>
+                <div style="flex:1;height:40px;background:hsl(220,80%,60%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:white">60%</div>
+                <div style="flex:1;height:40px;background:hsl(220,80%,75%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#333">75%</div>
+                <div style="flex:1;height:40px;background:hsl(220,80%,90%);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#333">90%</div>
+              </div>
+              <div class="code">
+                <span class="com">/* mesma matiz (220), mesma saturação (80%)</span><br>
+                <span class="com">   só muda a luminosidade → paleta coesa */</span><br>
+                <span class="prop">--cor-900</span>: hsl(220, 80%, 30%);<br>
+                <span class="prop">--cor-500</span>: hsl(220, 80%, 60%);<br>
+                <span class="prop">--cor-100</span>: hsl(220, 80%, 90%);
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fn-degradê -->
+    <section class="topico" id="fn-degradê">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Degradê</h2>
+            <p>// linear-gradient, radial-gradient e conic-gradient</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">linear-gradient()</span></div>
+            <div class="card-body">
+              <div style="height:60px;border-radius:6px;background:linear-gradient(to right, #6366f1, #22d3ee);margin-bottom:12px"></div>
+              <div class="code">
+                <span class="com">/* direção + cores */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">linear-gradient</span>(to right, purple, cyan);<br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">linear-gradient</span>(45deg, #f97316, #6366f1);<br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">linear-gradient</span>(to bottom, black, transparent);<br><br>
+                <span class="com">/* múltiplas paradas */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">linear-gradient</span>(to right, red, yellow 50%, green);
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">radial-gradient()</span></div>
+            <div class="card-body">
+              <div style="height:60px;border-radius:6px;background:radial-gradient(circle at 50% 50%, rgba(99,102,241,0.6), transparent);margin-bottom:12px"></div>
+              <div class="code">
+                <span class="prop">background</span>: <span style="color:var(--m07)">radial-gradient</span>(circle, purple, transparent);<br><br>
+                <span class="com">/* posição do centro */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">radial-gradient</span>(circle at top left, cyan, transparent);<br><br>
+                <span class="com">/* muito usado para "glows" e halos de luz */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">radial-gradient</span>(ellipse at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">conic-gradient()</span></div>
+            <div class="card-body">
+              <div style="width:60px;height:60px;border-radius:50%;background:conic-gradient(#f97316 25%, #6366f1 25% 50%, #34d399 50% 75%, #f472b6 75%);margin-bottom:12px"></div>
+              <div class="code">
+                <span class="com">/* gira ao redor de um ponto */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">conic-gradient</span>(red, yellow, green, red);<br><br>
+                <span class="com">/* gráfico de pizza */</span><br>
+                <span class="prop">background</span>: <span style="color:var(--m07)">conic-gradient</span>(<br>
+                &nbsp;&nbsp;blue 0% 30%,<br>
+                &nbsp;&nbsp;orange 30% 60%,<br>
+                &nbsp;&nbsp;green 60% 100%<br>
+                );
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Gradientes como <span style="color:var(--m07)">overlay</span> — padrão muito usado</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+              <div class="code">
+                <span class="com">/* texto sobre imagem — escurece a base */</span><br>
+                <span class="sel">.hero</span> {<br>
+                &nbsp;&nbsp;<span class="prop">background-image</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--m07)">linear-gradient</span>(to bottom, transparent, rgba(0,0,0,0.8)),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;url('foto.jpg');<br>
+                &nbsp;&nbsp;<span class="prop">background-size</span>: cover;<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Colocando o gradiente antes da imagem no <code style="color:var(--m07)">background-image</code>, ele fica como uma camada por cima — criando um fade que facilita a leitura de texto sobre a foto.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- fn-formas -->
+    <section class="topico" id="fn-formas">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Formas</h2>
+            <p>// clip-path para recortar elementos em qualquer forma</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="demo-card full">
+            <div class="demo-card-header"><span style="color:var(--m07)">clip-path</span> — recorta o elemento na forma definida</div>
+            <div class="demo-area" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+              <div style="text-align:center">
+                <div style="width:80px;height:80px;background:rgba(245,158,11,0.4);border:1px solid rgba(245,158,11,0.6);margin:0 auto 8px;clip-path:circle(50%)"></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">circle(50%)</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:80px;height:80px;background:rgba(245,158,11,0.4);border:1px solid rgba(245,158,11,0.6);margin:0 auto 8px;clip-path:ellipse(40% 50%)"></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">ellipse(40% 50%)</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:80px;height:80px;background:rgba(245,158,11,0.4);border:1px solid rgba(245,158,11,0.6);margin:0 auto 8px;clip-path:polygon(50% 0%, 100% 100%, 0% 100%)"></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">polygon(triângulo)</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:80px;height:80px;background:rgba(245,158,11,0.4);border:1px solid rgba(245,158,11,0.6);margin:0 auto 8px;clip-path:polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)"></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(240,240,240,0.4)">polygon(custom)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Código das formas</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="prop">clip-path</span>: <span style="color:var(--m07)">circle</span>(50%); <span class="com">/* círculo */</span><br>
+                <span class="prop">clip-path</span>: <span style="color:var(--m07)">ellipse</span>(40% 50% at center); <span class="com">/* elipse */</span><br>
+                <span class="prop">clip-path</span>: <span style="color:var(--m07)">inset</span>(10px 20px round 8px); <span class="com">/* retângulo recortado */</span><br>
+                <span class="prop">clip-path</span>: <span style="color:var(--m07)">polygon</span>(50% 0%, 100% 100%, 0% 100%); <span class="com">/* triângulo */</span><br><br>
+                <span class="com">/* dica: use https://bennettfeely.com/clippy para gerar o polygon */</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 O <code style="color:var(--m07)">clip-path</code> recorta o elemento — tudo fora da forma some, incluindo sombras e bordas. Combine com <code style="color:var(--m07)">transition</code> para animações de reveal interessantes.</div>
+      </div>
+    </section>
+
+    <!-- fn-referencia -->
+    <section class="topico" id="fn-referencia">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m07)">M07</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m07)">Funções de Referência</h2>
+            <p>// var(), env(), url() e attr() — referenciar valores externos</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">var()</span> — variáveis CSS (já vimos, mas com mais detalhe)</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* valor de fallback — se a variável não existir */</span><br>
+                <span class="prop">color</span>: <span style="color:var(--m07)">var</span>(--cor-primaria, blue); <span class="com">← usa blue se --cor-primaria não existir</span><br><br>
+                <span class="com">/* fallback em cadeia */</span><br>
+                <span class="prop">color</span>: <span style="color:var(--m07)">var</span>(--cor-primaria, <span style="color:var(--m07)">var</span>(--cor-secundaria, black));<br><br>
+                <span class="com">/* var() dentro de calc() */</span><br>
+                <span class="prop">width</span>: <span style="color:var(--yellow)">calc</span>(<span style="color:var(--m07)">var</span>(--sidebar-w) + 24px);
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m07)">url()</span> · <span style="color:var(--m07)">env()</span> · <span style="color:var(--m07)">attr()</span></div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* url() — referencia arquivos externos */</span><br>
+                <span class="prop">background-image</span>: <span style="color:var(--m07)">url</span>('foto.jpg');<br>
+                <span class="prop">background-image</span>: <span style="color:var(--m07)">url</span>('../assets/bg.png');<br><br>
+                <span class="com">/* env() — variáveis do ambiente do dispositivo */</span><br>
+                <span class="prop">padding-bottom</span>: <span style="color:var(--m07)">env</span>(safe-area-inset-bottom); <span class="com">← safe area iPhone</span><br>
+                <span class="prop">padding-top</span>: <span style="color:var(--m07)">env</span>(safe-area-inset-top);<br><br>
+                <span class="com">/* attr() — lê atributo HTML do elemento */</span><br>
+                <span class="sel">[data-tooltip]::after</span> {<br>
+                &nbsp;&nbsp;<span class="prop">content</span>: <span style="color:var(--m07)">attr</span>(data-tooltip); <span class="com">← lê o atributo data-tooltip</span><br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="secao-divisor"></div>
+
+        <p class="label-secao">tabela resumo — CSS Functions</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Função</th><th>Categoria</th><th>Para que serve</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m07)">translate() rotate() scale()</td><td>Transform</td><td>Mover, girar e escalar sem afetar o fluxo</td></tr>
+              <tr><td style="color:var(--m07)">calc()</td><td>Matemática</td><td>Calcular com unidades diferentes misturadas</td></tr>
+              <tr><td style="color:var(--m07)">min() max()</td><td>Matemática</td><td>Definir limites de valor responsivos</td></tr>
+              <tr><td style="color:var(--m07)">clamp(min, val, max)</td><td>Matemática</td><td>Valor fluido com mínimo e máximo — tipografia responsiva</td></tr>
+              <tr><td style="color:var(--m07)">blur() brightness() contrast()</td><td>Filtro</td><td>Efeitos visuais em elementos</td></tr>
+              <tr><td style="color:var(--m07)">backdrop-filter: blur()</td><td>Filtro</td><td>Desfoca o conteúdo atrás do elemento</td></tr>
+              <tr><td style="color:var(--m07)">rgb() rgba() hsl() hsla()</td><td>Cor</td><td>Definir cores com canal alpha para transparência</td></tr>
+              <tr><td style="color:var(--m07)">linear-gradient()</td><td>Degradê</td><td>Gradiente em linha reta</td></tr>
+              <tr><td style="color:var(--m07)">radial-gradient()</td><td>Degradê</td><td>Gradiente circular — glows e halos</td></tr>
+              <tr><td style="color:var(--m07)">conic-gradient()</td><td>Degradê</td><td>Gradiente cônico — gráficos de pizza</td></tr>
+              <tr><td style="color:var(--m07)">clip-path: circle() polygon()</td><td>Forma</td><td>Recortar elemento em qualquer forma</td></tr>
+              <tr><td style="color:var(--m07)">var()</td><td>Referência</td><td>Usar variáveis CSS com fallback</td></tr>
+              <tr><td style="color:var(--m07)">url()</td><td>Referência</td><td>Referenciar arquivos externos</td></tr>
+              <tr><td style="color:var(--m07)">env()</td><td>Referência</td><td>Variáveis do dispositivo (safe area, etc.)</td></tr>
+              <tr><td style="color:var(--m07)">attr()</td><td>Referência</td><td>Ler atributo HTML do elemento no CSS</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
@@ -4421,7 +5068,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06', 'active-m07');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
