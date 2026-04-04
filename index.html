@@ -20,6 +20,7 @@
       --m05: #a78bfa;
       --m06: #34d399;
       --m07: #f59e0b;
+      --m08: #22d3ee;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -245,6 +246,7 @@
     .sidebar-item.active-m05::before { background: var(--m05); }
     .sidebar-item.active-m06::before { background: var(--m06); }
     .sidebar-item.active-m07::before { background: var(--m07); }
+    .sidebar-item.active-m08::before { background: var(--m08); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -811,14 +813,27 @@
       </div>
 
       <div class="sidebar-module">
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m08)"></span>
+          Responsividade
+        </div>
+        <a class="sidebar-item" href="#mq-intro" data-module="m08">O que são Media Queries</a>
+        <a class="sidebar-item" href="#mq-sintaxe" data-module="m08">Sintaxe & screen</a>
+        <a class="sidebar-item" href="#mq-rules" data-module="m08">Rules — min, max, orientation</a>
+        <a class="sidebar-item" href="#mq-range" data-module="m08">Range syntax</a>
+        <a class="sidebar-item" href="#mq-mobile-first" data-module="m08">Mobile-first vs Desktop-first</a>
+        <a class="sidebar-item" href="#mq-rem" data-module="m08">Rem & a dica do 62.5%</a>
+        <a class="sidebar-item" href="#mq-arquivos" data-module="m08">Arquivos separados & bundler</a>
+      </div>
+
+      <div class="sidebar-module">
         <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
-        <div class="sidebar-item" style="opacity:0.25;cursor:default">Responsividade</div>
         <div class="sidebar-item" style="opacity:0.25;cursor:default">Animations & Transitions</div>
       </div>
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>8/8 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>9/9 módulos</span></div>
       <div class="sidebar-progress-bar">
         <div class="sidebar-progress-fill" style="width:100%"></div>
       </div>
@@ -5041,6 +5056,525 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 08 — RESPONSIVIDADE & MEDIA QUERIES
+    ═══════════════════════════════════════════════ -->
+
+    <!-- mq-intro -->
+    <section class="topico" id="mq-intro">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">O que são Media Queries</h2>
+            <p>// condicionais CSS — aplica estilos dependendo do contexto</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Media Query é uma condicional CSS</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* SE a tela for menor que 768px */</span><br>
+                <span style="color:var(--m08)">@media</span> (max-width: 768px) {<br>
+                &nbsp;&nbsp;<span class="sel">.menu</span> { <span class="prop">display</span>: none; }<br>
+                }<br><br>
+                <span class="com">/* SE a tela for maior que 1024px */</span><br>
+                <span style="color:var(--m08)">@media</span> (min-width: 1024px) {<br>
+                &nbsp;&nbsp;<span class="sel">.sidebar</span> { <span class="prop">display</span>: block; }<br>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">3 formas de aplicar</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* 1. No CSS — a mais comum */</span><br>
+                <span style="color:var(--m08)">@media</span> (max-width: 768px) { ... }<br><br>
+                <span class="com">/* 2. No @import */</span><br>
+                <span style="color:var(--m08)">@import</span> url("mobile.css")<br>
+                &nbsp;&nbsp;screen and (max-width: 768px);<br><br>
+                <span class="com">/* 3. Na tag link do HTML */</span><br>
+                <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"mobile.css"</span><br>
+                &nbsp;&nbsp;<span class="attr">media</span>=<span class="val">"screen and (max-width: 768px)"</span><span class="tag">&gt;</span>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Contextos que uma media query pode checar</div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:8px;letter-spacing:1px">TELA</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                  Largura e altura da viewport<br>
+                  Orientação (portrait/landscape)<br>
+                  Resolução e DPI
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:8px;letter-spacing:1px">PREFERÊNCIAS</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                  Tema escuro/claro<br>
+                  Modo de alto contraste<br>
+                  Animações reduzidas
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:8px;letter-spacing:1px">MÍDIA</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                  <code style="color:var(--m08)">screen</code> → telas digitais<br>
+                  <code style="color:var(--m08)">print</code> → impressão<br>
+                  <code style="color:var(--m08)">all</code> → todos (padrão)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-sintaxe -->
+    <section class="topico" id="mq-sintaxe">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Sintaxe & screen</h2>
+            <p>// anatomia de uma media query e o papel do screen</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">Anatomia completa</div>
+            <div class="card-body">
+              <div class="code" style="font-size:14px">
+                <span style="color:var(--m08)">@media</span> <span style="color:var(--yellow)">screen</span> <span style="color:rgba(240,240,240,0.4)">and</span> <span style="color:var(--green)">(min-width: 768px)</span> {<br>
+                &nbsp;&nbsp;<span class="com">/* estilos aqui */</span><br>
+                }<br><br>
+                <span class="com">/* ↑ tipo  ↑ operador  ↑ condição */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">O <span style="color:var(--yellow)">screen</span> é opcional — mas faz diferença?</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div class="code" style="margin-bottom:12px">
+                  <span class="com">/* sem screen — aplica em todos os tipos */</span><br>
+                  <span style="color:var(--m08)">@media</span> (max-width: 768px) { ... }<br><br>
+                  <span class="com">/* com screen — só em telas digitais */</span><br>
+                  <span style="color:var(--m08)">@media</span> <span style="color:var(--yellow)">screen</span> and (max-width: 768px) { ... }
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Na prática para projetos web, <strong style="color:white">não muda nada</strong> — quase ninguém usa estilos separados para impressão.<br><br>
+                Sem <code style="color:var(--yellow)">screen</code> o padrão é <code style="color:var(--yellow)">all</code>, que inclui screen e print.<br><br>
+                Use <code style="color:var(--yellow)">print</code> explicitamente quando quiser estilos específicos para quando o usuário imprimir a página.
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Operadores — <span style="color:var(--m08)">and</span> · <span style="color:var(--m08)">not</span> · <span style="color:var(--m08)">,</span> (ou)</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* and — as duas condições precisam ser verdadeiras */</span><br>
+                <span style="color:var(--m08)">@media</span> screen and (min-width: 768px) and (max-width: 1200px) { ... }<br><br>
+                <span class="com">/* , (vírgula) — funciona como OR — uma ou outra */</span><br>
+                <span style="color:var(--m08)">@media</span> (max-width: 480px), (orientation: landscape) { ... }<br><br>
+                <span class="com">/* not — inverte a condição */</span><br>
+                <span style="color:var(--m08)">@media</span> not screen { ... } <span class="com">/* tudo exceto telas */</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-rules -->
+    <section class="topico" id="mq-rules">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Rules — min-width, max-width e orientation</h2>
+            <p>// as condições mais usadas no dia a dia</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m08)">min-width</span> — Mobile First</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="com">/* base: mobile */</span><br>
+                <span class="sel">.container</span> { <span class="prop">padding</span>: 16px; }<br><br>
+                <span class="com">/* tablet e acima */</span><br>
+                <span style="color:var(--m08)">@media</span> (min-width: 768px) {<br>
+                &nbsp;&nbsp;<span class="sel">.container</span> { <span class="prop">padding</span>: 32px; }<br>
+                }<br><br>
+                <span class="com">/* desktop e acima */</span><br>
+                <span style="color:var(--m08)">@media</span> (min-width: 1200px) {<br>
+                &nbsp;&nbsp;<span class="sel">.container</span> { <span class="prop">padding</span>: 48px; }<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">→ começa pelo menor e vai adicionando</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m08)">max-width</span> — Desktop First</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="com">/* base: desktop */</span><br>
+                <span class="sel">.container</span> { <span class="prop">padding</span>: 48px; }<br><br>
+                <span class="com">/* tablet e abaixo */</span><br>
+                <span style="color:var(--m08)">@media</span> (max-width: 1199px) {<br>
+                &nbsp;&nbsp;<span class="sel">.container</span> { <span class="prop">padding</span>: 32px; }<br>
+                }<br><br>
+                <span class="com">/* mobile e abaixo */</span><br>
+                <span style="color:var(--m08)">@media</span> (max-width: 767px) {<br>
+                &nbsp;&nbsp;<span class="sel">.container</span> { <span class="prop">padding</span>: 16px; }<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">→ começa pelo maior e vai reduzindo</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m08)">orientation</span></div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* portrait — altura maior que largura */</span><br>
+                <span style="color:var(--m08)">@media</span> (orientation: portrait) {<br>
+                &nbsp;&nbsp;<span class="com">/* celular na vertical */</span><br>
+                }<br><br>
+                <span class="com">/* landscape — largura maior que altura */</span><br>
+                <span style="color:var(--m08)">@media</span> (orientation: landscape) {<br>
+                &nbsp;&nbsp;<span class="com">/* celular na horizontal */</span><br>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m08)">prefers-color-scheme</span></div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* detecta o tema do sistema */</span><br>
+                <span style="color:var(--m08)">@media</span> (prefers-color-scheme: dark) {<br>
+                &nbsp;&nbsp;<span class="sel">body</span> { <span class="prop">background</span>: #0f0f0f; }<br>
+                }<br><br>
+                <span style="color:var(--m08)">@media</span> (prefers-color-scheme: light) {<br>
+                &nbsp;&nbsp;<span class="sel">body</span> { <span class="prop">background</span>: white; }<br>
+                }<br><br>
+                <span class="com">/* prefers-reduced-motion — acessibilidade */</span><br>
+                <span style="color:var(--m08)">@media</span> (prefers-reduced-motion: reduce) {<br>
+                &nbsp;&nbsp;<span class="sel">*</span> { <span class="prop">animation</span>: none !important; }<br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabela" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Breakpoint</th><th>Valor comum</th><th>Contexto</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--m08)">Mobile</td><td>até 767px</td><td>Celulares na vertical</td></tr>
+              <tr><td style="color:var(--m08)">Tablet</td><td>768px – 1023px</td><td>Tablets e celulares na horizontal</td></tr>
+              <tr><td style="color:var(--m08)">Desktop</td><td>1024px – 1279px</td><td>Laptops e monitores menores</td></tr>
+              <tr><td style="color:var(--m08)">Wide</td><td>1280px+</td><td>Monitores grandes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-range -->
+    <section class="topico" id="mq-range">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Range Syntax — a forma moderna</h2>
+            <p>// usar operadores matemáticos ao invés de min/max</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header">Sintaxe clássica vs sintaxe range</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* clássico */</span><br>
+                <span style="color:var(--m08)">@media</span> (min-width: 600px) { ... }<br>
+                <span style="color:var(--m08)">@media</span> (max-width: 800px) { ... }<br><br>
+                <span class="com">/* range — mais legível */</span><br>
+                <span style="color:var(--m08)">@media</span> (width >= 600px) { ... }<br>
+                <span style="color:var(--m08)">@media</span> (width &lt;= 800px) { ... }<br><br>
+                <span class="com">/* range entre dois valores */</span><br>
+                <span style="color:var(--m08)">@media</span> (600px &lt;= width &lt;= 800px) { ... }<br><br>
+                <span class="com">/* operadores disponíveis */</span><br>
+                <span class="com">/* &gt;  &gt;=  &lt;  &lt;= */</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Vantagem do range — intervalo em uma linha</div>
+            <div class="card-body">
+              <div class="code">
+                <span class="com">/* clássico — precisa de dois @media */</span><br>
+                <span style="color:var(--m08)">@media</span> (min-width: 600px) and (max-width: 800px) {<br>
+                &nbsp;&nbsp;<span class="com">/* só tablet */</span><br>
+                }<br><br>
+                <span class="com">/* range — bem mais limpo */</span><br>
+                <span style="color:var(--m08)">@media</span> (600px &lt;= width &lt;= 800px) {<br>
+                &nbsp;&nbsp;<span class="com">/* só tablet */</span><br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);margin-top:12px;line-height:1.8">Suporte moderno — Chrome 104+, Firefox 63+, Safari 16.4+. Para projetos que precisam suportar browsers antigos, use a sintaxe clássica.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-mobile-first -->
+    <section class="topico" id="mq-mobile-first">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Mobile-first vs Desktop-first</h2>
+            <p>// qual estratégia adotar e quando</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">A diferença na prática</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:10px;letter-spacing:1px">MOBILE-FIRST — min-width</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* base = mobile */</span><br>
+                  <span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: 1fr; }<br><br>
+                  <span class="com">/* adiciona complexidade */</span><br>
+                  <span style="color:var(--m08)">@media</span> (min-width: 768px) {<br>
+                  &nbsp;&nbsp;<span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: 1fr 1fr; }<br>
+                  }<br>
+                  <span style="color:var(--m08)">@media</span> (min-width: 1200px) {<br>
+                  &nbsp;&nbsp;<span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: repeat(4,1fr); }<br>
+                  }
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">✅ Recomendado — começa simples e adiciona. CSS base menor, melhor performance no mobile.</div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);margin-bottom:10px;letter-spacing:1px">DESKTOP-FIRST — max-width</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* base = desktop */</span><br>
+                  <span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: repeat(4,1fr); }<br><br>
+                  <span class="com">/* reduz complexidade */</span><br>
+                  <span style="color:var(--m08)">@media</span> (max-width: 1199px) {<br>
+                  &nbsp;&nbsp;<span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: 1fr 1fr; }<br>
+                  }<br>
+                  <span style="color:var(--m08)">@media</span> (max-width: 767px) {<br>
+                  &nbsp;&nbsp;<span class="sel">.cols</span> { <span class="prop">grid-template-columns</span>: 1fr; }<br>
+                  }
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">⚠️ Mais intuitivo no início mas tende a gerar mais overrides e CSS mais pesado.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">Faz sentido misturar os dois? Por seção?</div>
+            <div class="card-body">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Tecnicamente funciona, mas <strong style="color:white">não é recomendado misturar no mesmo projeto</strong> — fica difícil de manter e entender qual breakpoint sobrescreve qual.<br><br>
+                O ideal é <strong style="color:white">escolher uma estratégia e manter consistente</strong> ao longo de todo o projeto. Para projetos novos, mobile-first é o padrão do mercado hoje.
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+                <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:8px">✅ Use mobile-first quando</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Projeto novo · maioria dos usuários é mobile · quer melhor performance · padrão do mercado</div>
+                </div>
+                <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:8px;padding:14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);margin-bottom:8px">⚠️ Desktop-first faz sentido quando</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Projeto legado · usuários predominantemente desktop · adaptando um site que nasceu desktop</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-rem -->
+    <section class="topico" id="mq-rem">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Rem & a dica do 62.5%</h2>
+            <p>// usar unidades relativas e simplificar a conversão px → rem</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">Por que usar rem ao invés de px?</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div class="code">
+                  <span class="com">/* px — valor fixo, não escala */</span><br>
+                  <span class="sel">h1</span> { <span class="prop">font-size</span>: 32px; }<br><br>
+                  <span class="com">/* rem — relativo ao root */</span><br>
+                  <span class="sel">h1</span> { <span class="prop">font-size</span>: 2rem; }<br><br>
+                  <span class="com">/* root padrão do browser = 16px</span><br>
+                  <span class="com">   2rem = 2 × 16 = 32px */</span>
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Se o usuário aumentou o tamanho da fonte nas configurações do navegador, <strong style="color:white">rem respeita essa preferência</strong> — px ignora.<br><br>
+                Isso melhora a <strong style="color:white">acessibilidade</strong> e faz o layout escalar de forma mais natural entre diferentes dispositivos.
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">⭐ A dica do <span style="color:var(--m08)">62.5%</span> — conversão fácil de px para rem</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div class="code" style="margin-bottom:14px">
+                  <span class="com">/* root padrão = 16px */</span><br>
+                  <span class="com">/* 24px ÷ 16 = 1.5rem — difícil de cabeça */</span><br><br>
+                  <span class="com">/* com 62.5% → root = 10px */</span><br>
+                  <span class="sel">:root</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">font-size</span>: 62.5%; <span class="com">/* 10px */</span><br>
+                  }<br><br>
+                  <span class="sel">body</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">font-size</span>: 1.6rem; <span class="com">/* volta para 16px */</span><br>
+                  }<br><br>
+                  <span class="com">/* agora: 24px = 2.4rem 🎉 */</span><br>
+                  <span class="com">/* 32px = 3.2rem */</span><br>
+                  <span class="com">/* 14px = 1.4rem */</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;margin-bottom:14px">
+                  O root padrão do navegador é <strong style="color:white">16px</strong>. Dividir por 16 para converter para rem é trabalhoso.<br><br>
+                  Com <code style="color:var(--m08)">font-size: 62.5%</code> no `:root`, o root vira <strong style="color:white">10px</strong>. A conversão fica simplesmente mover a vírgula:<br>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:6px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.6);text-align:center">
+                    <div style="color:var(--m08);font-size:10px;margin-bottom:4px">SEM a dica</div>
+                    16px = 1rem<br>
+                    24px = 1.5rem<br>
+                    32px = 2rem
+                  </div>
+                  <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.6);text-align:center">
+                    <div style="color:var(--green);font-size:10px;margin-bottom:4px">COM 62.5%</div>
+                    16px = 1.6rem<br>
+                    24px = 2.4rem<br>
+                    32px = 3.2rem
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nota">⚠️ <strong>Atenção:</strong> se você usar a dica do 62.5%, lembre de redefinir o <code style="color:var(--m08)">font-size</code> no <code>body</code> para <code style="color:var(--m08)">1.6rem</code> — caso contrário, todo o texto da página vai aparecer com 10px. Algumas pessoas preferem não usar essa técnica e utilizar a extensão <strong>px to rem</strong> do VS Code (atalho <code style="color:var(--yellow)">alt + Z</code>).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mq-arquivos -->
+    <section class="topico" id="mq-arquivos">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m08)">M08</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m08)">Arquivos separados & Bundler</h2>
+            <p>// organização vs performance — e como resolver o conflito</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">O problema de separar CSS em múltiplos arquivos</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:10px;letter-spacing:1px">✅ VANTAGEM — organização</div>
+                <div class="code" style="margin-bottom:10px">
+                  styles/<br>
+                  &nbsp;&nbsp;global.css<br>
+                  &nbsp;&nbsp;layout.css<br>
+                  &nbsp;&nbsp;components/<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;button.css<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;card.css<br>
+                  &nbsp;&nbsp;pages/<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;home.css
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Código organizado, fácil de manter e encontrar o que precisa.</div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:10px;letter-spacing:1px">⚠️ PROBLEMA — carregamento</div>
+                <div class="code" style="margin-bottom:10px">
+                  <span class="com">/* cada @import = request HTTP */</span><br>
+                  <span style="color:var(--m08)">@import</span> url("global.css");<br>
+                  <span style="color:var(--m08)">@import</span> url("layout.css");<br>
+                  <span style="color:var(--m08)">@import</span> url("button.css");<br>
+                  <span style="color:var(--m08)">@import</span> url("card.css");<br>
+                  <span class="com">/* 4 requests separados = lento */</span>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Cada arquivo CSS é uma request extra ao servidor — muitos arquivos = página mais lenta.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">✅ A solução — <span style="color:var(--m08)">Bundler</span></div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;margin-bottom:14px">
+                  Um <strong style="color:white">bundler</strong> (como Vite, Webpack, Parcel) processa todos os arquivos CSS separados e os <strong style="color:white">une em um único arquivo</strong> na hora de fazer o build para produção.<br><br>
+                  Você escreve organizado → o bundler entrega otimizado.
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px">
+                  <div style="background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:6px;padding:10px;color:rgba(240,240,240,0.5);flex:1">
+                    global.css<br>layout.css<br>button.css<br>card.css
+                  </div>
+                  <div style="color:var(--m08);font-size:18px">→</div>
+                  <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:10px;color:var(--green);flex:1">
+                    main.min.css<br><span style="font-size:10px;color:rgba(240,240,240,0.3)">1 arquivo · minificado · rápido</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m08);margin-bottom:10px;letter-spacing:1px">Bundlers mais usados</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:2">
+                  <strong style="color:white">Vite</strong> → padrão atual, rápido, usado com React/Vue<br>
+                  <strong style="color:white">Webpack</strong> → mais antigo, muito configurável<br>
+                  <strong style="color:white">Parcel</strong> → zero config, bom para aprender<br>
+                  <strong style="color:white">esbuild</strong> → extremamente rápido, base do Vite
+                </div>
+                <div style="margin-top:12px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">
+                  💡 Você vai usar bundler naturalmente quando entrar no React/Next.js — eles já vêm configurados. Por enquanto, organize bem os arquivos e use <code style="color:var(--m08)">@import</code> para estudo.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">🛠️ Ferramenta recomendada — <span style="color:var(--m08)">Responsively App</span></div>
+            <div class="card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                  O <strong style="color:white">Responsively App</strong> é um browser focado em desenvolvimento responsivo — ele mostra vários tamanhos de tela ao mesmo tempo, sincronizados.<br><br>
+                  Ao clicar em um elemento em um breakpoint, todos os outros também respondem. Economiza muito tempo comparado a ficar redimensionando o DevTools.
+                </div>
+                <div class="code">
+                  <span class="com">/* download */</span><br>
+                  https://responsively.app/<br><br>
+                  <span class="com">/* gratuito e open source */</span><br>
+                  <span class="com">/* Windows · Mac · Linux */</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
@@ -5068,7 +5602,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06', 'active-m07');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06', 'active-m07', 'active-m08');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
