@@ -21,6 +21,7 @@
       --m06: #34d399;
       --m07: #f59e0b;
       --m08: #22d3ee;
+      --m09: #a78bfa;
       --m01: #f59e0b;
       --m02: #f472b6;
       --m03: #f97316;
@@ -247,6 +248,7 @@
     .sidebar-item.active-m06::before { background: var(--m06); }
     .sidebar-item.active-m07::before { background: var(--m07); }
     .sidebar-item.active-m08::before { background: var(--m08); }
+    .sidebar-item.active-m09::before { background: var(--m09); }
 
     .sidebar-footer {
       padding: 14px 20px;
@@ -827,13 +829,22 @@
       </div>
 
       <div class="sidebar-module">
-        <div class="sidebar-module-label" style="opacity:0.4">Em breve</div>
-        <div class="sidebar-item" style="opacity:0.25;cursor:default">Animations & Transitions</div>
+        <div class="sidebar-module-label">
+          <span class="sidebar-module-dot" style="background:var(--m09)"></span>
+          Animations & Transitions
+        </div>
+        <a class="sidebar-item" href="#anim-transition" data-module="m09">Transition</a>
+        <a class="sidebar-item" href="#anim-timing" data-module="m09">Timing Function & cubic-bezier</a>
+        <a class="sidebar-item" href="#anim-shorthand" data-module="m09">Shorthand & boas práticas</a>
+        <a class="sidebar-item" href="#anim-keyframes" data-module="m09">@keyframes</a>
+        <a class="sidebar-item" href="#anim-properties" data-module="m09">Propriedades da animation</a>
+        <a class="sidebar-item" href="#anim-timeline" data-module="m09">animation-timeline</a>
+        <a class="sidebar-item" href="#anim-scroll-js" data-module="m09">Scroll animations & JS</a>
       </div>
     </div>
 
     <div class="sidebar-footer">
-      <div class="sidebar-progress-label">progresso <span>9/9 módulos</span></div>
+      <div class="sidebar-progress-label">progresso <span>10/10 módulos</span></div>
       <div class="sidebar-progress-bar">
         <div class="sidebar-progress-fill" style="width:100%"></div>
       </div>
@@ -851,7 +862,7 @@
         <span style="color:var(--css-c)">CSS</span><br>
         <span style="color:var(--accent)">Guia de Estudo</span>
       </h1>
-      <p class="cover-sub">// Rocketseat Fullstack · Nível 3 · v2.0 — material completo</p>
+      <p class="cover-sub">// Rocketseat Fullstack · Nível 3 · v3.0 — material completo ✅</p>
       <div class="cover-tags">
         <span class="cover-tag" style="background:rgba(249,115,22,0.1);color:var(--html-c);border:1px solid rgba(249,115,22,0.2)">HTML</span>
         <span class="cover-tag" style="background:rgba(99,102,241,0.1);color:var(--css-c);border:1px solid rgba(99,102,241,0.2)">CSS</span>
@@ -5575,9 +5586,520 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         MÓDULO 09 — CSS ANIMATIONS & TRANSITIONS
+    ═══════════════════════════════════════════════ -->
+
+    <!-- anim-transition -->
+    <section class="topico" id="anim-transition">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">Transition</h2>
+            <p>// suavidade ao mudar o valor de uma propriedade</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">As 4 propriedades do transition</div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px">
+              <div>
+                <div class="code">
+                  <span class="com">/* qual propriedade animar */</span><br>
+                  <span class="prop">transition-property</span>: background-color;<br>
+                  <span class="prop">transition-property</span>: all; <span class="com">/* ⚠️ evite */</span><br><br>
+                  <span class="com">/* quanto tempo dura */</span><br>
+                  <span class="prop">transition-duration</span>: 0.3s;<br>
+                  <span class="prop">transition-duration</span>: 300ms;<br><br>
+                  <span class="com">/* quanto tempo esperar antes de iniciar */</span><br>
+                  <span class="prop">transition-delay</span>: 0.1s;<br><br>
+                  <span class="com">/* curva de aceleração */</span><br>
+                  <span class="prop">transition-timing-function</span>: ease;
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;margin-bottom:16px">
+                  O transition <strong style="color:white">não cria animação sozinho</strong> — ele só suaviza a mudança de uma propriedade que já vai acontecer (via :hover, :focus, classe adicionada pelo JS, etc.).
+                </div>
+                <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:8px;padding:14px;margin-bottom:10px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:8px">⚠️ Evite transition: all</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Em projetos grandes, <code style="color:#f87171">all</code> monitora toda e qualquer mudança de propriedade — pode causar transições indesejadas, bugs difíceis de rastrear e afetar performance. Seja específico.</div>
+                </div>
+                <div class="code">
+                  <span class="com">/* ❌ evite */</span><br>
+                  <span class="prop">transition</span>: all 0.3s ease;<br><br>
+                  <span class="com">/* ✅ prefira */</span><br>
+                  <span class="prop">transition</span>: background-color 0.3s ease,<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform 0.2s ease;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">⭐ Transição no elemento, não no estado</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f87171;margin-bottom:8px">❌ só anima na entrada — volta instantânea</div>
+                <div class="code">
+                  <span class="sel">.btn:hover</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">transition</span>: background-color 0.3s; <span class="com">← errado</span><br>
+                  &nbsp;&nbsp;<span class="prop">background-color</span>: blue;<br>
+                  }
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:8px">✅ anima nos dois sentidos — indo e voltando</div>
+                <div class="code">
+                  <span class="sel">.btn</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">transition</span>: background-color 0.3s; <span class="com">← aqui</span><br>
+                  }<br>
+                  <span class="sel">.btn:hover</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">background-color</span>: blue;<br>
+                  }
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding:0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.8">
+              💡 A exceção é quando você quer animações diferentes de entrada e saída — nesse caso faz sentido ter <code style="color:var(--m09)">transition</code> nos dois, com valores diferentes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- anim-timing -->
+    <section class="topico" id="anim-timing">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">Timing Function & cubic-bezier</h2>
+            <p>// a curva de aceleração — como a animação se move do início ao fim</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card full">
+            <div class="card-header">Valores predefinidos</div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">linear</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Velocidade constante do início ao fim. Parece mecânico — raramente usado para elementos de UI.</div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">ease — padrão</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Começa rápido, desacelera no fim. Sensação natural para a maioria dos elementos.</div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">ease-in</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Começa devagar, acelera no fim. Boa para elementos que saem da tela.</div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">ease-out</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Começa rápido, chega devagar. Boa para elementos que entram na tela — chegada suave.</div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">ease-in-out</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Começa e termina devagar, rápido no meio. Boa para elementos que vão e voltam.</div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--m09);margin-bottom:6px">steps(n)</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Animação em etapas discretas — sem suavização. Útil para sprites e efeitos digitais.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">⭐ <span style="color:var(--m09)">cubic-bezier()</span> — curva totalmente customizada</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div class="code" style="margin-bottom:14px">
+                  <span class="com">/* os predefinidos são cubic-bezier por baixo */</span><br>
+                  ease &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ cubic-bezier(0.25, 0.1, 0.25, 1)<br>
+                  ease-in &nbsp;&nbsp;&nbsp;&nbsp;→ cubic-bezier(0.42, 0, 1, 1)<br>
+                  ease-out &nbsp;&nbsp;&nbsp;→ cubic-bezier(0, 0, 0.58, 1)<br>
+                  ease-in-out → cubic-bezier(0.42, 0, 0.58, 1)<br>
+                  linear &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ cubic-bezier(0, 0, 1, 1)<br><br>
+                  <span class="com">/* customizado — você define os 4 pontos */</span><br>
+                  <span class="prop">transition-timing-function</span>:<br>
+                  &nbsp;&nbsp;<span style="color:var(--m09)">cubic-bezier</span>(.17, .67, .83, .67);
+                </div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Os 4 valores são as coordenadas <strong style="color:white">x1, y1, x2, y2</strong> das alças de controle da curva.<br><br>
+                Ninguém decora esses valores — todo mundo usa o site:<br>
+                <span style="color:var(--m09)">cubic-bezier.com</span><br><br>
+                Você arrasta os pontos, vê a curva em tempo real e copia o valor gerado direto para o CSS.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">🛠️ <strong>Ferramenta recomendada:</strong> <code style="color:var(--m09)">animista.net</code> — biblioteca de animações CSS prontas. Você escolhe o efeito, customiza os parâmetros e copia o <code>@keyframes</code> gerado.</div>
+      </div>
+    </section>
+
+    <!-- anim-shorthand -->
+    <section class="topico" id="anim-shorthand">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">Shorthand & Boas Práticas</h2>
+            <p>// transition em uma linha e acessibilidade</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">Shorthand — <span style="color:var(--m09)">transition</span></div>
+            <div class="card-body">
+              <div class="sh-titulo">sintaxe</div>
+              <div class="sh-syntax">transition: <span class="parte">[property]</span> <span class="parte">[duration]</span> <span class="parte">[timing-function]</span> <span class="parte">[delay]</span>;</div>
+              <div class="code">
+                <span class="prop">transition</span>: background-color 0.3s ease;<br>
+                <span class="prop">transition</span>: transform 0.2s ease-in-out 0.1s; <span class="com">/* com delay */</span><br><br>
+                <span class="com">/* múltiplas — separadas por vírgula */</span><br>
+                <span class="prop">transition</span>: background-color 0.3s ease,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform 0.2s ease-in-out,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opacity 0.15s linear;
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m09)">prefers-reduced-motion</span> — acessibilidade</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div class="code">
+                <span style="color:var(--m09)">@media</span> (prefers-reduced-motion: reduce) {<br>
+                &nbsp;&nbsp;<span class="sel">*</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">transition</span>: none !important;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">animation</span>: none !important;<br>
+                &nbsp;&nbsp;}<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Usuários com epilepsia ou sensibilidade a movimento podem configurar o sistema para reduzir animações.<br><br>
+                Respeitar essa preferência é <strong style="color:white">acessibilidade básica</strong> — e boa prática em qualquer projeto.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- anim-keyframes -->
+    <section class="topico" id="anim-keyframes">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">@keyframes — construindo a linha do tempo</h2>
+            <p>// definindo os estados em cada ponto da animação</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card">
+            <div class="card-header">from / to — início e fim</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div class="code">
+                <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">aparecer</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">from</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">opacity</span>: 0;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">transform</span>: translateY(20px);<br>
+                &nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">to</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">opacity</span>: 1;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">transform</span>: translateY(0);<br>
+                &nbsp;&nbsp;}<br>
+                }<br><br>
+                <span class="com">/* usando a animação */</span><br>
+                <span class="sel">.card</span> {<br>
+                &nbsp;&nbsp;<span class="prop">animation</span>: <span style="color:var(--green)">aparecer</span> 0.5s ease;<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                <strong style="color:white">from = 0%</strong> e <strong style="color:white">to = 100%</strong> — são atalhos.<br><br>
+                O <code style="color:var(--m09)">from</code> pode ser omitido — se você não declarar o estado inicial, a animação começa do estado atual do elemento.<br><br>
+                ⚠️ <strong style="color:white">Ao terminar, o elemento volta ao estado inicial</strong> por padrão — a menos que você use <code style="color:var(--m09)">animation-fill-mode: forwards</code>.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Porcentagens — múltiplos pontos na linha do tempo</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div class="code">
+                <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">pulsar</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">0%</span>   { <span class="prop">transform</span>: scale(1); }<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">50%</span>  { <span class="prop">transform</span>: scale(1.1); }<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">100%</span> { <span class="prop">transform</span>: scale(1); }<br>
+                }<br><br>
+                <span class="com">/* múltiplas porcentagens juntas */</span><br>
+                <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">piscar</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">0%, 100%</span> { <span class="prop">opacity</span>: 1; }<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">50%</span>      { <span class="prop">opacity</span>: 0; }<br>
+                }<br><br>
+                <span class="com">/* elemento fica no estado final */</span><br>
+                <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">entrar</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">0%</span>  { <span class="prop">opacity</span>: 0; }<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">80%</span> { <span class="prop">opacity</span>: 1; }<br>
+                &nbsp;&nbsp;<span class="com">/* sem 100% → fica em opacity: 1 */</span><br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9">
+                Porcentagens são mais flexíveis que from/to — permitem quantos pontos você quiser na linha do tempo.<br><br>
+                <strong style="color:white">Múltiplas porcentagens com vírgula</strong> aplicam o mesmo estado em vários pontos — útil para loops e pulsações.<br><br>
+                Se o último keyframe for <strong style="color:white">menor que 100%</strong>, o elemento chega ao estado final antes da animação acabar e já fica lá — evitando o retorno.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- anim-properties -->
+    <section class="topico" id="anim-properties">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">Propriedades da animation</h2>
+            <p>// controlando cada aspecto da animação</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="tabela">
+            <table>
+              <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que controla</th></tr></thead>
+              <tbody>
+                <tr><td style="color:var(--m09)">animation-name</td><td>nome do @keyframes</td><td>Qual animação usar</td></tr>
+                <tr><td style="color:var(--m09)">animation-duration</td><td>0.5s · 300ms</td><td>Quanto tempo dura cada ciclo</td></tr>
+                <tr><td style="color:var(--m09)">animation-delay</td><td>0.1s · 500ms</td><td>Quanto esperar antes de começar</td></tr>
+                <tr><td style="color:var(--m09)">animation-timing-function</td><td>ease · linear · cubic-bezier()</td><td>Curva de aceleração</td></tr>
+                <tr><td style="color:var(--m09)">animation-iteration-count</td><td>1 · 3 · infinite</td><td>Quantas vezes repetir</td></tr>
+                <tr><td style="color:var(--m09)">animation-direction</td><td>normal · reverse · alternate · alternate-reverse</td><td>Sentido da animação — vai, volta ou alterna</td></tr>
+                <tr><td style="color:var(--m09)">animation-fill-mode</td><td>none · forwards · backwards · both</td><td>Estado do elemento antes e depois da animação</td></tr>
+                <tr><td style="color:var(--m09)">animation-play-state</td><td>running · paused</td><td>Pausar ou retomar a animação</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card full">
+            <div class="card-header">Detalhando os mais importantes</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:8px;letter-spacing:1px">animation-fill-mode</div>
+                <div class="code" style="margin-bottom:12px">
+                  <span class="com">/* none — volta ao estado original */</span><br>
+                  <span class="prop">animation-fill-mode</span>: none;<br><br>
+                  <span class="com">/* forwards — fica no estado final ⭐ */</span><br>
+                  <span class="prop">animation-fill-mode</span>: forwards;<br><br>
+                  <span class="com">/* backwards — aplica from antes de começar */</span><br>
+                  <span class="prop">animation-fill-mode</span>: backwards;<br><br>
+                  <span class="com">/* both — forwards + backwards */</span><br>
+                  <span class="prop">animation-fill-mode</span>: both;
+                </div>
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:8px;letter-spacing:1px">Shorthand — animation</div>
+                <div class="sh-syntax" style="margin-bottom:12px">animation: <span class="parte">[name]</span> <span class="parte">[duration]</span> <span class="parte">[timing]</span> <span class="parte">[delay]</span> <span class="parte">[iteration]</span> <span class="parte">[direction]</span> <span class="parte">[fill-mode]</span>;</div>
+                <div class="code">
+                  <span class="com">/* simples */</span><br>
+                  <span class="prop">animation</span>: aparecer 0.5s ease forwards;<br><br>
+                  <span class="com">/* completo */</span><br>
+                  <span class="prop">animation</span>: pulsar 1s ease-in-out 0.2s infinite alternate both;<br><br>
+                  <span class="com">/* múltiplas animações */</span><br>
+                  <span class="prop">animation</span>: aparecer 0.5s ease forwards,<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pulsar 2s ease infinite 0.5s;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- anim-timeline -->
+    <section class="topico" id="anim-timeline">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">animation-timeline — o futuro das animações</h2>
+            <p>// vincular animações ao scroll da página ou à visibilidade do elemento</p>
+          </div>
+        </div>
+        <div class="grade">
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m09)">scroll()</span> — progride com o scroll da página</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">progresso</span> {<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">from</span> { <span class="prop">width</span>: 0%; }<br>
+                &nbsp;&nbsp;<span style="color:var(--m09)">to</span>   { <span class="prop">width</span>: 100%; }<br>
+                }<br><br>
+                <span class="sel">.barra-progresso</span> {<br>
+                &nbsp;&nbsp;<span class="prop">animation</span>: progresso linear;<br>
+                &nbsp;&nbsp;<span class="prop">animation-timeline</span>: <span style="color:var(--m09)">scroll()</span>;<br>
+                }
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">Rolar a página = avançar a animação. Ideal para barras de progresso de leitura.</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span style="color:var(--m09)">view()</span> — progride conforme o elemento entra na viewport ⭐</div>
+            <div class="card-body">
+              <div class="code" style="margin-bottom:12px">
+                <span class="sel">.card</span> {<br>
+                &nbsp;&nbsp;<span class="prop">animation</span>: fade-up linear both;<br>
+                &nbsp;&nbsp;<span class="prop">animation-timeline</span>: <span style="color:var(--m09)">view()</span>;<br>
+                &nbsp;&nbsp;<span class="prop">animation-range</span>: entry 0% entry 100%;<br>
+                }<br><br>
+                <span class="com">/* argumentos: deslocamento topo / fundo */</span><br>
+                <span class="prop">animation-timeline</span>: <span style="color:var(--m09)">view(100px 200px)</span>;<br>
+                <span class="prop">animation-timeline</span>: <span style="color:var(--m09)">view(10%)</span>;
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8">O mais versátil — o efeito de "aparecer conforme rola" que você vê em todo site moderno.</div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header"><span style="color:var(--m09)">animation-range</span> — qual parte da visibilidade aciona a animação</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div class="code">
+                <span class="com">/* entry — elemento entrando na viewport ⭐ */</span><br>
+                <span class="prop">animation-range</span>: entry 0% entry 100%;<br><br>
+                <span class="com">/* exit — elemento saindo da viewport */</span><br>
+                <span class="prop">animation-range</span>: exit 0% exit 100%;<br><br>
+                <span class="com">/* entry + exit juntos — aparece e some */</span><br>
+                <span class="prop">animation-range</span>: entry 0% exit 100%;<br><br>
+                <span class="com">/* cover — elemento cobrindo a viewport */</span><br>
+                <span class="prop">animation-range</span>: cover 0% cover 100%;<br><br>
+                <span class="com">/* contain — elemento totalmente visível */</span><br>
+                <span class="prop">animation-range</span>: contain 0% contain 100%;
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.45);line-height:1.9;margin-bottom:14px">
+                  <strong style="color:white">entry</strong> é de longe o mais usado — elementos que animam ao entrar na tela ao rolar.<br><br>
+                  <strong style="color:white">entry + exit</strong> cria efeitos elegantes onde o elemento aparece e desaparece conforme passa pela viewport.<br><br>
+                  <strong style="color:white">cover</strong> e <strong style="color:white">contain</strong> são mais usados em efeitos de parallax e animações mais elaboradas.
+                </div>
+                <div class="code">
+                  <span class="com">/* exemplo completo — fade-up ao entrar */</span><br>
+                  <span style="color:var(--m09)">@keyframes</span> <span style="color:var(--green)">fade-up</span> {<br>
+                  &nbsp;&nbsp;<span style="color:var(--m09)">from</span> {<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">opacity</span>: 0;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">transform</span>: translateY(40px);<br>
+                  &nbsp;&nbsp;}<br>
+                  &nbsp;&nbsp;<span style="color:var(--m09)">to</span> {<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">opacity</span>: 1;<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="prop">transform</span>: translateY(0);<br>
+                  &nbsp;&nbsp;}<br>
+                  }<br><br>
+                  <span class="sel">.elemento</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">animation</span>: fade-up linear both;<br>
+                  &nbsp;&nbsp;<span class="prop">animation-timeline</span>: view();<br>
+                  &nbsp;&nbsp;<span class="prop">animation-range</span>: entry 0% entry 100%;<br>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nota">💡 <strong>Suporte atual (2025):</strong> Chrome/Edge completo, Firefox 110+, Safari ainda limitado. Verifique o <a href="https://caniuse.com" style="color:var(--m09)">caniuse.com</a> antes de usar em produção se precisar suportar Safari.</div>
+      </div>
+    </section>
+
+    <!-- anim-scroll-js -->
+    <section class="topico" id="anim-scroll-js">
+      <div class="topico-inner">
+        <div class="cap-header">
+          <div class="cap-numero" style="color:var(--m09)">M09</div>
+          <div class="cap-titulo">
+            <h2 style="color:var(--m09)">Scroll animations & JavaScript</h2>
+            <p>// antes do animation-timeline, era tudo JS — e ainda tem espaço</p>
+          </div>
+        </div>
+        <div class="grade cols-1">
+          <div class="card full">
+            <div class="card-header">As abordagens com JavaScript</div>
+            <div class="card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+              <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:8px">Intersection Observer API</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8;margin-bottom:10px">JS nativo sem biblioteca. Detecta quando o elemento entra na viewport e adiciona uma classe CSS com a animação.</div>
+                <div class="code" style="font-size:10px">
+                  <span class="com">/* JS adiciona .visivel */</span><br>
+                  <span class="sel">.fade-up.visivel</span> {<br>
+                  &nbsp;&nbsp;<span class="prop">opacity</span>: 1;<br>
+                  &nbsp;&nbsp;<span class="prop">transform</span>: none;<br>
+                  }
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:8px">AOS — Animate On Scroll</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8;margin-bottom:10px">A biblioteca mais simples. Só adiciona atributos no HTML e importa o CSS/JS.</div>
+                <div class="code" style="font-size:10px">
+                  <span class="tag">&lt;div</span><br>
+                  &nbsp;&nbsp;<span class="attr">data-aos</span>=<span class="val">"fade-up"</span><br>
+                  &nbsp;&nbsp;<span class="attr">data-aos-delay</span>=<span class="val">"200"</span><br>
+                  <span class="tag">&gt;</span>
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:8px">GSAP + ScrollTrigger</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,240,240,0.4);line-height:1.8;margin-bottom:10px">A mais poderosa — usada em sites de alto impacto. Animações complexas, sequenciadas e precisas. Você vai encontrar em projetos React avançados.</div>
+                <div class="code" style="font-size:10px">
+                  gsap.from(".card", {<br>
+                  &nbsp;&nbsp;scrollTrigger: ".card",<br>
+                  &nbsp;&nbsp;y: 40, opacity: 0<br>
+                  });
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card full">
+            <div class="card-header">CSS puro vs JavaScript — quando usar cada um</div>
+            <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);margin-bottom:10px">✅ CSS puro — animation-timeline</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                  → Animações simples de entrada/saída<br>
+                  → Fade, slide, scale ao rolar<br>
+                  → Sem dependências externas<br>
+                  → Melhor performance (roda na GPU)<br>
+                  → Projetos sem necessidade de Safari antigo
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:14px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--m09);margin-bottom:10px">🎯 JavaScript ainda faz sentido quando</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(240,240,240,0.5);line-height:1.9">
+                  → Animações complexas e sequenciadas<br>
+                  → Controle preciso por JS (pausar, retomar)<br>
+                  → Compatibilidade com Safari antigo<br>
+                  → Projetos com GSAP já integrado<br>
+                  → Efeitos além do que CSS oferece
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="secao-divisor"></div>
+
+        <p class="label-secao">tabela resumo — transitions vs animations</p>
+        <div class="tabela">
+          <table>
+            <thead><tr><th>Característica</th><th style="color:var(--m09)">Transition</th><th style="color:var(--m09)">Animation</th></tr></thead>
+            <tbody>
+              <tr><td>Como funciona</td><td>Suaviza a mudança de uma propriedade</td><td>Executa uma sequência definida no @keyframes</td></tr>
+              <tr><td>Precisa de gatilho</td><td>✅ Sim — :hover, :focus, classe via JS</td><td>❌ Não — começa automaticamente</td></tr>
+              <tr><td>Múltiplos estados</td><td>❌ Só início e fim</td><td>✅ Quantos quiser com %</td></tr>
+              <tr><td>Loop</td><td>❌ Não tem</td><td>✅ animation-iteration-count: infinite</td></tr>
+              <tr><td>Controle</td><td>Simples</td><td>Completo — direção, delay, fill-mode, etc.</td></tr>
+              <tr><td>Quando usar</td><td>Hover states, feedback de UI</td><td>Loading, entrada de elementos, efeitos visuais</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
-      <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 ✅</p>
+      <p>Web Dev Study · HTML &amp; CSS · Rocketseat Fullstack · Nível 3 — completo ✅</p>
     </div>
 
   </main>
@@ -5602,7 +6124,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           items.forEach(item => {
-            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06', 'active-m07', 'active-m08');
+            item.classList.remove('active', 'active-m00', 'active-m01', 'active-m02', 'active-m03', 'active-m04', 'active-m05', 'active-m06', 'active-m07', 'active-m08', 'active-m09');
           });
           const active = document.querySelector(`.sidebar-item[href="#${id}"]`);
           if (active) {
